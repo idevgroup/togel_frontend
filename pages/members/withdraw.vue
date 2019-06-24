@@ -11,7 +11,12 @@
 export default {
   middleware: 'auth',
   name: 'WithdrawView',
-  layout: 'members'
+  layout: 'members',
+  head() {
+    return {
+      title: this.$t('Withdraw')
+    }
+  }
 }
 </script>
 

@@ -26,6 +26,11 @@ module.exports = {
 
   loading: { color: '#007bff' },
 
+  loadingIndicator: {
+    name: 'rectangle-bounce',
+    color: '#000',
+    background: '#fff'
+  },
   router: {
     middleware: ['locale', 'check-auth']
   },

@@ -11,7 +11,12 @@
 export default {
   middleware: 'auth',
   name: 'DepositView',
-  layout: 'members'
+  layout: 'members',
+  head() {
+    return {
+      title: this.$t('Deposit')
+    }
+  }
 }
 </script>
 

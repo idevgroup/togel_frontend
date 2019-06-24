@@ -21,11 +21,9 @@ export default {
   middleware: 'auth',
   name: 'DashboardView',
   layout: 'members',
-  computed: {
-    ...mapGetters({
-      user: 'auth/user'
-    })
-  },
+  computed: mapGetters({
+    user: 'auth/user'
+  }),
   head() {
     return { title: this.$t('dashboard') }
   }

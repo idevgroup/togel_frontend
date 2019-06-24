@@ -26,8 +26,6 @@ const SettingsPassword = () =>
     import('~/pages/memberprofile/password').then(m => m.default || m)
 const MemeberDashboard = () =>
     import('~/pages/members/dashboard').then(m => m.default || m)
-const Memeber = () =>
-    import('~/pages/members/dashboard').then(m => m.default || m)
 const MemberDeposit = () =>
     import('~/pages/members/deposit').then(m => m.default || m)
 const MemberWithdraw = () =>
@@ -61,19 +59,13 @@ const routes = [
       }
     ]
   },
+
+  { path: '/members/dashboard', name: 'members.dashboard', component: MemeberDashboard },
+  { path: '/members/deposit', name: 'members.deposit', component: MemberDeposit },
   {
-    path: '/members',
-    component: Memeber,
-    children: [
-      { path: '', redirect: { name: 'members.dashboard' } },
-      { path: 'dashboard', name: 'members.dashboard', component: MemeberDashboard },
-      { path: 'deposit', name: 'members.deposit', component: MemberDeposit },
-      {
-        path: 'withdraw',
-        name: 'members.withdraw',
-        component: MemberWithdraw
-      }
-    ]
+    path: '/members/withdraw',
+    name: 'members.withdraw',
+    component: MemberWithdraw
   }
 ]
 

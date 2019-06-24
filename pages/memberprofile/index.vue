@@ -31,6 +31,7 @@ import Password from '~/pages/memberprofile/password'
 export default {
   name: 'SettingsView',
   layout: 'members',
+  middleware: 'auth',
   components: {
     'profile-view': Profile,
     'password-view': Password

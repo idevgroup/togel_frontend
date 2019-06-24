@@ -66,6 +66,7 @@ import { mapGetters } from 'vuex'
 import axios from 'axios'
 import Swal from 'sweetalert2'
 export default {
+  middleware: 'auth',
   data() {
     return {
       markets: [],
@@ -94,7 +95,7 @@ export default {
     getMarket() {
       const vm = this
       axios
-        .get('member/getmarket')
+        .get('member/getmarket', { responseType: 'json' })
         .then((response) => {
           vm.markets = response.data
         })
