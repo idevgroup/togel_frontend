@@ -31,10 +31,10 @@ module.exports = {
   },
 
   /*
-    css: [
-      // { src: '~assets/sass/app.scss', lang: 'scss' }
-    ],
-  */
+            css: [
+              // { src: '~assets/sass/app.scss', lang: 'scss' }
+            ],
+          */
 
   css: [],
   plugins: [
@@ -62,8 +62,8 @@ module.exports = {
   build: {
     extractCSS: true,
     /*
-     ** You can extend webpack config here
-     */
+         ** You can extend webpack config here
+         */
     extend(config, ctx) {
       // Run ESLint on save
       if (ctx.isDev && ctx.isClient) {

@@ -31,7 +31,7 @@
         />
       </v-card-text>
       <v-card-actions>
-        <submit-button :flat="true" :form="form" :label="$t('update')" />
+        <submit-button :flat="true" :form="form" :label="$t('update')" color="primary" />
       </v-card-actions>
     </form>
   </v-card>

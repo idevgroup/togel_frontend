@@ -19,13 +19,19 @@ const PasswordRequest = () =>
     import('~/pages/auth/password/email').then(m => m.default || m)
 
 const Settings = () =>
-    import('~/pages/settings/index').then(m => m.default || m)
+    import('~/pages/memberprofile/index').then(m => m.default || m)
 const SettingsProfile = () =>
-    import('~/pages/settings/profile').then(m => m.default || m)
+    import('~/pages/memberprofile/profile').then(m => m.default || m)
 const SettingsPassword = () =>
-    import('~/pages/settings/password').then(m => m.default || m)
-const Dashboard = () =>
-    import('~/pages/dashboard').then(m => m.default || m)
+    import('~/pages/memberprofile/password').then(m => m.default || m)
+const MemeberDashboard = () =>
+    import('~/pages/members/dashboard').then(m => m.default || m)
+const Memeber = () =>
+    import('~/pages/members/dashboard').then(m => m.default || m)
+const MemberDeposit = () =>
+    import('~/pages/members/deposit').then(m => m.default || m)
+const MemberWithdraw = () =>
+    import('~/pages/members/withdraw').then(m => m.default || m)
 const routes = [
   { path: '/', name: 'index', component: Index },
   { path: '/welcome', name: 'welcome', component: Welcome },
@@ -42,7 +48,6 @@ const routes = [
     name: 'password.reset',
     component: PasswordReset
   },
-  { path: '/dashboard', name: 'dashboard', component: Dashboard },
   {
     path: '/settings',
     component: Settings,
@@ -53,6 +58,20 @@ const routes = [
         path: 'password',
         name: 'settings.password',
         component: SettingsPassword
+      }
+    ]
+  },
+  {
+    path: '/members',
+    component: Memeber,
+    children: [
+      { path: '', redirect: { name: 'members.dashboard' } },
+      { path: 'dashboard', name: 'members.dashboard', component: MemeberDashboard },
+      { path: 'deposit', name: 'members.deposit', component: MemberDeposit },
+      {
+        path: 'withdraw',
+        name: 'members.withdraw',
+        component: MemberWithdraw
       }
     ]
   }

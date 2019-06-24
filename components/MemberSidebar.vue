@@ -28,7 +28,8 @@
         <template v-for="transaction in transactions">
           <v-list-tile
             :key="transaction.title"
-            @click="transactionEvent(transaction.par)"
+            flat
+            @click="transactionEvent(transaction.path)"
           >
             <v-list-tile-action>
               <v-icon>remove</v-icon>
@@ -44,7 +45,8 @@
         <template v-for="profile in userprofiles">
           <v-list-tile
             :key="profile.title"
-            @click="profileEvent(profile.par)"
+            flat
+            @click="profileEvent(profile.path)"
           >
             <v-list-tile-action>
               <v-icon>remove</v-icon>
@@ -68,20 +70,22 @@ export default {
     return {
       markets: [],
       transactions: [
-        { title: this.$t('Deposit'), par: 'deposit' },
-        { title: this.$t('Withdraw'), par: 'withdraw' },
-        { title: this.$t('Reports'), par: 'reports' }
+        { title: this.$t('Deposit'), path: 'deposit' },
+        { title: this.$t('Withdraw'), path: 'withdraw' },
+        { title: this.$t('Reports'), path: 'reports' }
       ],
       userprofiles: [
-        { title: this.$t('Profile'), par: 'profile' },
-        { title: this.$t('Referrals'), par: 'referrals' },
-        { title: this.$t('Contact'), par: 'contact' }
+        { title: this.$t('Profile'), path: 'profile' },
+        { title: this.$t('bank'), path: 'bank' },
+        { title: this.$t('Referrals'), path: 'referrals' },
+        { title: this.$t('Contact'), path: 'contact' }
       ]
     }
   },
 
   computed: mapGetters({
-    user: 'auth/user'
+    user: 'auth/user',
+    authenticated: 'auth/check'
   }),
   mounted() {
     this.getMarket()
@@ -101,11 +105,12 @@ export default {
     markPlace(code) {
       console.log(code)
     },
-    transactionEvent(par) {
-      console.log(par)
+    transactionEvent(expression) {
+      this.$router.push({ name: 'members.' + expression })
+      console.log(expression)
     },
-    profileEvent(par) {
-      console.log(par)
+    profileEvent(expression) {
+      this.$router.push({ name: 'settings.' + expression })
     }
   }
 }

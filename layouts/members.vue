@@ -12,15 +12,13 @@
                 </v-card>
               </v-flex>
               <v-flex xs12 sm9 mt-5>
-                <v-card>
-                  <v-sheet
-                    class="d-flex"
-                    color="with"
-                    min-height="656"
-                  >
-                    <router-view />
-                  </v-sheet>
-                </v-card>
+                <v-content>
+                  <v-card>
+                    <transition name="page" mode="out-in">
+                      <router-view />
+                    </transition>
+                  </v-card>
+                </v-content>
               </v-flex>
             </v-layout>
           </transition>

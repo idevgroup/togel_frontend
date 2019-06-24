@@ -184,7 +184,7 @@ export default {
       await this.$store.dispatch('auth/updateUser', { user: data })
 
       // Redirect home.
-      this.$router.push({ name: 'dashboard' })
+      this.$router.push({ name: 'members.dashboard' })
     },
     getBank() {
       const vm = this
