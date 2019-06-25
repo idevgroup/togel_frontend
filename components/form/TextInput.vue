@@ -10,6 +10,9 @@
       :label="label"
       :name="name"
       :prepend-icon="prepend"
+      :readonly="readonly"
+      :outline="outline"
+      :solo="solo"
     />
     <has-error :form="form" :field="name" />
   </div>
@@ -51,6 +54,18 @@ export default {
     value: {
       type: String,
       default: ''
+    },
+    readonly: {
+      type: Boolean,
+      default: false
+    },
+    outline: {
+      type: Boolean,
+      default: false
+    },
+    solo: {
+      type: Boolean,
+      default: false
     },
     // eslint-disable-next-line
     browserAutocomplete: String

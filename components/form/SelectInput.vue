@@ -9,6 +9,8 @@
       :item-text="itemText"
       :item-value="itemValue"
       :error-messages="errorMessages"
+      :outline="outline"
+      :solo="solo"
     />
     <has-error :form="form" :field="name" />
   </div>
@@ -54,8 +56,15 @@ export default {
     value: {
       type: [Number, String],
       default: () => { return '' }
+    },
+    outline: {
+      type: Boolean,
+      default: false
+    },
+    solo: {
+      type: Boolean,
+      default: false
     }
-
   },
   computed: {
     errorMessages() {

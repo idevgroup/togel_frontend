@@ -163,7 +163,6 @@ export default {
   },
   methods: {
     onVerify(response) {
-      console.log(response)
       this.form.recaptcha = response
     },
     async register() {

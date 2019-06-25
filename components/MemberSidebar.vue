@@ -85,8 +85,7 @@ export default {
   },
 
   computed: mapGetters({
-    user: 'auth/user',
-    authenticated: 'auth/check'
+    user: 'auth/user'
   }),
   mounted() {
     this.getMarket()
@@ -95,7 +94,7 @@ export default {
     getMarket() {
       const vm = this
       axios
-        .get('member/getmarket', { responseType: 'json' })
+        .get('member/getmarket')
         .then((response) => {
           vm.markets = response.data
         })
@@ -108,7 +107,6 @@ export default {
     },
     transactionEvent(expression) {
       this.$router.push({ name: 'members.' + expression })
-      console.log(expression)
     },
     profileEvent(expression) {
       this.$router.push({ name: 'settings.' + expression })

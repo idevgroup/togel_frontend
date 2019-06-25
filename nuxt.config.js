@@ -24,7 +24,7 @@ module.exports = {
     script: []
   },
 
-  loading: { color: '#007bff' },
+  loading: { color: '#007bff', height: '3px' },
 
   loadingIndicator: {
     name: 'rectangle-bounce',
@@ -36,10 +36,10 @@ module.exports = {
   },
 
   /*
-            css: [
-              // { src: '~assets/sass/app.scss', lang: 'scss' }
-            ],
-          */
+              css: [
+                // { src: '~assets/sass/app.scss', lang: 'scss' }
+              ],
+            */
 
   css: [],
   plugins: [

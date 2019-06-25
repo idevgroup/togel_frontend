@@ -101,7 +101,7 @@ export default {
       await this.$store.dispatch('auth/fetchUser')
 
       // Redirect member dashboard.
-      this.$router.push({ name: 'members.dashboard' })
+      this.$router.push({ name: 'members' })
     }
   }
 }
