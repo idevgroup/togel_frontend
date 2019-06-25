@@ -6,9 +6,9 @@ module.exports = {
   srcDir: __dirname,
 
   env: {
-    apiUrl: process.env.APP_URL || 'http://api.bson.loc/api',
+    apiUrl: process.env.APP_URL || 'http://agdemo.zentogel.com/v1/',
     appName: process.env.APP_NAME || 'Laravel-Nuxt',
-    appLocale: process.env.APP_LOCALE || 'en',
+    appLocale: process.env.APP_LOCALE || 'kh',
     githubAuth: !!process.env.GITHUB_CLIENT_ID
   },
 
@@ -55,11 +55,14 @@ module.exports = {
     // '@nuxtjs/pwa',
     '@nuxtjs/vuetify',
     '@nuxtjs/font-awesome',
-    'nuxt-material-design-icons'
+    'nuxt-material-design-icons',
+    '@nuxtjs/axios'
   ],
-
+  axios: {
+    baseURL: process.env.APP_URL || 'http://agdemo.zentogel.com/v1/'
+  },
   vuetify: {
-    materialIcons: false
+    materialIcons: true
     // Vuetify options
     //  theme: { }
   },
