@@ -59,7 +59,7 @@ const routes = [
       }
     ]
   },
-  { path: '/members', name: 'members', component: MemeberDashboard },
+  { path: '/members', redirect: { name: 'members.dashboard' } },
   { path: '/members/dashboard', name: 'members.dashboard', component: MemeberDashboard },
   { path: '/members/deposit', name: 'members.deposit', component: MemberDeposit },
   {

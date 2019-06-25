@@ -3,7 +3,7 @@
     <v-flex ms11 md11 ma-auto mb-5 mt-5>
       <v-card>
         <progress-bar :show="form.busy" />
-        <form @keydown="form.onKeydown($event)">
+        <form @keydown="form.onKeydown($event)" @submit.prevent="deposit">
           <v-card-title>
             <v-icon
               large
@@ -28,7 +28,6 @@
                   :value.sync="form.bank"
                   name="bank"
                   solo
-                  readonly
                 />
               </v-flex>
             </v-layout>
@@ -46,7 +45,6 @@
                   :value.sync="form.accountname"
                   name="accountname"
                   solo
-                  readonly
                 />
               </v-flex>
             </v-layout>
@@ -64,7 +62,6 @@
                   :value.sync="form.accountid"
                   name="accountid"
                   solo
-                  readonly
                 />
               </v-flex>
             </v-layout>
@@ -74,6 +71,7 @@
               </v-flex>
               <v-flex sm9>
                 <select-input
+                  v-model="user.get_player_bank.reg_bk_id"
                   v-validate="'required|min:1'"
                   :items="bankitems"
                   item-text="bk_name"
@@ -155,7 +153,6 @@
 
 <script>
 import Form from 'vform'
-import axios from 'axios'
 import { mapGetters } from 'vuex'
 import VueRecaptcha from 'vue-recaptcha'
 export default {
@@ -193,14 +190,13 @@ export default {
     onVerify(response) {
       this.form.recaptcha = response
     },
-
-    getBankList() {
-      axios
-        .get('banklist')
-        .then((response) => {
-          this.bankitems = response.data
-        })
-        .catch()
+    async deposit() {
+      if (await this.formHasErrors()) return
+      console.log(this.form)
+    },
+    async  getBankList() {
+      const getitems = await this.$axios.$get('banklist')
+      this.bankitems = getitems
     },
     resetCaptcha() {
       this.$refs.recaptcha.reset()

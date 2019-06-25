@@ -7,7 +7,7 @@
 
     <!-- Authenticated -->
     <template v-if="authenticated">
-      <v-btn flat :to="{ name: 'members' }">
+      <v-btn flat :to="{ name: 'members.dashboard' }">
         {{ user.reg_name }}
       </v-btn>
       <v-btn flat @click.prevent="logout">
