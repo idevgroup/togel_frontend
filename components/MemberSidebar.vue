@@ -6,6 +6,11 @@
       </v-toolbar>
 
       <v-list>
+        <v-subheader id="dashboard" @click="dashboardEvent">
+          <v-icon>
+            dashboard
+          </v-icon> Dashboard
+        </v-subheader>
         <v-subheader>
           <v-icon>markunread_mailbox</v-icon> Market
         </v-subheader>
@@ -110,6 +115,9 @@ export default {
     },
     profileEvent(expression) {
       this.$router.push({ name: 'settings.' + expression })
+    },
+    dashboardEvent() {
+      this.$router.push({ name: 'members.dashboard' })
     }
   }
 }
@@ -129,6 +137,7 @@ export default {
   font-size: 18px;
   font-weight: 600;
   padding: 0 10px;
+
 }
 .v-subheader .v-icon{
   margin-right: 10px;
@@ -138,5 +147,11 @@ margin-bottom: 5px;
 }
 .v-list__tile {
   padding: 0 10px;
+}
+#dashboard{
+ cursor: pointer;
+}
+#dashboard:hover{
+  background-color: whitesmoke
 }
 </style>

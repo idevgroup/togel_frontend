@@ -42,11 +42,6 @@ export default {
   methods: {
     async logout() {
       this.busy = true
-
-      if (this.drawer) {
-        this.toggleDrawer()
-      }
-
       // Log out the user.
       await this.$store.dispatch('auth/logout')
       this.busy = false

@@ -1,5 +1,5 @@
 <template>
-  <v-layout>
+  <v-layout row wrap>
     <v-flex xs12 sm4 ma-3>
       <v-card>
         <v-card-title primary-title>
@@ -12,15 +12,22 @@
         </v-card-title>
       </v-card>
     </v-flex>
+    <v-flex ma-3>
+      <deposit-list />
+    </v-flex>
   </v-layout>
 </template>
 
 <script>
 import { mapGetters } from 'vuex'
+import DepositList from './depositlist'
 export default {
   middleware: 'auth',
   name: 'DashboardView',
   layout: 'members',
+  components: {
+    DepositList
+  },
   computed: mapGetters({
     user: 'auth/user'
   }),

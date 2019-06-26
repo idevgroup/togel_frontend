@@ -30,6 +30,8 @@ const MemberDeposit = () =>
     import('~/pages/members/deposit').then(m => m.default || m)
 const MemberWithdraw = () =>
     import('~/pages/members/withdraw').then(m => m.default || m)
+const MemberDepositList = () =>
+    import('~/pages/members/depositlist').then(m => m.default || m)
 const routes = [
   { path: '/', name: 'index', component: Index },
   { path: '/welcome', name: 'welcome', component: Welcome },
@@ -66,6 +68,11 @@ const routes = [
     path: '/members/withdraw',
     name: 'members.withdraw',
     component: MemberWithdraw
+  },
+  {
+    path: '/members/depositlist',
+    name: 'members.deposit.list',
+    component: MemberDepositList
   }
 ]
 

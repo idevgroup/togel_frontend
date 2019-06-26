@@ -36,10 +36,10 @@ module.exports = {
   },
 
   /*
-              css: [
-                // { src: '~assets/sass/app.scss', lang: 'scss' }
-              ],
-            */
+                            css: [
+                              // { src: '~assets/sass/app.scss', lang: 'scss' }
+                            ],
+                          */
 
   css: [],
   plugins: [
@@ -59,7 +59,7 @@ module.exports = {
     '@nuxtjs/axios'
   ],
   axios: {
-    baseURL: process.env.APP_URL || 'http://agdemo.zentogel.com/v1/'
+    baseURL: process.env.APP_URL
   },
   vuetify: {
     materialIcons: true

@@ -20,7 +20,6 @@
               </v-flex>
               <v-flex sm9>
                 <text-input
-                  v-model="user.get_player_bank.get_bank.bk_name"
                   v-validate="'required'"
                   :form="form"
                   :label="$t('bank')"
@@ -28,6 +27,7 @@
                   :value.sync="form.bank"
                   name="bank"
                   solo
+                  readonly
                 />
               </v-flex>
             </v-layout>
@@ -37,7 +37,6 @@
               </v-flex>
               <v-flex sm9>
                 <text-input
-                  v-model="user.get_player_bank.reg_account_name"
                   v-validate="'required'"
                   :form="form"
                   :label="$t('Account Name')"
@@ -45,6 +44,7 @@
                   :value.sync="form.accountname"
                   name="accountname"
                   solo
+                  readonly
                 />
               </v-flex>
             </v-layout>
@@ -54,7 +54,6 @@
               </v-flex>
               <v-flex sm9>
                 <text-input
-                  v-model="user.get_player_bank.reg_account_number"
                   v-validate="'required'"
                   :form="form"
                   :label="$t('Account ID')"
@@ -62,6 +61,7 @@
                   :value.sync="form.accountid"
                   name="accountid"
                   solo
+                  readonly
                 />
               </v-flex>
             </v-layout>
@@ -71,7 +71,6 @@
               </v-flex>
               <v-flex sm9>
                 <select-input
-                  v-model="user.get_player_bank.reg_bk_id"
                   v-validate="'required|min:1'"
                   :items="bankitems"
                   item-text="bk_name"
@@ -164,8 +163,14 @@ export default {
     return {
       title: this.$t('Deposit'),
       script: [
-        { src: 'https://www.google.com/recaptcha/api.js?onload=vueRecaptchaInit&render=explicit' }
+        { src: 'https://www.google.com/recaptcha/api.js' }
       ]
+    }
+  },
+  props: {
+    memberid: {
+      type: [String, Number],
+      default: ''
     }
   },
   data: () => ({
@@ -176,15 +181,20 @@ export default {
       debank: '',
       amount: '',
       note: '',
-      recaptcha: ''
+      recaptcha: '',
+      memberid: ''
     }),
     bankitems: []
   }),
   computed: mapGetters({
     user: 'auth/user'
   }),
+  watch: {
+
+  },
   mounted() {
     this.getBankList()
+    this.setValue()
   },
   methods: {
     onVerify(response) {
@@ -192,11 +202,19 @@ export default {
     },
     async deposit() {
       if (await this.formHasErrors()) return
-      console.log(this.form)
+      const data = await this.$axios.$post('member/deposit', this.form)
+      console.log(data)
     },
     async  getBankList() {
       const getitems = await this.$axios.$get('banklist')
       this.bankitems = getitems
+    },
+    setValue() {
+      this.form.memberid = this.user.id
+      this.form.bank = this.user.get_player_bank.get_bank.bk_name
+      this.form.accountname = this.user.get_player_bank.reg_account_name
+      this.form.accountid = this.user.get_player_bank.reg_account_number
+      this.form.debank = this.user.get_player_bank.reg_bk_id
     },
     resetCaptcha() {
       this.$refs.recaptcha.reset()
