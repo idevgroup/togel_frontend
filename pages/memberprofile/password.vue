@@ -35,21 +35,26 @@
         <!-- <form-feedback :form="form" :text="$t('password_updated')"></form-feedback> -->
       </v-card-text>
       <v-card-actions>
-        <submit-button :flat="true" :form="form" :label="$t('update')" color="primary" />
+        <submit-button
+          :flat="true"
+          :form="form"
+          :label="$t('update')"
+          color="primary"
+        />
       </v-card-actions>
     </form>
   </v-card>
 </template>
 
 <script>
-import Form from 'vform'
+import Form from "vform"
 
 export default {
-  name: 'PasswordView',
+  name: "PasswordView",
   data: () => ({
     form: new Form({
-      password: '',
-      password_confirmation: ''
+      password: "",
+      password_confirmation: ""
     }),
     eye: true
   }),
@@ -58,16 +63,16 @@ export default {
     async update() {
       if (await this.formHasErrors()) return
 
-      this.$emit('busy', true)
+      this.$emit("busy", true)
 
-      await this.form.patch('/settings/password')
+      await this.form.patch("/settings/password")
 
       this.form.reset()
-      this.$emit('busy', false)
+      this.$emit("busy", false)
 
-      this.$store.dispatch('message/responseMessage', {
-        type: 'success',
-        text: this.$t('password_updated')
+      this.$store.dispatch("message/responseMessage", {
+        type: "success",
+        text: this.$t("password_updated")
       })
     }
   }

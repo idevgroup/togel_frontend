@@ -11,11 +11,11 @@ export function cookieFromRequest(req, key) {
   }
 
   const cookie = req.headers.cookie
-    .split(';')
+    .split(";")
     .find(c => c.trim().startsWith(`${key}=`))
 
   if (cookie) {
-    return cookie.split('=')[1]
+    return cookie.split("=")[1]
   }
 }
 

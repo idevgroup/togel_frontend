@@ -18,10 +18,10 @@
 </template>
 
 <script>
-import TextInput from './TextInput'
+import TextInput from "./TextInput"
 
 export default {
-  name: 'NumberInput',
+  name: "NumberInput",
   extends: TextInput
 }
 </script>

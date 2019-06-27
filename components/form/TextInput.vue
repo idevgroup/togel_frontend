@@ -20,7 +20,7 @@
 
 <script>
 export default {
-  name: 'TextInput',
+  name: "TextInput",
 
   props: {
     name: {
@@ -45,7 +45,7 @@ export default {
     },
     prepend: {
       type: String,
-      default: ''
+      default: ""
     },
     counter: {
       type: [Boolean, Number, String],
@@ -53,7 +53,7 @@ export default {
     },
     value: {
       type: String,
-      default: ''
+      default: ""
     },
     readonly: {
       type: Boolean,
@@ -77,7 +77,7 @@ export default {
     },
     errorClass() {
       return (
-        this.form.errors.has(this.name) && ' input-group--error error--text'
+        this.form.errors.has(this.name) && " input-group--error error--text"
       )
     },
     _value: {
@@ -85,9 +85,9 @@ export default {
         return this.value
       },
       set(value) {
-        value = value || ''
-        this.$emit('update:value', value.trim())
-        this.$emit('input', value.trim())
+        value = value || ""
+        this.$emit("update:value", value.trim())
+        this.$emit("input", value.trim())
       }
     }
   }

@@ -3,12 +3,7 @@
     <v-toolbar flat color="white">
       <v-toolbar-title>Deposit</v-toolbar-title>
     </v-toolbar>
-    <v-data-table
-      :headers="headers"
-      :items="desserts"
-      class="elevation-1"
-      light
-    >
+    <v-data-table :headers="headers" :items="desserts" class="elevation-1" flat>
       <template v-slot:items="props">
         <td>{{ props.item.name }}</td>
         <td class="text-xs-right">
@@ -17,24 +12,11 @@
         <td class="text-xs-right">
           {{ props.item.fat }}
         </td>
-        <td class="text-xs-right">
-          {{ props.item.carbs }}
-        </td>
-        <td class="text-xs-right">
-          {{ props.item.protein }}
-        </td>
         <td class="justify-center layout px-0">
-          <v-icon
-            small
-            class="mr-2"
-            @click="editItem(props.item)"
-          >
+          <v-icon small class="mr-2" @click="editItem(props.item)">
             edit
           </v-icon>
-          <v-icon
-            small
-            @click="deleteItem(props.item)"
-          >
+          <v-icon small @click="deleteItem(props.item)">
             delete
           </v-icon>
         </td>
@@ -50,34 +32,30 @@
 
 <script>
 export default {
-  middleware: 'auth',
-  name: 'DepositListView',
+  middleware: "auth",
+  name: "DepositListView",
   data: () => ({
     dialog: false,
     headers: [
       {
-        text: 'Trans-ID',
-        align: 'left',
-        sortable: false,
-        value: 'name'
+        text: "Trans-ID",
+        align: "left",
+        value: "transactionid"
       },
-      { text: 'Acc Name', value: 'fat' },
-      { text: 'Acc Number', value: 'carbs' },
-      { text: 'Bank', value: 'protein' },
-      { text: 'Amount', value: 'protein' },
-      { text: 'Status', value: 'name', sortable: false }
+      { text: "Amount", value: "protein", align: "rigth" },
+      { text: "Status", value: "name", sortable: false }
     ],
     desserts: [],
     editedIndex: -1,
     editedItem: {
-      name: '',
+      name: "",
       calories: 0,
       fat: 0,
       carbs: 0,
       protein: 0
     },
     defaultItem: {
-      name: '',
+      name: "",
       calories: 0,
       fat: 0,
       carbs: 0,
@@ -87,7 +65,7 @@ export default {
 
   computed: {
     formTitle() {
-      return this.editedIndex === -1 ? 'New Item' : 'Edit Item'
+      return this.editedIndex === -1 ? "New Item" : "Edit Item"
     }
   },
 
@@ -114,7 +92,8 @@ export default {
 
     deleteItem(item) {
       const index = this.desserts.indexOf(item)
-      confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
+      confirm("Are you sure you want to delete this item?") &&
+        this.desserts.splice(index, 1)
     },
 
     close() {
@@ -137,6 +116,4 @@ export default {
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

@@ -108,7 +108,7 @@
               browser-autocomplete="accountid"
               name="accountid"
             />
-            <vue-recaptcha
+            <VueRecaptcha
               ref="recaptcha"
               v-model="form.recaptcha"
               v-validate="'required'"
@@ -127,33 +127,36 @@
   </v-layout>
 </template>
 <script>
-import Form from 'vform'
-import axios from 'axios'
-import VueRecaptcha from 'vue-recaptcha'
+import Form from "vform"
+import axios from "axios"
+import VueRecaptcha from "vue-recaptcha"
 export default {
-  layout: 'frontend',
-  name: 'RegisterView',
+  layout: "frontend",
+  name: "RegisterView",
   components: { VueRecaptcha },
   head() {
     return {
-      title: this.$t('Member Register'),
+      title: this.$t("Member Register"),
       script: [
-        { src: 'https://www.google.com/recaptcha/api.js?onload=vueRecaptchaInit&render=explicit' }
+        {
+          src:
+            "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaInit&render=explicit"
+        }
       ]
     }
   },
   data: () => ({
     form: new Form({
-      name: '',
-      username: '',
-      email: '',
-      password: '',
-      password_confirmation: '',
-      bank: '',
-      accountname: '',
-      accountid: '',
-      recaptcha: '',
-      phone: ''
+      name: "",
+      username: "",
+      email: "",
+      password: "",
+      password_confirmation: "",
+      bank: "",
+      accountname: "",
+      accountid: "",
+      recaptcha: "",
+      phone: ""
     }),
     getbank: [],
     eye: true
@@ -169,27 +172,27 @@ export default {
       if (await this.formHasErrors()) return
 
       // Register the user.
-      const { data } = await this.form.post('member/register')
+      const { data } = await this.form.post("member/register")
 
       // Log in the user.
       const {
         data: { token }
-      } = await this.form.post('member/login')
+      } = await this.form.post("member/login")
 
       // Save the token.
-      this.$store.dispatch('auth/saveToken', { token })
+      this.$store.dispatch("auth/saveToken", { token })
 
       // Update the user.
-      await this.$store.dispatch('auth/updateUser', { user: data })
+      await this.$store.dispatch("auth/updateUser", { user: data })
 
       // Redirect home.
-      this.$router.push({ name: 'members.dashboard' })
+      this.$router.push({ name: "members.dashboard" })
     },
     getBank() {
       const vm = this
       axios
-        .get('banklist')
-        .then((response) => {
+        .get("banklist")
+        .then(response => {
           vm.getbank = response.data
         })
         .catch()

@@ -1,7 +1,7 @@
-import axios from 'axios'
+import axios from "axios"
 
 export default async ({ store, req }) => {
-  const token = store.getters['auth/token']
+  const token = store.getters["auth/token"]
 
   if (process.server) {
     if (token) {
@@ -11,7 +11,7 @@ export default async ({ store, req }) => {
     }
   }
 
-  if (!store.getters['auth/check'] && token) {
-    await store.dispatch('auth/fetchUser')
+  if (!store.getters["auth/check"] && token) {
+    await store.dispatch("auth/fetchUser")
   }
 }

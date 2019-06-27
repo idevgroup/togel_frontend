@@ -25,20 +25,20 @@
 </template>
 
 <script>
-import Profile from '~/pages/memberprofile/profile'
-import Password from '~/pages/memberprofile/password'
+import Profile from "~/pages/memberprofile/profile"
+import Password from "~/pages/memberprofile/password"
 
 export default {
-  name: 'SettingsView',
-  layout: 'members',
-  middleware: 'auth',
+  name: "SettingsView",
+  layout: "members",
+  middleware: "auth",
   components: {
-    'profile-view': Profile,
-    'password-view': Password
+    "profile-view": Profile,
+    "password-view": Password
   },
   head() {
     return {
-      title: this.$t('profile')
+      title: this.$t("profile")
     }
   },
   data() {

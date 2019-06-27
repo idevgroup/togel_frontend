@@ -1,22 +1,19 @@
 <template>
   <v-layout row wrap>
     <v-flex ms11 md11 ma-auto mb-5 mt-5>
-      <v-card>
+      <v-card flat>
         <progress-bar :show="form.busy" />
         <form @keydown="form.onKeydown($event)" @submit.prevent="deposit">
           <v-card-title>
-            <v-icon
-              large
-              left
-            >
+            <v-icon large left>
               account_balance_wallet
             </v-icon>
-            <span class="title font-weight-light">{{ $t('Deposit') }}</span>
+            <span class="title font-weight-light">{{ $t("Deposit") }}</span>
           </v-card-title>
           <v-card-text>
             <v-layout row>
               <v-flex sm3>
-                <label class="label">{{ $t('bank') }}</label>
+                <label class="label">{{ $t("bank") }}</label>
               </v-flex>
               <v-flex sm9>
                 <text-input
@@ -33,7 +30,7 @@
             </v-layout>
             <v-layout row>
               <v-flex sm3>
-                <label class="label">{{ $t('Account Name') }}</label>
+                <label class="label">{{ $t("Account Name") }}</label>
               </v-flex>
               <v-flex sm9>
                 <text-input
@@ -50,7 +47,7 @@
             </v-layout>
             <v-layout row>
               <v-flex sm3>
-                <label class="label">{{ $t('Account ID') }}</label>
+                <label class="label">{{ $t("Account ID") }}</label>
               </v-flex>
               <v-flex sm9>
                 <text-input
@@ -67,7 +64,7 @@
             </v-layout>
             <v-layout row>
               <v-flex sm3>
-                <label class="label">{{ $t('deposit to') }}</label>
+                <label class="label">{{ $t("deposit to") }}</label>
               </v-flex>
               <v-flex sm9>
                 <select-input
@@ -86,7 +83,7 @@
             </v-layout>
             <v-layout row>
               <v-flex sm3>
-                <label class="label">{{ $t('amount') }}</label>
+                <label class="label">{{ $t("amount") }}</label>
               </v-flex>
               <v-flex sm9>
                 <number-input
@@ -95,7 +92,6 @@
                   :label="$t('amount')"
                   :v-errors="errors"
                   :value.sync="form.amount"
-                  browser-autocomplete="new-amount"
                   name="amount"
                   solo
                 />
@@ -103,11 +99,11 @@
             </v-layout>
             <v-layout row>
               <v-flex sm3>
-                <label class="label">{{ $t('note') }}</label>
+                <label class="label">{{ $t("note") }}</label>
               </v-flex>
               <v-flex sm9>
                 <textarea-input
-                  v-validate="'min:20'"
+                  v-validate="'min:10'"
                   :form="form"
                   :label="$t('note')"
                   :v-errors="errors"
@@ -122,7 +118,7 @@
                 <label class="label" />
               </v-flex>
               <v-flex sm9>
-                <vue-recaptcha
+                <VueRecaptcha
                   ref="recaptcha"
                   v-model="form.recaptcha"
                   v-validate="'required'"
@@ -140,7 +136,12 @@
                 <label class="label" />
               </v-flex>
               <v-flex sm5>
-                <submit-button :form="form" :label="$t('Deposit')" block color="primary" />
+                <submit-button
+                  :form="form"
+                  :label="$t('Deposit')"
+                  block
+                  color="primary"
+                />
               </v-flex>
             </v-layout>
           </v-card-actions>
@@ -151,47 +152,43 @@
 </template>
 
 <script>
-import Form from 'vform'
-import { mapGetters } from 'vuex'
-import VueRecaptcha from 'vue-recaptcha'
+import Form from "vform"
+import { mapGetters } from "vuex"
+import VueRecaptcha from "vue-recaptcha"
 export default {
-  middleware: 'auth',
-  name: 'DepositView',
-  layout: 'members',
+  middleware: "auth",
+  name: "DepositView",
+  layout: "members",
   components: { VueRecaptcha },
   head() {
     return {
-      title: this.$t('Deposit'),
-      script: [
-        { src: 'https://www.google.com/recaptcha/api.js' }
-      ]
+      title: this.$t("Deposit"),
+      script: [{ src: "https://www.google.com/recaptcha/api.js" }]
     }
   },
   props: {
     memberid: {
       type: [String, Number],
-      default: ''
+      default: ""
     }
   },
   data: () => ({
     form: new Form({
-      bank: '',
-      accountname: '',
-      accountid: '',
-      debank: '',
-      amount: '',
-      note: '',
-      recaptcha: '',
-      memberid: ''
+      bank: "",
+      accountname: "",
+      accountid: "",
+      debank: "",
+      amount: "",
+      note: "",
+      recaptcha: "",
+      memberid: ""
     }),
     bankitems: []
   }),
   computed: mapGetters({
-    user: 'auth/user'
+    user: "auth/user"
   }),
-  watch: {
-
-  },
+  watch: {},
   mounted() {
     this.getBankList()
     this.setValue()
@@ -202,11 +199,11 @@ export default {
     },
     async deposit() {
       if (await this.formHasErrors()) return
-      const data = await this.$axios.$post('member/deposit', this.form)
+      const data = await this.$axios.$post("member/deposit", this.form)
       console.log(data)
     },
-    async  getBankList() {
-      const getitems = await this.$axios.$get('banklist')
+    async getBankList() {
+      const getitems = await this.$axios.$get("banklist")
       this.bankitems = getitems
     },
     setValue() {
@@ -224,13 +221,10 @@ export default {
 </script>
 
 <style scoped>
-.v-card {
-    box-shadow:none
-}
-.label{
+.label {
   font-size: 16px;
-    font-weight: 600;
-    display: flex;
-    line-height: 45px;
+  font-weight: 600;
+  display: flex;
+  line-height: 45px;
 }
 </style>

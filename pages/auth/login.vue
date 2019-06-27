@@ -1,12 +1,6 @@
 <template>
   <v-layout row>
-    <v-flex
-      xs12
-      sm8
-      lg5
-      mt-5
-      ma-auto
-    >
+    <v-flex xs12 sm8 lg5 mt-5 ma-auto>
       <v-card>
         <progress-bar :show="busy" />
         <form @submit.prevent="login" @keydown="form.onKeydown($event)">
@@ -64,20 +58,20 @@
 </template>
 
 <script>
-import Form from 'vform'
+import Form from "vform"
 
 export default {
-  layout: 'frontend',
-  name: 'LoginView',
+  layout: "frontend",
+  name: "LoginView",
   head() {
     return {
-      title: this.$t('login')
+      title: this.$t("login")
     }
   },
   data: () => ({
     form: new Form({
-      username: '',
-      password: ''
+      username: "",
+      password: ""
     }),
     eye: true,
     remember: false,
@@ -89,19 +83,19 @@ export default {
       if (await this.formHasErrors()) return
 
       // Submit the form.
-      const { data } = await this.form.post('member/login')
+      const { data } = await this.form.post("member/login")
 
       // Save the token.
-      this.$store.dispatch('auth/saveToken', {
+      this.$store.dispatch("auth/saveToken", {
         token: data.token,
         remember: this.remember
       })
       this.busy = true
       // Fetch the user.
-      await this.$store.dispatch('auth/fetchUser')
+      await this.$store.dispatch("auth/fetchUser")
 
       // Redirect member dashboard.
-      this.$router.push({ name: 'members.dashboard' })
+      this.$router.push({ name: "members.dashboard" })
     }
   }
 }

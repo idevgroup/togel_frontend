@@ -32,15 +32,15 @@
 export default {
   data() {
     return {
-      name: this.$t('nav_menu_title'),
+      name: this.$t("nav_menu_title"),
       items: [
-        { title: 'Dashboard', icon: 'dashboard', route: { name: 'home' } },
+        { title: "Dashboard", icon: "dashboard", route: { name: "home" } },
         {
-          title: 'Account',
-          icon: 'account_box',
-          route: { name: 'settings.profile' }
+          title: "Account",
+          icon: "account_box",
+          route: { name: "settings.profile" }
         },
-        { title: 'Welcome', icon: 'menu', route: { name: 'index' } }
+        { title: "Welcome", icon: "menu", route: { name: "index" } }
       ]
     }
   }

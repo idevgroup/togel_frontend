@@ -57,21 +57,21 @@
 </template>
 
 <script>
-import Form from 'vform'
+import Form from "vform"
 
 export default {
-  name: 'ResetView',
-  layout: 'app',
+  name: "ResetView",
+  layout: "app",
   metaInfo() {
-    return { title: this.$t('reset_password') }
+    return { title: this.$t("reset_password") }
   },
 
   data: () => ({
     form: new Form({
-      token: '',
-      email: '',
-      password: '',
-      password_confirmation: ''
+      token: "",
+      email: "",
+      password: "",
+      password_confirmation: ""
     }),
     eye: true
   }),
@@ -82,27 +82,27 @@ export default {
 
       this.form.token = this.$route.params.token
 
-      const response = await this.form.post('/password/reset')
+      const response = await this.form.post("/password/reset")
 
       // Login user if reset successful.
-      const { data } = await this.form.post('/login')
+      const { data } = await this.form.post("/login")
 
       // Save the token.
-      this.$store.dispatch('auth/saveToken', {
+      this.$store.dispatch("auth/saveToken", {
         token: data.token,
         remember: false
       })
 
       // Fetch the user.
-      await this.$store.dispatch('auth/fetchUser')
+      await this.$store.dispatch("auth/fetchUser")
 
-      this.$store.dispatch('message/responseMessage', {
-        type: 'success',
+      this.$store.dispatch("message/responseMessage", {
+        type: "success",
         text: response.data.status
       })
 
       // Redirect home.
-      this.$router.push({ name: 'home' })
+      this.$router.push({ name: "home" })
     }
   }
 }

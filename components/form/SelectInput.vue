@@ -18,7 +18,7 @@
 
 <script>
 export default {
-  name: 'SelectInput',
+  name: "SelectInput",
   props: {
     itemText: {
       type: String,
@@ -39,7 +39,9 @@ export default {
     items: {
       type: Array,
       required: true,
-      default: () => { return [] }
+      default: () => {
+        return []
+      }
     },
     counter: {
       type: [Boolean, Number, String],
@@ -55,7 +57,9 @@ export default {
     },
     value: {
       type: [Number, String],
-      default: () => { return '' }
+      default: () => {
+        return ""
+      }
     },
     outline: {
       type: Boolean,
@@ -72,7 +76,7 @@ export default {
     },
     errorClass() {
       return (
-        this.form.errors.has(this.name) && ' input-group--error error--text'
+        this.form.errors.has(this.name) && " input-group--error error--text"
       )
     },
     _value: {
@@ -80,12 +84,11 @@ export default {
         return this.value
       },
       set(value) {
-        value = value || ''
-        this.$emit('update:value', value)
-        this.$emit('input', value)
+        value = value || ""
+        this.$emit("update:value", value)
+        this.$emit("input", value)
       }
     }
-
   }
 }
 </script>

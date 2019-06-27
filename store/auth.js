@@ -1,5 +1,5 @@
-import axios from 'axios'
-import Cookies from 'js-cookie'
+import axios from "axios"
+import Cookies from "js-cookie"
 
 // state
 export const state = () => ({
@@ -41,35 +41,37 @@ export const mutations = {
 // actions
 export const actions = {
   saveToken({ commit, dispatch }, { token, remember }) {
-    commit('SET_TOKEN', token)
+    commit("SET_TOKEN", token)
 
-    Cookies.set('token', token, { expires: remember ? 365 : null })
+    Cookies.set("token", token, { expires: remember ? 365 : null })
   },
 
   async fetchUser({ commit }) {
     try {
-      const { data } = await axios.get('member/refresh')
+      const { data } = await axios.get("member/refresh")
 
-      commit('FETCH_USER_SUCCESS', data)
+      commit("FETCH_USER_SUCCESS", data)
     } catch (e) {
-      Cookies.remove('token')
+      Cookies.remove("token")
 
-      commit('FETCH_USER_FAILURE')
+      commit("FETCH_USER_FAILURE")
     }
   },
 
   updateUser({ commit }, payload) {
-    commit('UPDATE_USER', payload)
+    commit("UPDATE_USER", payload)
   },
 
   async logout({ commit }) {
     try {
-      await axios.post('member/logout')
-    } catch (e) {}
+      await axios.post("member/logout")
+    } catch (e) {
+      console.log(e)
+    }
 
-    Cookies.remove('token')
+    Cookies.remove("token")
 
-    commit('LOGOUT')
+    commit("LOGOUT")
   },
 
   async fetchOauthUrl(ctx, { provider }) {

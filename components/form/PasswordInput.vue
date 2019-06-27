@@ -20,20 +20,20 @@
 
 <script>
 // import i18n from '~/plugins/vue-i18n'
-import TextInput from './TextInput'
+import TextInput from "./TextInput"
 
 export default {
-  name: 'PasswordInput',
+  name: "PasswordInput",
   extends: TextInput,
 
   props: {
     name: {
       type: String,
-      default: 'password'
+      default: "password"
     },
     label: {
       type: String,
-      default: ''
+      default: ""
     },
     hideIcon: {
       type: [Boolean, String],
@@ -54,11 +54,11 @@ export default {
   computed: {
     icon() {
       if (this.hideIcon) {
-        return ''
+        return ""
       } else if (this.eye) {
-        return 'visibility'
+        return "visibility"
       }
-      return 'visibility_off'
+      return "visibility_off"
     },
     _eye() {
       if (this.hide !== null) {
@@ -70,14 +70,14 @@ export default {
 
   watch: {
     eye() {
-      this.$emit('eye', this.eye)
+      this.$emit("eye", this.eye)
     }
   },
 
   methods: {
     toggleVisibility() {
       this.eye = !this.eye
-      this.$emit('eye', this.eye)
+      this.$emit("eye", this.eye)
     }
   }
 }

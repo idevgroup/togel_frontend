@@ -31,32 +31,37 @@
         />
       </v-card-text>
       <v-card-actions>
-        <submit-button :flat="true" :form="form" :label="$t('update')" color="primary" />
+        <submit-button
+          :flat="true"
+          :form="form"
+          :label="$t('update')"
+          color="primary"
+        />
       </v-card-actions>
     </form>
   </v-card>
 </template>
 
 <script>
-import Form from 'vform'
-import { mapGetters } from 'vuex'
+import Form from "vform"
+import { mapGetters } from "vuex"
 
 export default {
-  name: 'ProfileView',
+  name: "ProfileView",
   data: () => ({
     form: new Form({
-      name: '',
-      email: ''
+      name: "",
+      email: ""
     })
   }),
 
   computed: mapGetters({
-    user: 'auth/user'
+    user: "auth/user"
   }),
 
   created() {
     // Fill the form with user data.
-    this.form.keys().forEach((key) => {
+    this.form.keys().forEach(key => {
       this.form[key] = this.user[key]
     })
   },
@@ -65,16 +70,16 @@ export default {
     async update() {
       if (await this.formHasErrors()) return
 
-      this.$emit('busy', true)
+      this.$emit("busy", true)
 
-      const { data } = await this.form.patch('/settings/profile')
+      const { data } = await this.form.patch("/settings/profile")
 
-      await this.$store.dispatch('auth/updateUser', { user: data })
-      this.$emit('busy', false)
+      await this.$store.dispatch("auth/updateUser", { user: data })
+      this.$emit("busy", false)
 
-      this.$store.dispatch('message/responseMessage', {
-        type: 'success',
-        text: this.$t('info_updated')
+      this.$store.dispatch("message/responseMessage", {
+        type: "success",
+        text: this.$t("info_updated")
       })
     }
   }

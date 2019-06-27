@@ -26,9 +26,9 @@
           <a href="https://github.com/laravel/laravel">
             GitHub
           </a>
-          <br>
+          <br />
         </div>
-        <img src="/img/v.png" alt="Vuetify.js" class="mt-5">
+        <img src="/img/v.png" alt="Vuetify.js" class="mt-5" />
         <div class="display-2 grey--text mt-5">
           Vuetify
         </div>
@@ -47,15 +47,15 @@
 
 <script>
 export default {
-  name: 'WelcomeView',
-  layout: 'app',
+  name: "WelcomeView",
+  layout: "app",
 
   metaInfo() {
-    return { title: this.$t('home') }
+    return { title: this.$t("home") }
   },
 
   data: () => ({
-    title: 'Laravel Vuetify Nuxt'
+    title: "Laravel Vuetify Nuxt"
   })
 }
 </script>

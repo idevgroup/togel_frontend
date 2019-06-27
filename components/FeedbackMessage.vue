@@ -40,16 +40,16 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
+import { mapGetters } from "vuex"
 
 export default {
-  name: 'FeedbackMessage',
+  name: "FeedbackMessage",
   computed: mapGetters({
-    responseMessage: 'message/responseMessage'
+    responseMessage: "message/responseMessage"
   }),
   methods: {
     close() {
-      this.$store.dispatch('message/clearMessage')
+      this.$store.dispatch("message/clearMessage")
     }
   }
 }

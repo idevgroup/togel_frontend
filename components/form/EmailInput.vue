@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import TextInput from './TextInput'
+import TextInput from "./TextInput"
 
 export default {
-  name: 'EmailInput',
+  name: "EmailInput",
   extends: TextInput
 }
 </script>

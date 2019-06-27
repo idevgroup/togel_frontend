@@ -1,6 +1,6 @@
 <template>
   <div>
-    <vue-recaptcha
+    <VueRecaptcha
       ref="recaptcha"
       v-model="_value"
       :sitekey="sitekey"
@@ -14,17 +14,17 @@
 </template>
 
 <script>
-import VueRecaptcha from 'vue-recaptcha'
+import VueRecaptcha from "vue-recaptcha"
 export default {
-  name: 'RecaptchaInput',
+  name: "RecaptchaInput",
   components: { VueRecaptcha },
   head: {
     // Include external js files
     script: [
       {
-        type: 'text/javascript',
+        type: "text/javascript",
         src:
-          'https://www.google.com/recaptcha/api.js?onload=vueRecaptchaInit&render=explicit'
+          "https://www.google.com/recaptcha/api.js?onload=vueRecaptchaInit&render=explicit"
       }
     ]
   },
@@ -47,11 +47,11 @@ export default {
     },
     value: {
       type: String,
-      default: ''
+      default: ""
     },
     recaptcha: {
       type: String,
-      default: ''
+      default: ""
     }
   },
   data() {
@@ -65,7 +65,7 @@ export default {
     },
     errorClass() {
       return (
-        this.form.errors.has(this.name) && ' input-group--error error--text'
+        this.form.errors.has(this.name) && " input-group--error error--text"
       )
     },
     _value: {
@@ -73,9 +73,9 @@ export default {
         return this.value
       },
       set(value) {
-        value = value || ''
-        this.$emit('update:value', value.trim())
-        this.$emit('input', value.trim())
+        value = value || ""
+        this.$emit("update:value", value.trim())
+        this.$emit("input", value.trim())
       }
     }
   },
@@ -88,5 +88,4 @@ export default {
 }
 </script>
 
-<style>
-</style>
+<style></style>

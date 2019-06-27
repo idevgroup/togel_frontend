@@ -25,7 +25,7 @@
 
 <script>
 export default {
-  name: 'SubmitButton',
+  name: "SubmitButton",
   props: {
     form: {
       type: Object,
@@ -45,7 +45,7 @@ export default {
     },
     color: {
       type: String,
-      default: 'primary'
+      default: "primary"
     }
   }
 }

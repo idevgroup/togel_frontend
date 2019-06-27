@@ -3,7 +3,7 @@
     <v-toolbar-title />
     <v-spacer />
 
-    <locale-dropdown />
+    <LocaleDropdown />
 
     <!-- Authenticated -->
     <template v-if="authenticated">
@@ -28,26 +28,26 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import LocaleDropdown from './LocaleDropdown'
+import { mapGetters } from "vuex"
+import LocaleDropdown from "./LocaleDropdown"
 export default {
   components: {
     LocaleDropdown
   },
   computed: mapGetters({
-    user: 'auth/user',
-    authenticated: 'auth/check'
+    user: "auth/user",
+    authenticated: "auth/check"
   }),
 
   methods: {
     async logout() {
       this.busy = true
       // Log out the user.
-      await this.$store.dispatch('auth/logout')
+      await this.$store.dispatch("auth/logout")
       this.busy = false
 
       // Redirect to login.
-      this.$router.push({ name: 'login' })
+      this.$router.push({ name: "login" })
     }
   }
 }

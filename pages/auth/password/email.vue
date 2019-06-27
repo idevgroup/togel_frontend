@@ -34,18 +34,18 @@
 </template>
 
 <script>
-import Form from 'vform'
+import Form from "vform"
 
 export default {
-  name: 'EmailView',
-  layout: 'app',
+  name: "EmailView",
+  layout: "app",
   metaInfo() {
-    return { title: this.$t('reset_password') }
+    return { title: this.$t("reset_password") }
   },
 
   data: () => ({
     form: new Form({
-      email: ''
+      email: ""
     })
   }),
 
@@ -53,14 +53,14 @@ export default {
     async send() {
       if (await this.formHasErrors()) return
 
-      const { data } = await this.form.post('/password/email')
+      const { data } = await this.form.post("/password/email")
 
-      this.$store.dispatch('message/responseMessage', {
-        type: 'success',
+      this.$store.dispatch("message/responseMessage", {
+        type: "success",
         text: data.status
       })
 
-      this.$router.push({ name: 'welcome' })
+      this.$router.push({ name: "welcome" })
     }
   }
 }

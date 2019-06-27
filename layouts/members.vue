@@ -31,27 +31,27 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
-import ToolBar from '~/components/ToolBar'
-import FeedbackMessage from '~/components/FeedbackMessage'
-import PageFooter from '~/components/PageFooter'
-import MemberSideBar from '~/components/MemberSideBar'
+import { mapGetters } from "vuex"
+import ToolBar from "~/components/ToolBar"
+import FeedbackMessage from "~/components/FeedbackMessage"
+import PageFooter from "~/components/PageFooter"
+import MemberSideBar from "~/components/MemberSideBar"
 export default {
   components: {
-    'tool-bar': ToolBar,
-    'feedback-message': FeedbackMessage,
-    'page-footer': PageFooter,
-    'member-sidebar': MemberSideBar
+    "tool-bar": ToolBar,
+    "feedback-message": FeedbackMessage,
+    "page-footer": PageFooter,
+    "member-sidebar": MemberSideBar
   },
   computed: mapGetters({
-    authenticated: 'auth/check'
+    authenticated: "auth/check"
   }),
   methods: {
     async logout() {
       // Log out the user.
-      await this.$store.dispatch('auth/logout')
+      await this.$store.dispatch("auth/logout")
       // Redirect to login.
-      this.$router.push({ name: 'login' })
+      this.$router.push({ name: "login" })
     }
   }
 }

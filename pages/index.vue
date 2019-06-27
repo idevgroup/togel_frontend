@@ -9,10 +9,10 @@
 
 <script>
 export default {
-  layout: 'frontend',
+  layout: "frontend",
   head() {
     return {
-      title: this.$t('home')
+      title: this.$t("home")
     }
   }
 }

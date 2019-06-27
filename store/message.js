@@ -1,10 +1,10 @@
-import * as types from '../mutation-types'
+import * as types from "../mutation-types"
 
 // state
 export const state = () => ({
-  type: '',
-  title: '',
-  text: '',
+  type: "",
+  title: "",
+  text: "",
   modal: false,
   show: false
 })
@@ -16,9 +16,9 @@ export const mutations = {
   },
   [types.CLEAR_MSG](state) {
     Object.assign(state, {
-      type: '',
-      text: '',
-      title: '',
+      type: "",
+      text: "",
+      title: "",
       modal: false,
       show: false
     })
@@ -42,7 +42,7 @@ export const actions = {
 
 // getters
 export const getters = {
-  responseMessage: (state) => {
+  responseMessage: state => {
     return { ...state }
   }
 }

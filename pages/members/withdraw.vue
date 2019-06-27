@@ -7,19 +7,16 @@
 </template>
 
 <script>
-
 export default {
-  middleware: 'auth',
-  name: 'WithdrawView',
-  layout: 'members',
+  middleware: "auth",
+  name: "WithdrawView",
+  layout: "members",
   head() {
     return {
-      title: this.$t('Withdraw')
+      title: this.$t("Withdraw")
     }
   }
 }
 </script>
 
-<style>
-
-</style>
+<style></style>

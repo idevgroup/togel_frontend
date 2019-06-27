@@ -9,7 +9,7 @@
 
 <script>
 export default {
-  name: 'ProgressBar',
+  name: "ProgressBar",
   props: {
     show: {
       type: [Boolean, String],
@@ -17,7 +17,7 @@ export default {
     },
     color: {
       type: String,
-      default: 'accent'
+      default: "accent"
     }
   }
 }
