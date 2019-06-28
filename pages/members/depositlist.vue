@@ -1,119 +1,108 @@
 <template>
   <div>
     <v-toolbar flat color="white">
-      <v-toolbar-title>Deposit</v-toolbar-title>
+      <v-toolbar-title>{{ $t("transaction") }}</v-toolbar-title>
     </v-toolbar>
-    <v-data-table :headers="headers" :items="desserts" class="elevation-1" flat>
+    <v-data-table
+      :headers="headers"
+      :items="transItems"
+      disable-initial-sort
+      :loading="loading"
+    >
       <template v-slot:items="props">
-        <td>{{ props.item.name }}</td>
-        <td class="text-xs-right">
-          {{ props.item.calories }}
+        <td>{{ props.item.transactionid }}</td>
+        <td>{{ props.item.transactiondate }}</td>
+        <td>{{ $t(props.item.transtype) }}</td>
+        <td class="text-right">{{ props.item.amount }}</td>
+        <td>
+          <v-chip
+            v-if="props.item.status === 0"
+            color="orange"
+            label
+            text-color="white"
+          >
+            Pending
+          </v-chip>
+          <v-chip
+            v-if="props.item.status === 1"
+            color="green"
+            label
+            text-color="white"
+          >
+            Approval
+          </v-chip>
+          <v-chip
+            v-if="props.item.status === 2"
+            color="red"
+            label
+            text-color="white"
+          >
+            Reject
+          </v-chip>
         </td>
-        <td class="text-xs-right">
-          {{ props.item.fat }}
-        </td>
-        <td class="justify-center layout px-0">
-          <v-icon small class="mr-2" @click="editItem(props.item)">
-            edit
-          </v-icon>
-          <v-icon small @click="deleteItem(props.item)">
-            delete
-          </v-icon>
-        </td>
-      </template>
-      <template v-slot:no-data>
-        <v-btn color="primary" @click="initialize">
-          Refresh
-        </v-btn>
       </template>
     </v-data-table>
   </div>
 </template>
 
 <script>
+import { mapGetters } from "vuex"
+import Form from "vform"
+import Swal from "sweetalert2"
 export default {
   middleware: "auth",
   name: "DepositListView",
   data: () => ({
-    dialog: false,
+    form: new Form({
+      memberid: ""
+    }),
+    loading: false,
     headers: [
       {
         text: "Trans-ID",
         align: "left",
         value: "transactionid"
       },
-      { text: "Amount", value: "protein", align: "rigth" },
-      { text: "Status", value: "name", sortable: false }
+      {
+        text: "Trans-Date",
+        align: "left",
+        value: "transactiondate"
+      },
+      {
+        text: "Trans-Is",
+        align: "left",
+        value: "transtype"
+      },
+      { text: "Amount", value: "amount", align: "right" },
+      { text: "Status", value: "id", sortable: false }
     ],
-    desserts: [],
-    editedIndex: -1,
-    editedItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
-    },
-    defaultItem: {
-      name: "",
-      calories: 0,
-      fat: 0,
-      carbs: 0,
-      protein: 0
-    }
+    transItems: []
   }),
-
-  computed: {
-    formTitle() {
-      return this.editedIndex === -1 ? "New Item" : "Edit Item"
-    }
-  },
-
-  watch: {
-    dialog(val) {
-      val || this.close()
-    }
-  },
-
+  computed: mapGetters({
+    user: "auth/user"
+  }),
   created() {
     this.initialize()
   },
 
   methods: {
-    initialize() {
-      this.desserts = []
-    },
-
-    editItem(item) {
-      this.editedIndex = this.desserts.indexOf(item)
-      this.editedItem = Object.assign({}, item)
-      this.dialog = true
-    },
-
-    deleteItem(item) {
-      const index = this.desserts.indexOf(item)
-      confirm("Are you sure you want to delete this item?") &&
-        this.desserts.splice(index, 1)
-    },
-
-    close() {
-      this.dialog = false
-      setTimeout(() => {
-        this.editedItem = Object.assign({}, this.defaultItem)
-        this.editedIndex = -1
-      }, 300)
-    },
-
-    save() {
-      if (this.editedIndex > -1) {
-        Object.assign(this.desserts[this.editedIndex], this.editedItem)
-      } else {
-        this.desserts.push(this.editedItem)
-      }
-      this.close()
+    async initialize() {
+      this.loading = true
+      this.form.memberid = this.user.id
+      const { data } = await this.form
+        .post("member/dashboard")
+        .catch(function(error) {
+          Swal.fire("Oops...", "Something went wrong!\t" + error, "error")
+        })
+        .finally(() => (this.loading = false))
+      this.transItems = data
     }
   }
 }
 </script>
 
-<style></style>
+<style>
+.text-right {
+  text-align: right;
+}
+</style>

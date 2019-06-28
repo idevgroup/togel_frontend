@@ -43,6 +43,11 @@ export default {
     "page-footer": PageFooter,
     "member-sidebar": MemberSideBar
   },
+  head() {
+    return {
+      script: [{ src: "https://www.google.com/recaptcha/api.js" }]
+    }
+  },
   computed: mapGetters({
     authenticated: "auth/check"
   }),

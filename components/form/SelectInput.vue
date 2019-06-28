@@ -11,6 +11,7 @@
       :error-messages="errorMessages"
       :outline="outline"
       :solo="solo"
+      @change="onChange"
     />
     <has-error :form="form" :field="name" />
   </div>
@@ -88,6 +89,11 @@ export default {
         this.$emit("update:value", value)
         this.$emit("input", value)
       }
+    }
+  },
+  methods: {
+    onChange() {
+      this.$emit("onChange")
     }
   }
 }

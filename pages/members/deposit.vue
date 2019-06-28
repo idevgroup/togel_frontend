@@ -8,7 +8,7 @@
             <v-icon large left>
               account_balance_wallet
             </v-icon>
-            <span class="title font-weight-light">{{ $t("Deposit") }}</span>
+            <span class="title font-weight-light">{{ $t("deposit") }}</span>
           </v-card-title>
           <v-card-text>
             <v-layout row>
@@ -16,49 +16,19 @@
                 <label class="label">{{ $t("bank") }}</label>
               </v-flex>
               <v-flex sm9>
-                <text-input
-                  v-validate="'required'"
+                <select-input
+                  v-model="selectNull"
+                  v-validate="'required|min:1'"
+                  :items="memberBank"
+                  item-text="bank"
+                  item-value="id"
                   :form="form"
                   :label="$t('bank')"
                   :v-errors="errors"
-                  :value.sync="form.bank"
-                  name="bank"
+                  :value.sync="form.memberbank"
+                  name="memberbank"
                   solo
-                  readonly
-                />
-              </v-flex>
-            </v-layout>
-            <v-layout row>
-              <v-flex sm3>
-                <label class="label">{{ $t("Account Name") }}</label>
-              </v-flex>
-              <v-flex sm9>
-                <text-input
-                  v-validate="'required'"
-                  :form="form"
-                  :label="$t('Account Name')"
-                  :v-errors="errors"
-                  :value.sync="form.accountname"
-                  name="accountname"
-                  solo
-                  readonly
-                />
-              </v-flex>
-            </v-layout>
-            <v-layout row>
-              <v-flex sm3>
-                <label class="label">{{ $t("Account ID") }}</label>
-              </v-flex>
-              <v-flex sm9>
-                <text-input
-                  v-validate="'required'"
-                  :form="form"
-                  :label="$t('Account ID')"
-                  :v-errors="errors"
-                  :value.sync="form.accountid"
-                  name="accountid"
-                  solo
-                  readonly
+                  @onChange="getBankList"
                 />
               </v-flex>
             </v-layout>
@@ -68,9 +38,10 @@
               </v-flex>
               <v-flex sm9>
                 <select-input
+                  v-model="selectBank"
                   v-validate="'required|min:1'"
                   :items="bankitems"
-                  item-text="bk_name"
+                  item-text="bank"
                   item-value="id"
                   :form="form"
                   :label="$t('deposit to')"
@@ -87,7 +58,7 @@
               </v-flex>
               <v-flex sm9>
                 <number-input
-                  v-validate="'required|numeric'"
+                  v-validate="'required'"
                   :form="form"
                   :label="$t('amount')"
                   :v-errors="errors"
@@ -138,7 +109,7 @@
               <v-flex sm5>
                 <submit-button
                   :form="form"
-                  :label="$t('Deposit')"
+                  :label="$t('deposit')"
                   block
                   color="primary"
                 />
@@ -155,6 +126,7 @@
 import Form from "vform"
 import { mapGetters } from "vuex"
 import VueRecaptcha from "vue-recaptcha"
+import Swal from "sweetalert2"
 export default {
   middleware: "auth",
   name: "DepositView",
@@ -162,8 +134,7 @@ export default {
   components: { VueRecaptcha },
   head() {
     return {
-      title: this.$t("Deposit"),
-      script: [{ src: "https://www.google.com/recaptcha/api.js" }]
+      title: this.$t("deposit")
     }
   },
   props: {
@@ -174,24 +145,25 @@ export default {
   },
   data: () => ({
     form: new Form({
-      bank: "",
-      accountname: "",
-      accountid: "",
       debank: "",
       amount: "",
       note: "",
       recaptcha: "",
-      memberid: ""
+      memberid: "",
+      memberbank: ""
     }),
-    bankitems: []
+    bankitems: [],
+    memberBank: [],
+    selectNull: null,
+    selectBank: null
   }),
   computed: mapGetters({
     user: "auth/user"
   }),
   watch: {},
   mounted() {
-    this.getBankList()
     this.setValue()
+    this.getMemberBank()
   },
   methods: {
     onVerify(response) {
@@ -199,19 +171,30 @@ export default {
     },
     async deposit() {
       if (await this.formHasErrors()) return
-      const data = await this.$axios.$post("member/deposit", this.form)
-      console.log(data)
+      //const data = await this.$axios.$post("member/deposit", this.form)
+      const { data } = await this.form
+        .post("member/deposit")
+        .catch(function(error) {
+          console.log(error)
+        })
+      Swal.fire(data.alert.title, data.alert.message, "success")
+      // Redirect member dashboard.
+      this.$router.push({ name: "members.dashboard" })
+    },
+    async getMemberBank() {
+      await this.form.post("member/getmemberbank").then(response => {
+        this.memberBank = response.data
+      })
     },
     async getBankList() {
-      const getitems = await this.$axios.$get("banklist")
-      this.bankitems = getitems
+      await this.form
+        .get("member/get-bank-operator?bankmember=" + this.form.memberbank)
+        .then(response => {
+          this.bankitems = response.data
+        })
     },
     setValue() {
       this.form.memberid = this.user.id
-      this.form.bank = this.user.get_player_bank.get_bank.bk_name
-      this.form.accountname = this.user.get_player_bank.reg_account_name
-      this.form.accountid = this.user.get_player_bank.reg_account_number
-      this.form.debank = this.user.get_player_bank.reg_bk_id
     },
     resetCaptcha() {
       this.$refs.recaptcha.reset()

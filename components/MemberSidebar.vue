@@ -68,7 +68,7 @@ export default {
     return {
       markets: [],
       transactions: [
-        { title: this.$t("Deposit"), path: "deposit" },
+        { title: this.$t("deposit"), path: "deposit" },
         { title: this.$t("Withdraw"), path: "withdraw" },
         { title: this.$t("Reports"), path: "reports" }
       ],
@@ -96,7 +96,7 @@ export default {
           vm.markets = response.data
         })
         .catch(function(error) {
-          Swal.fire("Oops...", "Something went wrong!\n" + error, "error")
+          Swal.fire("Oops...", "Something went wrong!\t" + error, "error")
         })
     },
     markPlace(code) {
