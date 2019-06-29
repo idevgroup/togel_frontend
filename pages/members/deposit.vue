@@ -155,12 +155,14 @@ export default {
     bankitems: [],
     memberBank: [],
     selectNull: null,
-    selectBank: null
+    selectBank: null,
+    isInputActive: false
   }),
-  computed: mapGetters({
-    user: "auth/user"
-  }),
-  watch: {},
+  computed: {
+    ...mapGetters({
+      user: "auth/user"
+    })
+  },
   mounted() {
     this.setValue()
     this.getMemberBank()
