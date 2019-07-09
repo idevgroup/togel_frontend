@@ -6,39 +6,49 @@
     <v-data-table
       :headers="headers"
       :items="transItems"
-      disable-initial-sort
+      :pagination.sync="pagination"
       :loading="loading"
     >
+      <template v-slot:headers="props">
+        <tr>
+          <th
+            v-for="header in props.headers"
+            :key="header.text"
+            :class="[
+              'column sortable',
+              pagination.descending ? 'desc' : 'asc',
+              header.value === pagination.sortBy ? 'active' : ''
+            ]"
+            @click="changeSort(header.value)"
+          >
+            <v-icon small>arrow_upward</v-icon>
+            {{ header.text }}
+          </th>
+        </tr>
+      </template>
       <template v-slot:items="props">
-        <td>{{ props.item.transactionid }}</td>
         <td>{{ props.item.transactiondate }}</td>
-        <td>{{ $t(props.item.transtype) }}</td>
+        <td>{{ props.item.transtype.toUpperCase() }}</td>
         <td class="text-right">{{ props.item.amount }}</td>
         <td>
-          <v-chip
+          <strong
             v-if="props.item.status === 0"
-            color="orange"
-            label
-            text-color="white"
+            class="green--text text--darken-4"
           >
             Pending
-          </v-chip>
-          <v-chip
+          </strong>
+          <strong
             v-if="props.item.status === 1"
-            color="green"
-            label
-            text-color="white"
+            class="blue--text text--darken-4"
           >
-            Approval
-          </v-chip>
-          <v-chip
+            Approved
+          </strong>
+          <strong
             v-if="props.item.status === 2"
-            color="red"
-            label
-            text-color="white"
+            class="red--text text--darken-4"
           >
             Reject
-          </v-chip>
+          </strong>
         </td>
       </template>
     </v-data-table>
@@ -51,18 +61,17 @@ import Form from "vform"
 import Swal from "sweetalert2"
 export default {
   middleware: "auth",
-  name: "DepositListView",
+  name: "TransactionListView",
   data: () => ({
     form: new Form({
       memberid: ""
     }),
+    pagination: {
+      sortBy: "transactiondate",
+      descending: true
+    },
     loading: false,
     headers: [
-      {
-        text: "Trans-ID",
-        align: "left",
-        value: "transactionid"
-      },
       {
         text: "Trans-Date",
         align: "left",
@@ -74,7 +83,7 @@ export default {
         value: "transtype"
       },
       { text: "Amount", value: "amount", align: "right" },
-      { text: "Status", value: "id", sortable: false }
+      { text: "Status", value: "status" }
     ],
     transItems: []
   }),
@@ -96,6 +105,14 @@ export default {
         })
         .finally(() => (this.loading = false))
       this.transItems = data
+    },
+    changeSort(column) {
+      if (this.pagination.sortBy === column) {
+        this.pagination.descending = !this.pagination.descending
+      } else {
+        this.pagination.sortBy = column
+        this.pagination.descending = false
+      }
     }
   }
 }

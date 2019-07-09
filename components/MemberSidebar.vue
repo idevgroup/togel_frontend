@@ -1,60 +1,64 @@
 <template>
   <div>
-    <v-card>
-      <v-toolbar color="teal" dark>
-        <v-toolbar-title>{{ user.reg_name }}</v-toolbar-title>
-      </v-toolbar>
+    <v-toolbar color="teal" dark>
+      <v-toolbar-title>{{ user.reg_name }}</v-toolbar-title>
+    </v-toolbar>
 
-      <v-list>
-        <v-subheader id="dashboard" @click="dashboardEvent">
-          <v-icon>
-            dashboard
-          </v-icon>
-          Dashboard
-        </v-subheader>
-        <v-subheader> <v-icon>markunread_mailbox</v-icon> Market </v-subheader>
-        <template v-for="market in markets">
-          <v-list-tile :key="market.id" @click="markPlace(market.code)">
-            <v-list-tile-action>
-              <v-icon>remove</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ market.name }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </template>
-        <v-subheader> <v-icon>transform</v-icon>Transaction </v-subheader>
-        <template v-for="transaction in transactions">
-          <v-list-tile
-            :key="transaction.title"
-            flat
-            @click="transactionEvent(transaction.path)"
-          >
-            <v-list-tile-action>
-              <v-icon>remove</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ transaction.title }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </template>
-        <v-subheader> <v-icon>settings</v-icon>Profile Setting </v-subheader>
-        <template v-for="profile in userprofiles">
-          <v-list-tile
-            :key="profile.title"
-            flat
-            @click="profileEvent(profile.path)"
-          >
-            <v-list-tile-action>
-              <v-icon>remove</v-icon>
-            </v-list-tile-action>
-            <v-list-tile-content>
-              <v-list-tile-title>{{ profile.title }}</v-list-tile-title>
-            </v-list-tile-content>
-          </v-list-tile>
-        </template>
-      </v-list>
-    </v-card>
+    <v-list>
+      <v-subheader>
+        <v-icon>
+          account_balance_wallet
+        </v-icon>
+        {{ user.reg_remain_balance }}
+      </v-subheader>
+      <v-subheader id="dashboard" @click="dashboardEvent">
+        <v-icon>
+          dashboard
+        </v-icon>
+        Dashboard
+      </v-subheader>
+      <v-subheader> <v-icon>markunread_mailbox</v-icon> Market </v-subheader>
+      <template v-for="market in markets">
+        <v-list-tile :key="market.id" @click="markPlace(market.code)">
+          <v-list-tile-action>
+            <v-icon>remove</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ market.name }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </template>
+      <v-subheader> <v-icon>transform</v-icon>Transaction </v-subheader>
+      <template v-for="transaction in transactions">
+        <v-list-tile
+          :key="transaction.title"
+          flat
+          @click="transactionEvent(transaction.path)"
+        >
+          <v-list-tile-action>
+            <v-icon>remove</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ transaction.title }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </template>
+      <v-subheader> <v-icon>settings</v-icon>Profile Setting </v-subheader>
+      <template v-for="profile in userprofiles">
+        <v-list-tile
+          :key="profile.title"
+          flat
+          @click="profileEvent(profile.path)"
+        >
+          <v-list-tile-action>
+            <v-icon>remove</v-icon>
+          </v-list-tile-action>
+          <v-list-tile-content>
+            <v-list-tile-title>{{ profile.title }}</v-list-tile-title>
+          </v-list-tile-content>
+        </v-list-tile>
+      </template>
+    </v-list>
   </div>
 </template>
 

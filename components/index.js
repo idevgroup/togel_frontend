@@ -9,6 +9,7 @@ import TextInput from "./form/TextInput"
 import SelectInput from "./form/SelectInput"
 import TextareaInput from "./form/TextareaInput"
 import NumberInput from "./form/NumberInput"
+import CurrencyInput from "./form/CurrencyInput"
 // Vue.component(Icon.name, Icon)
 Vue.component(EmailInput.name, EmailInput)
 Vue.component(ProgressBar.name, ProgressBar)
@@ -21,3 +22,4 @@ Vue.component(AlertSuccess.name, AlertSuccess)
 Vue.component(SelectInput.name, SelectInput)
 Vue.component(TextareaInput.name, TextareaInput)
 Vue.component(NumberInput.name, NumberInput)
+Vue.component(CurrencyInput.name, CurrencyInput)

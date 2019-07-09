@@ -7,13 +7,13 @@
           <transition name="page" mode="out-in">
             <v-layout row>
               <v-flex xs12 sm3 mt-5>
-                <v-card>
+                <v-card min-height="990">
                   <member-sidebar />
                 </v-card>
               </v-flex>
               <v-flex xs12 sm9 mt-5>
                 <v-content>
-                  <v-card>
+                  <v-card min-height="990">
                     <transition name="page" mode="out-in">
                       <router-view />
                     </transition>

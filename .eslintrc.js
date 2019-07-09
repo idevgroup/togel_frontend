@@ -25,7 +25,7 @@ module.exports = {
         "prettier/prettier": ["error", { "semi": false }],
         "vue/component-name-in-template-casing": ["error", "PascalCase"],
         "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
-        "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off"
+        "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
     },
     globals: {
         $nuxt: true

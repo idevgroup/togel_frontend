@@ -57,15 +57,19 @@
                 <label class="label">{{ $t("amount") }}</label>
               </v-flex>
               <v-flex sm9>
-                <number-input
+                <v-text-field
+                  v-model="form.amount"
                   v-validate="'required'"
-                  :form="form"
-                  :label="$t('amount')"
-                  :v-errors="errors"
-                  :value.sync="form.amount"
-                  name="amount"
+                  v-currency="{ locale, currency }"
                   solo
+                  :label="$t('amount')"
+                  data-vv-name="amount"
+                  data-vv-as="Amount"
+                  name="amount"
                 />
+                <span v-if="errors.has('amount')" id="amountsms">
+                  {{ errors.first("amount") }}
+                </span>
               </v-flex>
             </v-layout>
             <v-layout row>
@@ -127,6 +131,7 @@ import Form from "vform"
 import { mapGetters } from "vuex"
 import VueRecaptcha from "vue-recaptcha"
 import Swal from "sweetalert2"
+import { CurrencyDirective } from "vue-currency-input"
 export default {
   middleware: "auth",
   name: "DepositView",
@@ -136,6 +141,9 @@ export default {
     return {
       title: this.$t("deposit")
     }
+  },
+  directives: {
+    currency: CurrencyDirective
   },
   props: {
     memberid: {
@@ -152,11 +160,12 @@ export default {
       memberid: "",
       memberbank: ""
     }),
+    locale: "en",
+    currency: "USD",
     bankitems: [],
     memberBank: [],
     selectNull: null,
-    selectBank: null,
-    isInputActive: false
+    selectBank: null
   }),
   computed: {
     ...mapGetters({
@@ -177,9 +186,19 @@ export default {
       const { data } = await this.form
         .post("member/deposit")
         .catch(function(error) {
-          console.log(error)
+          console.log(error.response.data.errors.amount[0])
+          Swal.fire(
+            "Invalid amount",
+            error.response.data.errors.amount[0],
+            "warning"
+          )
         })
-      Swal.fire(data.alert.title, data.alert.message, "success")
+      if (data.success === false) {
+        Swal.fire(data.alert.title, data.alert.message, "info")
+      } else {
+        Swal.fire(data.alert.title, data.alert.message, "success")
+      }
+
       // Redirect member dashboard.
       this.$router.push({ name: "members.dashboard" })
     },
@@ -193,6 +212,9 @@ export default {
         .get("member/get-bank-operator?bankmember=" + this.form.memberbank)
         .then(response => {
           this.bankitems = response.data
+        })
+        .catch(function(error) {
+          console.log(error)
         })
     },
     setValue() {
@@ -211,5 +233,16 @@ export default {
   font-weight: 600;
   display: flex;
   line-height: 45px;
+}
+#amountsms {
+  color: #ff5252 !important;
+  caret-color: #ff5252 !important;
+  flex: 1 1 auto;
+  font-size: 12px;
+  min-height: 12px;
+  min-width: 1px;
+  position: relative;
+  top: -25px;
+  right: -15px;
 }
 </style>

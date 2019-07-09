@@ -50,5 +50,6 @@
     "deposit to": "Deposit To",
     "amount": "Amount",
     "note": "Note",
-    "transaction": "Transaction"
+    "transaction": "Transaction",
+    "withdraw": "Withdraw"
 }
