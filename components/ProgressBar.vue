@@ -1,25 +1,25 @@
 <template>
-  <v-progress-linear
-    v-if="show"
-    :indeterminate="true"
-    :color="color"
-    height="4"
-  />
+	<v-progress-linear
+		v-if="show"
+		:indeterminate="true"
+		:color="color"
+		height="4"
+	/>
 </template>
 
 <script>
 export default {
-  name: "ProgressBar",
-  props: {
-    show: {
-      type: [Boolean, String],
-      required: true
-    },
-    color: {
-      type: String,
-      default: "accent"
-    }
-  }
+	name: "ProgressBar",
+	props: {
+		show: {
+			type: [Boolean, String],
+			required: true
+		},
+		color: {
+			type: String,
+			default: "accent"
+		}
+	}
 }
 </script>
 

@@ -1,22 +1,21 @@
 <template>
-  <v-layout row wrap>
-    <v-flex ma-3>
-      <transaction-list />
-    </v-flex>
-  </v-layout>
+	<v-layout row wrap>
+		<v-flex ma-3>
+			<transaction-list />
+		</v-flex>
+	</v-layout>
 </template>
 
 <script>
 import transactionList from "./transactionlist"
 export default {
-  middleware: "auth",
-  name: "DashboardView",
-  layout: "members",
-  components: {
-    transactionList
-  },
-  head() {
-    return { title: this.$t("dashboard") }
-  }
+	name: "DashboardView",
+	layout: "members",
+	components: {
+		transactionList
+	},
+	head() {
+		return { title: this.$t("dashboard") }
+	}
 }
 </script>

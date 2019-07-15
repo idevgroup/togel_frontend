@@ -26,6 +26,7 @@ module.exports = {
         "vue/component-name-in-template-casing": ["error", "PascalCase"],
         "no-console": process.env.NODE_ENV === "production" ? "error" : "off",
         "no-debugger": process.env.NODE_ENV === "production" ? "error" : "off",
+        "vue/html-indent": ["error", "tab"]
     },
     globals: {
         $nuxt: true
