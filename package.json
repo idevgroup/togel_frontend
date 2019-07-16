@@ -4,6 +4,7 @@
     "description": "My polished Nuxt.js project",
     "author": "chanroeun",
     "private": true,
+    "main": "index.js",
     "scripts": {
         "dev": "cross-env NODE_ENV=development nodemon server/index.js --watch server",
         "build": "nuxt build",
@@ -30,6 +31,7 @@
         "nuxt": "^2.8.1",
         "nuxt-material-design-icons": "^1.0.4",
         "popper.js": "^1.15.0",
+        "serverless-nuxt": "0.0.10",
         "sweetalert2": "^8.13.4",
         "v-currency-field": "^1.0.6",
         "vee-validate": "^2.2.12",

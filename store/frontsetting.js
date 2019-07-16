@@ -10,8 +10,8 @@ export const getters = {
 
 // mutations
 export const mutations = {
-	SET_SETTING(state, setting) {
-		state.setting = setting
+	SET_SETTING(state, payload) {
+		state.setting = payload
 	}
 }
 
