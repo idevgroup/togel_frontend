@@ -13,7 +13,8 @@
         "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
         "precommit": "npm run lint",
         "fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore .",
-        "now-build": "nuxt build --spa"
+        "now-build": "nuxt build --spa",
+        "fix-memory-limit": "cross-env LIMIT=2048 increase-memory-limit"
     },
     "dependencies": {
         "@nuxtjs/auth": "^4.8.1",
