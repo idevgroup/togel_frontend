@@ -64,7 +64,7 @@ export default {
       { text: 'Acc Name', value: 'fat' },
       { text: 'Acc Number', value: 'carbs' },
       { text: 'Bank', value: 'protein' },
-      { text: 'Amount', value: 'protein' },
+      { text: 'Amount', value: 'amount' },
       { text: 'Status', value: 'name', sortable: false }
     ],
     desserts: [],
