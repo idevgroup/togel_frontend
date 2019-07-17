@@ -1,28 +1,37 @@
 <template>
-	<div>
-		<v-text-field
-			v-model="_value"
-			:browser-autocomplete="browserAutocomplete"
-			:class="errorClass"
-			:counter="counter"
-			:error-messages="errorMessages"
-			:hint="hint"
-			:label="label"
-			:name="name"
-			:prepend-icon="prepend"
-			:readonly="readonly"
-			:outline="outline"
-			:solo="solo"
-		/>
-		<has-error :form="form" :field="name" />
-	</div>
+	<v-text-field
+		v-model="_value"
+		:v-currency="{ locale, currency }"
+		:class="errorClass"
+		:error-messages="errorMessages"
+		:label="label"
+		:name="name"
+		:solo="solo"
+	/>
 </template>
 
 <script>
+import { CurrencyDirective } from "vue-currency-input"
 export default {
-	name: "TextInput",
-
+	name: "CurrencyInput",
+	directives: {
+		currency: CurrencyDirective
+	},
 	props: {
+		locale: {
+			type: String,
+			default: undefined
+		},
+		currency: {
+			type: String,
+			default: undefined
+		},
+		vcurrency: {
+			type: Array,
+			default: () => {
+				return []
+			}
+		},
 		name: {
 			type: String,
 			required: true
@@ -30,10 +39,6 @@ export default {
 		label: {
 			type: String,
 			required: true
-		},
-		// eslint-disable-next-line
-    hint: {
-			type: String
 		},
 		vErrors: {
 			type: Object,
@@ -55,22 +60,11 @@ export default {
 			type: String,
 			default: ""
 		},
-		readonly: {
-			type: Boolean,
-			default: false
-		},
-		outline: {
-			type: Boolean,
-			default: false
-		},
 		solo: {
 			type: Boolean,
 			default: false
-		},
-		// eslint-disable-next-line
-    browserAutocomplete: String
+		}
 	},
-
 	computed: {
 		errorMessages() {
 			return this.vErrors.collect(this.name)
@@ -83,7 +77,11 @@ export default {
 		},
 		_value: {
 			get() {
-				return this.value
+				return this.$parseCurrency(
+					this.value,
+					this.locale,
+					this.currency
+				)
 			},
 			set(value) {
 				value = value || ""
@@ -94,9 +92,5 @@ export default {
 	}
 }
 </script>
-<style scoped>
-.invalid-feedback {
-	color: #ff5252;
-	margin-top: -20px;
-}
-</style>
+
+<style></style>

@@ -41,7 +41,7 @@
     "Member Register": "Member Register",
     "dashboard": "Dashboard",
     "phone": "Phone",
-    "Deposit": "Deposit",
+    "deposit": "Deposit",
     "Withdraw": "Withdraw",
     "Reports": "Reports",
     "Referrals": "Referrals",
@@ -49,5 +49,7 @@
     "Profile": "Profile",
     "deposit to": "Deposit To",
     "amount": "Amount",
-    "note": "Note"
+    "note": "Note",
+    "transaction": "Transaction",
+    "withdraw": "Withdraw"
 }
