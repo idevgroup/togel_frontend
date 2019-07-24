@@ -1,0 +1,32 @@
+{
+  "name": "zentogel",
+  "version": "1.0.0",
+  "description": "My stunning Nuxt.js project",
+  "author": "chanroeun",
+  "private": true,
+  "scripts": {
+    "dev": "nuxt",
+    "build": "nuxt build",
+    "start": "nuxt start",
+    "generate": "nuxt generate"
+  },
+  "dependencies": {
+    "@nuxtjs/auth": "^4.8.1",
+    "@nuxtjs/axios": "^5.5.4",
+    "@nuxtjs/dotenv": "^1.3.0",
+    "bootstrap": "^4.1.3",
+    "bootstrap-vue": "^2.0.0-rc.11",
+    "jquery": "^1.9.1",
+    "js-beautify": "^1.10.1",
+    "nuxt": "^2.0.0",
+    "pug-beautify": "^0.1.1",
+    "v-money": "^0.8.1",
+    "vee-validate": "^2.2.13",
+    "vue-bootstrap4-table": "^1.1.9",
+    "vue-recaptcha": "^1.2.0",
+    "vue-sweetalert2": "^2.1.1"
+  },
+  "devDependencies": {
+    "nodemon": "^1.18.9"
+  }
+}
