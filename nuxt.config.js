@@ -1,97 +1,101 @@
-require("dotenv").config()
+require('dotenv').config();
+export default {
+    mode: 'spa',
+    /*
+     ** Headers of the page
+     */
+    head: {
+        title: process.env.APP_NAME || '',
+        meta: [
+            { charset: 'utf-8' },
+            { name: 'viewport', content: 'width=device-width, initial-scale=1' },
+            {
+                hid: 'description',
+                name: 'description',
+                content: process.env.npm_package_description || ''
+            }
+        ],
+        link: [
+            { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+            {
+                rel: 'stylesheet',
+                href: 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.css'
+            }
+        ],
+        script: [{ src: 'https://www.google.com/recaptcha/api.js' }]
+    },
+    /*
+     ** Customize the progress-bar color
+     */
+    loading: { color: '#fff' },
+    /*
+     ** Global CSS
+     */
+    css: [
+        '~/assets/corporate/css/style.css',
+        '~/assets/corporate/css/style-responsive.css',
+        '~/assets/corporate/css/custom.css'
+    ],
+    /*
+     ** Plugins to load before mounting the App
+     */
+    router: {
+        middleware: ['frontendconfig']
+    },
+    plugins: [
+        // '~/plugins/mixins/validation.js',
+        '~/plugins/mixins/user.js',
+        // '~/plugins/mixins/config.js',
+        '~/plugins/axios.js',
+        '~/plugins/vee-validate.js',
+        '~/plugins/swal.js'
 
-module.exports = {
-	mode: "universal",
+    ],
+    /*
+     ** Nuxt.js modules
+     */
+    modules: [
+        // Doc: https://bootstrap-vue.js.org/docs/
+        'bootstrap-vue/nuxt',
+        // Doc: https://axios.nuxtjs.org/usage
+        '@nuxtjs/axios',
+        '@nuxtjs/auth',
+        '@nuxtjs/dotenv'
+    ],
+    /*
+     ** Axios module configuration
+     ** See https://axios.nuxtjs.org/options
+     */
+    axios: {
+        baseURL: process.env.APP_URL
+    },
 
-	srcDir: __dirname,
-
-	env: {
-		apiUrl: process.env.APP_URL || "http://agdemo.zentogel.com/v1/",
-		appName: process.env.APP_NAME || "Laravel-Nuxt",
-		appLocale: process.env.APP_LOCALE || "en",
-		githubAuth: !!process.env.GITHUB_CLIENT_ID
-	},
-
-	head: {
-		title: process.env.APP_NAME,
-		titleTemplate: "%s - " + process.env.APP_NAME,
-		meta: [
-			{ charset: "utf-8" },
-			{
-				name: "viewport",
-				content: "width=device-width, initial-scale=1"
-			},
-			{
-				hid: "description",
-				name: "description",
-				content: "Nuxt.js project"
-			}
-		],
-		link: [{ rel: "icon", type: "image/x-icon", href: "/favicon.ico" }],
-		script: []
-	},
-
-	generate: {
-		dir: "dist"
-	},
-	loading: { color: "#007bff", height: "3px" },
-
-	loadingIndicator: {
-		name: "rectangle-bounce",
-		color: "#000",
-		background: "#fff"
-	},
-	router: {
-		middleware: ["locale", "check-auth", "frontsetting"]
-	},
-
-	/*
-                                                        css: [
-                                                          // { src: '~assets/sass/app.scss', lang: 'scss' }
-                                                        ],
-                                                      */
-
-	css: [],
-	plugins: [
-		"~components",
-		"~plugins/i18n",
-		"~plugins/vform",
-		"~plugins/axios",
-		"~plugins/validation"
-	],
-
-	modules: [
-		"@nuxtjs/router",
-		// '@nuxtjs/pwa',
-		"@nuxtjs/vuetify",
-		"@nuxtjs/font-awesome",
-		"nuxt-material-design-icons",
-		"@nuxtjs/axios"
-	],
-	axios: {
-		baseURL: process.env.APP_URL
-	},
-	vuetify: {
-		materialIcons: true
-		// Vuetify options
-		//  theme: { }
-	},
-
-	build: {
-		extractCSS: true,
-		/*
-		 ** You can extend webpack config here
-		 */
-		extend(config, ctx) {
-			// Run ESLint on save
-			if (ctx.isDev && ctx.isClient) {
-				config.module.rules.push({
-					enforce: "pre",
-					test: /\.(js|vue)$/,
-					loader: "eslint-loader",
-					exclude: /(node_modules)/
-				})
-			}
-		}
-	}
-}
+    auth: {
+        strategies: {
+            local: {
+                endpoints: {
+                    login: { url: 'member/login', method: 'post', propertyName: 'token' },
+                    logout: { url: 'member/logout', method: 'post' },
+                    user: { url: 'member/refresh', method: 'get', propertyName: 'user' }
+                },
+                tokenRequired: true,
+                tokenType: 'bearer'
+            }
+        },
+        redirect: {
+            login: '/member/login',
+            home: '/'
+        },
+        plugins: ['~/plugins/auth']
+    },
+    /*
+     ** Build configuration
+     */
+    build: {
+        /*
+         ** You can extend webpack config here
+         */
+        extractCSS: true,
+        extend(config, ctx) {}
+    }
+};

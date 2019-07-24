@@ -57,7 +57,7 @@ typings/
 .yarn-integrity
 
 # dotenv environment variables file
-#.env
+.env
 
 # parcel-bundler cache (https://parceljs.org/)
 .cache
@@ -77,8 +77,12 @@ dist
 # Serverless directories
 .serverless
 
-# IDE
+# IDE / Editor
 .idea
+.editorconfig
 
 # Service worker
 sw.*
+
+# Mac OSX
+.DS_Store

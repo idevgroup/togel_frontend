@@ -1,19 +1,27 @@
 <template>
-	<v-layout column justify-center align-center>
-		<v-flex xs12 sm8 md6>
-			<div class="text-xs-center" />
-			<v-card />
-		</v-flex>
-	</v-layout>
+<div>
+   <b-container>
+     <Slider class="mt-2 mb-2"/>
+     
+   </b-container>
+</div>
 </template>
 
 <script>
+import Slider from '~/components/partials/Slider';
+import { mapGetters } from "vuex"
 export default {
-	layout: "frontend",
-	head() {
-		return {
-			title: this.$t("home")
-		}
-	}
+  components: {
+     Slider
+  },
+  computed:{
+    	...mapGetters({
+			setting: "frontendconfig/setting"
+		})
+  }
 }
 </script>
+
+<style>
+
+</style>

@@ -1,63 +1,50 @@
-import axios from "axios"
+import swal from 'sweetalert2'
 
-process.env.NODE_TLS_REJECT_UNAUTHORIZED = "0"
+export default function({ $axios, store, app, redirect, $option }) {
+    $axios.onRequest((request) => {
+        const token = ''
+        if (token) {
+            request.headers.common.Authorization = `Bearer ${token}`
+        }
+        return request
+    })
 
-export default ({ app, store, redirect }) => {
-	axios.defaults.baseURL = process.env.apiUrl
+    /**
+     * middleware for response
+     */
+    $axios.onResponse((response) => {
+        if (!response) {
+            swal.fire('No data', 'No response data.', 'warning')
+        }
+        return response
+    })
 
-	if (process.server) {
-		return
-	}
-
-	// Request interceptor
-	axios.interceptors.request.use(request => {
-		request.baseURL = process.env.apiUrl
-
-		const token = store.getters["auth/token"]
-
-		if (token) {
-			request.headers.common.Authorization = `Bearer ${token}`
-		}
-
-		const locale = store.getters["lang/locale"]
-		if (locale) {
-			request.headers.common["Accept-Language"] = locale
-		}
-
-		return request
-	})
-
-	// Response interceptor
-	axios.interceptors.response.use(
-		response => response,
-		error => {
-			const { status } = error.response || {}
-
-			if (status >= 500) {
-				store.dispatch("message/responseMessage", {
-					type: "error",
-					text: app.i18n.t("error_alert_text"),
-					title: app.i18n.t("error_alert_title"),
-					modal: true
-				})
-			}
-
-			if (status === 401 && store.getters["auth/check"]) {
-				store
-					.dispatch("message/responseMessage", {
-						type: "warning",
-						text: app.i18n.t("token_expired_alert_text"),
-						title: app.i18n.t("token_expired_alert_title"),
-						modal: true
-					})
-					.then(async () => {
-						await store.dispatch("auth/LOGOUT")
-
-						redirect.push({ name: "login" })
-					})
-			}
-
-			return Promise.reject(error)
-		}
-	)
+    $axios.onError((error) => {
+        if (!error.response) {
+            swal.fire('Error', '.Oops... Something went wrong', 'error')
+            this.$auth.logout()
+            return
+        }
+        const { status } = error.response
+            // Error 402
+        if (status === 422) {
+            const obj = error.response.data.errors
+            const arr = []
+            for (const key in obj) {
+                if (obj.hasOwnProperty(key)) {
+                    const element = obj[key]
+                    arr.push(element)
+                }
+            }
+            swal.fire({
+                type: 'warning',
+                title: 'Invalid input.',
+                text: arr.join(' ')
+            })
+        } else if (status === 401) {} else if (status === 403) {
+            redirect('/errors/403')
+        } else if (status >= 500) {
+            swal.fire('Error', 'Somethin went wrong.', 'error')
+        }
+    })
 }
