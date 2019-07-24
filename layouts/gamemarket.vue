@@ -8,7 +8,7 @@
                     <member-side-bar />
                 </b-col>
                 <b-col md="9" class="p-0">
-                    <nuxt />
+                   <nuxt />
                 </b-col>
 
             </b-row>
@@ -22,7 +22,7 @@ import NavBar from '~/components/partials/NavBar';
 import MemberSideBar from '~/components/partials/MemberSideBar';
 export default {
     middleware: 'guest',
-    name:'memberLayoutView',
+    name:'marketCodeLayoutView',
     components: {
         Header,
         NavBar,

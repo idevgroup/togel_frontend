@@ -117,7 +117,6 @@
 import {
     mapGetters
 } from "vuex";
-import Swal from "sweetalert2";
 import {
     Money
 } from "v-money";
