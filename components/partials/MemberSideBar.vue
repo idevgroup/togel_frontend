@@ -4,7 +4,7 @@
             <h4 slot="header" class="m-0"><i class="fa fa-bookmark"></i> Market</h4>
             <b-list-group flush class="m-menu">
                 <template v-for="item in marketItem">
-                    <b-list-group-item :to="{path:'/member/gamemarkets/'+item.code}" :key="item.id">{{ item.name }}</b-list-group-item>
+                    <b-list-group-item :to="{path:'/member/gamemarkets/'+item.code}" :key="item.id" >{{ item.name }}</b-list-group-item>
                 </template>
             </b-list-group>
         </b-card>
@@ -77,11 +77,6 @@ export default {
     },
     mounted() {
         this.marketItem = this.setting.market
-    },
-    methods: {
-        isSelected(i) {
-            return i === this.itemSelected
-        }
     }
 }
 </script>
