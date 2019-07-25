@@ -1,13 +1,13 @@
 <template>
     <div>
-        <h2>Working</h2>
-        {{ this.$route.params.marketcode }}
+        <h2>Working - {{ this.$route.params.marketcode }} 2D</h2>
     </div>
+
 </template>
 
 <script>
 export default {
-layout:'gamemarket'
+    layout: "gamemarket",
 }
 </script>
 

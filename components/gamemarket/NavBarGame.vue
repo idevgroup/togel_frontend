@@ -1,5 +1,11 @@
 <template>
-<div>{{ gameItem }}</div>
+    <div>
+        <b-list-group horizontal="md">  
+           <template v-for="item in gameItem">
+                    <b-list-group-item :to="{path:'/member/gamemarkets/'+marketCode+'/'+item.code}" :key="item.id" >{{ item.name }}</b-list-group-item>
+           </template>
+        </b-list-group>   
+    </div>
 
 </template>
 
@@ -9,7 +15,8 @@ import {
 } from "vuex"
 export default {
     data: () => ({
-        gameItem: []
+        gameItem: [],
+        marketCode:''
     }),
     computed: {
         ...mapGetters({
@@ -18,6 +25,7 @@ export default {
     },
     created() {
         this.gameItem = this.setting.gameitem
+        this.marketCode = this.$route.params.marketcode
     }
 }
 </script>
