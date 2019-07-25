@@ -121,7 +121,7 @@ import {
     Money
 } from "v-money";
 import VueRecaptcha from "vue-recaptcha";
-
+import Swal from 'sweetalert2';
 export default {
     layout: "member",
     components: {

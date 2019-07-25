@@ -9,23 +9,20 @@
                         <h4 slot="header" class="m-0"><i class="fa fa-bookmark"></i> Market</h4>
                         <b-list-group flush class="m-menu">
                             <template v-for="item in marketItem">
-                                <b-list-group-item
-                                    :to="{path:'/member/gamemarkets/'+item.code}"
-                                    :key="item.id"
-                                    @click="F_getMarketActive">{{ item.name }}</b-list-group-item>
+                                <b-list-group-item :to="{path:'/member/gamemarkets/'+item.code}" :key="item.id">{{ item.name }}</b-list-group-item>
                             </template>
                         </b-list-group>
                     </b-card>
-                     <template v-if="$route.params.marketcode">
-                    <b-card no-body class="mb-2">
-                        <h4 slot="header" class="m-0"><i class="fa fa-archive" aria-hidden="true"></i> Bet Game</h4>
-                        <b-list-group flush class="m-menu">
-                            <template v-for="item in gameItem">
-                                <b-list-group-item :to="{path:'/member/gamemarkets/'+$route.params.marketcode+'/'+item.code}" :key="item.id">{{ item.name }}</b-list-group-item>
-                            </template>
-                        </b-list-group>
-                    </b-card>
-                     </template>
+                    <template v-if="$route.params.marketcode">
+                        <b-card no-body class="mb-2">
+                            <h4 slot="header" class="m-0"><i class="fa fa-archive" aria-hidden="true"></i> Bet Game</h4>
+                            <b-list-group flush class="m-menu">
+                                <template v-for="item in gameItem">
+                                    <b-list-group-item :to="{path:'/member/gamemarkets/'+$route.params.marketcode+'/'+item.code}" :key="item.id">{{ item.name }}</b-list-group-item>
+                                </template>
+                            </b-list-group>
+                        </b-card>
+                    </template>
                 </b-col>
                 <b-col md="9" class="p-0">
                     <b-card
@@ -39,7 +36,11 @@
                             <b-col align-self="center" id="martket-side">
 
                                 <b-card-text id="martket-active">
-                                    Active: {{ getMarketActive.name }}<br />
+                                    <template v-for="item in marketItem">
+                                        <div v-if="item.code === $route.params.marketcode" :key="item.id">
+                                            Active:{{ item.name }} <br />
+                                        </div>
+                                    </template>
                                     {{ getDate() }}: {{ $route.params.marketcode.toUpperCase() }} - 0
                                 </b-card-text>
 
@@ -71,7 +72,6 @@ export default {
     data: () => ({
         marketItem: [],
         gameItem: [],
-        selected: 'cn',
         getMarketActive: []
     }),
     computed: {
@@ -82,20 +82,10 @@ export default {
     mounted() {
         this.gameItem = this.setting.gameitem
         this.marketItem = this.setting.market
-        this.F_getMarketActive()
+
     },
-    created() {
-        this.selected = this.$route.params.marketcode ? this.$route.params.marketcode : this.selected
-    },
+  
     methods: {
-        F_getMarketActive() {
-            let self = this
-            self.marketItem.forEach(function (key, value) {
-                if (key.code === self.selected) {
-                    self.getMarketActive = key
-                }
-            })
-        },
         getDate() {
             const toTwoDigits = num => num < 10 ? '0' + num : num;
             let today = new Date();

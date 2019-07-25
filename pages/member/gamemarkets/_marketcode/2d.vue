@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h2>Working - {{ this.$route.params.marketcode }} 2D</h2>
+        <h2>Working - {{ this.$route.params.marketcode }} 2D </h2>
     </div>
 
 </template>
