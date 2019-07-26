@@ -4,6 +4,16 @@
         <nav-bar />
         <b-container>
             <b-row class="mt-2">
+              <b-col>  
+                <b-card
+                    overlay
+                    img-src="https://picsum.photos/900/250/?image=3"
+                    img-alt="Card Image"
+                    text-variant="white">
+                </b-card>
+              </b-col>
+            </b-row>
+            <b-row class="mt-2">
                 <b-col col md="3">
                     <b-card no-body class="mb-2">
                         <h4 slot="header" class="m-0"><i class="fa fa-bookmark"></i> Market</h4>
@@ -24,13 +34,7 @@
                         </b-card>
                     </template>
                 </b-col>
-                <b-col md="9" class="p-0">
-                    <b-card
-                        overlay
-                        img-src="https://picsum.photos/900/250/?image=3"
-                        img-alt="Card Image"
-                        text-variant="white">
-                    </b-card>
+                <b-col md="9" class="pl-0">
                     <template v-if="$route.params.marketcode">
                         <b-row>
                             <b-col align-self="center" id="martket-side">
@@ -84,7 +88,7 @@ export default {
         this.marketItem = this.setting.market
 
     },
-  
+
     methods: {
         getDate() {
             const toTwoDigits = num => num < 10 ? '0' + num : num;
