@@ -7,7 +7,7 @@
                 <b-col col md="3">
                     <member-side-bar />
                 </b-col>
-                <b-col md="9" class="p-0">
+                <b-col md="9" class="pl-0">
                     <nuxt />
                 </b-col>
 
