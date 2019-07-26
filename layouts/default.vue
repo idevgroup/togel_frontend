@@ -2,7 +2,9 @@
     <div>
         <Header />
         <nav-bar />
+        <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
         <nuxt />
+        </transition>
         <Login />
         <Register />
     </div>

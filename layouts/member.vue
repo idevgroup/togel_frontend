@@ -8,7 +8,9 @@
                     <member-side-bar />
                 </b-col>
                 <b-col md="9" class="pl-0">
+                    <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                     <nuxt />
+                    </transition>
                 </b-col>
 
             </b-row>
