@@ -25,7 +25,7 @@
                 <td>
                     <span v-if="editIndex !== index">{{ item.betvalue }}</span>
                     <span v-if="editIndex === index">
-                        <b-form-input class="form-control form-control-sm" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" v-model="item.betvalue" :min="marketGameSetting.min_bet" :max="marketGameSetting.max_bet" :maxlength="marketGameSetting.max_bet" v-validate="{ required: true,is_not:0 }" name="betprice" data-vv-name="betprice" data-vv-as="bet price"></b-form-input>
+                        <b-form-input class="form-control form-control-sm" type="number" oninput="javascript: if (this.value.length > this.maxLength) this.value = this.value.slice(0, this.maxLength);" v-model="item.betvalue" min="0" maxlength="6"  v-validate="{ required: true,is_not:0 }" name="betprice" data-vv-name="betprice" data-vv-as="bet price"></b-form-input>
                         <span class="form-text text-danger" v-show="veeErrors.has('betprice')">{{ veeErrors.first('betprice') }}</span>
                     </span>
                 </td>
@@ -63,6 +63,7 @@
         </div>
     </div>
     {{marketGameSetting}}
+    {{ marketGameSetting.max_bet }}
 </div>
 </template>
 
