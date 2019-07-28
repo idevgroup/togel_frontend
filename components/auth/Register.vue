@@ -212,7 +212,7 @@ export default {
                                     name: 'member-dashboard'
                                 })
                                 this.$nextTick(() => {
-                                    this.$refs.modal.hide()
+                                    self.$refs.modal.hide()
                                 })
                             }).catch(function (error) {
                                 console.log(error)
