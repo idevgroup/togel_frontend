@@ -26,7 +26,8 @@
     "vue-comma-formatted-number": "^1.0.0",
     "vue-numeric": "^2.3.0",
     "vue-recaptcha": "^1.2.0",
-    "vue-sweetalert2": "^2.1.1"
+    "vue-sweetalert2": "^2.1.1",
+    "vue2-filters": "^0.7.0"
   },
   "devDependencies": {
     "nodemon": "^1.18.9"

@@ -51,6 +51,7 @@ export default {
         '~/plugins/vee-validate.js',
         '~/plugins/swal.js',
         // '~/plugins/global.js'
+        '~/plugins/vue2-filters.js'
     ],
     /*
      ** Nuxt.js modules

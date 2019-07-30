@@ -13,7 +13,7 @@
                     <template v-if="authenticated">
                         <b-nav class="pull-right">
                             <b-nav-item to="/member/gamemarkets">Play</b-nav-item>
-                            <b-nav-item to="/member/dashboard">{{user.reg_remain_balance}}</b-nav-item>
+                            <b-nav-item to="/member/dashboard">{{user.reg_remain_balance| currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</b-nav-item>
                             <b-nav-item-dropdown
                                 id="my-nav-dropdown"
                                 :text="user.reg_name"
@@ -48,6 +48,9 @@
 </template>
 
 <script>
+import {
+    mapGetters
+} from "vuex"
 export default {
     data: () => ({
         transactions: [
@@ -75,6 +78,11 @@ export default {
             }
         ]
     }),
+    computed:{
+  ...mapGetters({
+            setting: "frontendconfig/setting"
+        })
+    },
     methods: {
         async logoutSubmit() {
             await this.$auth.logout()
