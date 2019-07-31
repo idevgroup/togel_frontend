@@ -1,5 +1,12 @@
 <template>
     <div>
+        <p>
+            <span> 2D Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
+            <span> 2D Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}} </span>
+            <span> 2D Discount: {{ marketGameSetting.discount }}%</span>
+            <span> 2D Bet Modulus: {{ marketGameSetting.bet_mod |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
+            <span> Win 2D: x{{ marketGameSetting.menang }}</span>
+        </p>
 
         <table class="table table-bordered">
             <thead class="thead-light">
@@ -20,12 +27,14 @@
                             class="form-control form-control-sm"
                             type="text"
                             maxlength="2"
-                            v-model="item.number2d"
-                            v-validate="{ required: true,is_not:0,max:2,max_value:99, min:2 }"
+                            v-model.trim="item.number2d"
+                            v-validate="{is_not:0,max:2,max_value:99, min:2 }"
                             :name="`number`+index"
                             :data-vv-name="`number`+index"
-                            data-vv-as="bet number"> </b-form-input>
-                        <span class="form-text text-danger" v-show="veeErrors.has('number'+index)">{{ veeErrors.first('number'+index) }}</span>
+                            data-vv-as="bet number"
+                            :disabled="item.is_not"
+                            :state="!veeErrors.has('number'+index)">
+                        </b-form-input>
 
                     </td>
                     <td>
@@ -33,16 +42,17 @@
                             class="form-control form-control-sm"
                             :currency="setting.general.symbol"
                             separator=","
-                            v-model="item.betvalue"
+                            v-model.trim="item.betvalue"
                             v-bind:precision="2"
                             decimal-separator="."
-                            v-validate="{ required: true}"
+                            v-validate="{max_value:marketGameSetting.max_bet}"
                             :min="marketGameSetting.min_bet"
                             :max="marketGameSetting.max_bet"
                             :name="`betprice`+index"
                             :data-vv-name="`betprice`+index"
-                            data-vv-as="bet price"></vue-numeric>
-                        <span class="form-text text-danger" v-show="veeErrors.has('betprice'+index)">{{ veeErrors.first('betprice'+index) }}</span>
+                            data-vv-as="bet price"
+                            :disabled="item.is_not"
+                            :state="!veeErrors.has('betprice'+index)"></vue-numeric>
                     </td>
                     <td>
                         <div class="text-right">{{ subDiscount(item) | currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true }) }}</div>
@@ -60,16 +70,31 @@
 
                     </td>
                 </tr>
-                <tr>
+                <tr style="display:none">
                     <td colspan="6">
                         <div class="text-right" style="padding-right:55px">
                             <strong> Total Pay: {{ subTotalPay |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true }) }}</strong>
                         </div>
                     </td>
                 </tr>
+                <tr>
+                    <td colspan="6">
+                        <b-row>
+                            <b-col cols="9">
+                                <b-button
+                                    variant="success"
+                                    :disabled="veeErrors.any()"
+                                    @click="saveBetGame">Save</b-button>
+                                <b-button variant="outline-primary" @click="loadRowTable">Reset</b-button>
+                            </b-col>
+                            <b-col cols="3" class="text-right">
+                                <b-button variant="warning" @click="addRowTable"><i class="fa fa-plus" aria-hidden="true"></i> Add</b-button>
+                            </b-col>
+                        </b-row>
+                    </td>
+                </tr>
             </tbody>
         </table>
-       
     </div>
 </template>
 
@@ -78,6 +103,7 @@ import {
     mapGetters
 } from "vuex"
 import VueNumeric from 'vue-numeric'
+import Swal from 'sweetalert2';
 export default {
     layout: "gamemarket",
     name: 'game2DForm',
@@ -102,7 +128,7 @@ export default {
     computed: {
         subTotalPay: function () {
             let self = this
-            var total = this.items.reduce(function (value, item) {
+            var total = self.items.reduce(function (value, item) {
                 return value + item.betpay;
             }, 0)
             return total;
@@ -135,16 +161,31 @@ export default {
             this.marketGameSetting = data
         },
         loadRowTable() {
+            let self = this
             var i = 0;
+            self.items = []
             for (i = 0; i < 20; i++) {
-                this.items[i] = {
+                self.items[i] = {
                     number2d: '',
                     betvalue: 0,
                     discount: 0,
                     betpay: 0,
                     is_not: false
                 }
+
             }
+
+            this.veeErrors.items.clean
+          //  this.veeFields = []
+        },
+        addRowTable() {
+            this.items.push({
+                number2d: '',
+                betvalue: 0,
+                discount: 0,
+                betpay: 0,
+                is_not: false
+            })
         },
         isNotBet(index, item) {
             item.is_not = true
@@ -154,11 +195,50 @@ export default {
             item.is_not = false
             this.items.splice(index, 1, item)
         },
+        async saveBetGame() {
+             let self = this
+            let totalBet = this.subTotalPay
+            let tempArray = self.items
+            if (totalBet < this.user.reg_remain_balance) {
+               let itemEl = []
+                tempArray.forEach(element => {
+                    var el = element
+                    if(el.number2d !== "" || el.number2d !== null || el.is_not !== true ){
+                         itemEl.push({number2d:el.number2d,betvalue:el.betvalue,discount:el.discount})   
+                    }
+
+                });    
+                console.log(itemEl)
+                const input = {
+                    'betitem': self.items,
+                    'market': this.$route.params.marketcode
+                }
+                //const data = await this.$axios.$post('/member/dobetgame', input)
+                //console.log(data)
+            }
+        }
 
     }
 }
 </script>
 
-<style>
+<style scoped>
+table tr td input {
+    text-align: right;
+}
 
+.form-control.is-valid {
+    border-color: #28a745;
+    padding-right: 5px;
+    background-image: none;
+    background-repeat: no-repeat;
+    background-position: center right calc(0.375em + 0.1875rem);
+    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+}
+
+p span {
+    display: block;
+    font-weight: bold;
+    line-height: 20px;
+}
 </style>
