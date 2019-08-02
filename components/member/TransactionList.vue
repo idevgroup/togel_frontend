@@ -8,6 +8,7 @@
         :classes="classes"
         >
         <template slot="status" slot-scope="props">
+             <b-badge variant="info" v-if="props.cell_value === ''">Success</b-badge>
             <b-badge variant="primary" v-if="props.cell_value === 1">Approved</b-badge>
             <b-badge variant="danger" v-if="props.cell_value === 2">Reject</b-badge>
             <b-badge variant="warning" v-if="props.cell_value === 0">Pending</b-badge>

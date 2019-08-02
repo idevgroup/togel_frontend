@@ -35,19 +35,7 @@
             <b-col md="9" class="pl-0">
                 <template v-if="$route.params.marketcode">
 
-                    <b-row>
-                        <b-col align-self="center" id="martket-side">
-
-                            <b-card-text id="martket-active">
-                                <template v-for="item in marketItem">
-                                    <div v-if="item.code === $route.params.marketcode" :key="item.id">
-                                        Active:{{ item.name }} <br />
-                                    </div>
-                                </template>
-                                {{ getDate() }}: {{ $route.params.marketcode.toUpperCase() }} - 0
-                            </b-card-text>
-                        </b-col>
-                    </b-row>
+                 <market-head-active />
 
                 </template>
                 <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
@@ -65,6 +53,7 @@ import {
 } from "vuex"
 import Header from '~/components/partials/Header';
 import NavBar from '~/components/partials/NavBar';
+import MarketHeadActive from '~/components/gamemarket/MarketHeadActive';
 import Swal from 'sweetalert2';
 export default {
     middleware: 'guest',
@@ -72,12 +61,13 @@ export default {
     components: {
         Header,
         NavBar,
-
+    MarketHeadActive
     },
     data: () => ({
         marketItem: [],
         gameItem: [],
-        getMarketActive: []
+        getMarketActive: [],
+       periodMarket:''
     }),
     computed: {
         ...mapGetters({
@@ -87,35 +77,10 @@ export default {
     mounted() {
         this.gameItem = this.setting.gameitem
         this.marketItem = this.setting.market
-
-    },
-
-    methods: {
-        getDate() {
-            const toTwoDigits = num => num < 10 ? '0' + num : num;
-            let today = new Date();
-            let year = today.getFullYear();
-            let month = toTwoDigits(today.getMonth() + 1);
-            let day = toTwoDigits(today.getDate());
-            return `${year}-${month}-${day}`;
-        }
     }
 }
 </script>
 
 <style>
-#martket-side {
-    display: table;
-    height: 140px;
-}
 
-#martket-active {
-    font-size: 18px;
-    font-weight: bold;
-    text-align: center;
-    line-height: 30px;
-    color: #540606;
-    vertical-align: middle;
-    display: table-cell;
-}
 </style>
