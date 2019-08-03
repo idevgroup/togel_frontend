@@ -339,7 +339,8 @@ export default {
         async checkNumberBetLimit(index,item){
             const input ={
                 numberbet:item.number2d,
-                marketcode:this.$route.params.marketcode
+                marketcode:this.$route.params.marketcode,
+                gamecode: '2d'
             }
             const result = await this.$axios.$post('checklimitnubmerbet',input)
             
