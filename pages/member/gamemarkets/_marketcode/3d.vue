@@ -33,7 +33,8 @@
                             data-vv-as="bet number"
                             :disabled="item.is_not"
                             :state="!veeErrors.has('number'+index)"
-                            @blur="checkNumberBetLimit(index,item)">
+                            @blur="checkNumberBetLimit(index,item)"
+                            @keypress="isNumberInt($event)">
                         </b-form-input>
 
                     </td>
@@ -325,14 +326,19 @@ export default {
             this.previewbet = []
 
         },
-        checkAmount(index, item) {
+         checkAmount(index, item) {
             let limitMax = this.marketGameSetting.max_bet
             let limitMin = this.marketGameSetting.min_bet
+            let modulus = this.marketGameSetting.bet_mod
+            let value_mod = 0
             if (item.betvalue !== 0) {
-                if (limitMax < item.betvalue || limitMin > item.betvalue) {
+
+                value_mod = parseFloat(item.betvalue) % parseFloat(modulus)
+
+                if (limitMax < item.betvalue || limitMin > item.betvalue || value_mod !== 0) {
                     item.betvalue = 0
                     this.items.splice(index, 1, item)
-                    Swal.fire('Invalide Amount', 'Amount cannot less then ' + limitMin + ' or greater than ' + limitMax, "info")
+                    Swal.fire('Invalide Amount', 'Amount cannot less then ' + this.setting.general.symbol + ' ' + limitMin + ' or greater than ' + this.setting.general.symbol + ' ' + limitMax + ' and also modulus of ' + this.setting.general.symbol + ' ' + modulus, "info")
                 }
             }
         },

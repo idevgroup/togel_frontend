@@ -11,7 +11,7 @@
             <thead class="thead-light">
                 <tr>
                     <th width="1">#</th>
-                    <th width="20%">2 Digit Number</th>
+                    <th width="20%">4 Digit Number</th>
                     <th width="25%">Bet</th>
                     <th width="20%">Discount</th>
                     <th>Pay</th>
@@ -25,15 +25,16 @@
                         <b-form-input
                             class="form-control form-control-sm"
                             type="text"
-                            maxlength="2"
+                            maxlength="4"
                             v-model.trim="item.numberXd"
-                            v-validate="{is_not:0,max:2,max_value:99, min:2 }"
+                            v-validate="{is_not:0,max:4,max_value:9999, min:4 }"
                             :name="`number`+index"
                             :data-vv-name="`number`+index"
                             data-vv-as="bet number"
                             :disabled="item.is_not"
                             :state="!veeErrors.has('number'+index)"
-                            @blur="checkNumberBetLimit(index,item)">
+                            @blur="checkNumberBetLimit(index,item)"
+                            @keypress="isNumberInt($event)">
                         </b-form-input>
 
                     </td>
@@ -328,11 +329,16 @@ export default {
         checkAmount(index, item) {
             let limitMax = this.marketGameSetting.max_bet
             let limitMin = this.marketGameSetting.min_bet
+            let modulus = this.marketGameSetting.bet_mod
+            let value_mod = 0
             if (item.betvalue !== 0) {
-                if (limitMax < item.betvalue || limitMin > item.betvalue) {
+
+                value_mod = parseFloat(item.betvalue) % parseFloat(modulus)
+
+                if (limitMax < item.betvalue || limitMin > item.betvalue || value_mod !== 0) {
                     item.betvalue = 0
                     this.items.splice(index, 1, item)
-                    Swal.fire('Invalide Amount', 'Amount cannot less then ' + limitMin + ' or greater than ' + limitMax, "info")
+                    Swal.fire('Invalide Amount', 'Amount cannot less then ' + this.setting.general.symbol + ' ' + limitMin + ' or greater than ' + this.setting.general.symbol + ' ' + limitMax + ' and also modulus of ' + this.setting.general.symbol + ' ' + modulus, "info")
                 }
             }
         },
@@ -356,7 +362,7 @@ export default {
                         this.items.splice(index, 1, item)
                         Swal.fire('Guess Limit Number', 'Your input value is limited, please try other number', "info")
                     }
-                   
+
                 }
 
             }

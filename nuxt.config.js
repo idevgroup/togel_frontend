@@ -52,7 +52,8 @@ export default {
         '~/plugins/swal.js',
         // '~/plugins/global.js'
         '~/plugins/vue2-filters.js',
-        '~/plugins/modal.js'
+        '~/plugins/modal.js',
+        '~/plugins/mixins/corefunction.js'
     ],
     /*
      ** Nuxt.js modules
