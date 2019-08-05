@@ -33,12 +33,12 @@ export default {
         periodMarket: function () {
             let self = this
             let val = ''
-           return this.$axios.$post('/getperiod', {
+            this.$axios.$post('/getperiod', {
                 marketcode: this.$route.params.marketcode
             }).then(result => {
                 val = result.period
                 self.getPeriod = val
-                 return val
+                // return val
             })
             //return val
         }

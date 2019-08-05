@@ -5,9 +5,8 @@
             <span> 2D Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}} </span>
             <span> 2D Discount: {{ marketGameSetting.discount }}%</span>
             <span> 2D Bet Modulus: {{ marketGameSetting.bet_mod |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
-            <span> Win 2D: x{{ marketGameSetting.menang }}</span>
+            <span> Win 2D: x {{ marketGameSetting.menang }}</span>
         </p>
-
         <table class="table table-bordered">
             <thead class="thead-light">
                 <tr>
@@ -27,13 +26,14 @@
                             class="form-control form-control-sm"
                             type="text"
                             maxlength="2"
-                            v-model.trim="item.number2d"
+                            v-model.trim="item.numberXd"
                             v-validate="{is_not:0,max:2,max_value:99, min:2 }"
                             :name="`number`+index"
                             :data-vv-name="`number`+index"
                             data-vv-as="bet number"
                             :disabled="item.is_not"
-                            :state="!veeErrors.has('number'+index)">
+                            :state="!veeErrors.has('number'+index)"
+                            @blur="checkNumberBetLimit(index,item)">
                         </b-form-input>
 
                     </td>
@@ -42,7 +42,7 @@
                             class="form-control form-control-sm"
                             :currency="setting.general.symbol"
                             separator=","
-                            v-model.trim="item.betvalue"
+                            v-model.number="item.betvalue"
                             v-bind:precision="2"
                             decimal-separator="."
                             v-validate="{max_value:marketGameSetting.max_bet}"
@@ -187,7 +187,7 @@ export default {
             getDicount: 0,
             marketGameSetting: [],
             items: [{
-                number2d: '',
+                numberXd: '',
                 betvalue: 0,
                 discount: 0,
                 betpay: 0,
@@ -216,12 +216,12 @@ export default {
     },
     methods: {
         subtotal(item) {
-            return (item.number2d !== '') ? item.betvalue - (item.betvalue * this.marketGameSetting.discount / 100) : 0
+            return (item.numberXd !== '') ? item.betvalue - (item.betvalue * this.marketGameSetting.discount / 100) : 0
         },
         subDiscount(item) {
-            item.discount = (item.number2d !== '') ? (item.betvalue * this.marketGameSetting.discount) / 100 : 0
-            item.betpay = (item.number2d !== '') ? item.betvalue - item.discount : 0
-            return (item.number2d !== '') ? item.discount : 0
+            item.discount = (item.numberXd !== '') ? (item.betvalue * this.marketGameSetting.discount) / 100 : 0
+            item.betpay = (item.numberXd !== '') ? item.betvalue - item.discount : 0
+            return (item.numberXd !== '') ? item.discount : 0
         },
 
         async getMarketGameSetting() {
@@ -238,7 +238,7 @@ export default {
             self.items = []
             for (i = 0; i < 20; i++) {
                 self.items[i] = {
-                    number2d: '',
+                    numberXd: '',
                     betvalue: 0,
                     discount: 0,
                     betpay: 0,
@@ -254,7 +254,7 @@ export default {
             var i = 0;
             for (i = 0; i < 10; i++) {
                 this.items.push({
-                    number2d: '',
+                    numberXd: '',
                     betvalue: 0,
                     discount: 0,
                     betpay: 0,
@@ -276,7 +276,7 @@ export default {
                 'betitem': self.previewbet,
                 'market': this.$route.params.marketcode,
                 'totalpay': self.totalBet,
-                'gamecode': '2d'
+                'gamecode': '2D'
             }
             //if(!this.$validator.validateAll()) return
 
@@ -294,9 +294,9 @@ export default {
             let itemValueBet = []
             let totalPay = 0;
             self.items.forEach(item => {
-                if (item.number2d !== '' && !item.is_not && item.betpay > 0) {
+                if (item.numberXd !== '' && !item.is_not && item.betpay > 0) {
                     itemValueBet.push({
-                        'betnumber': item.number2d,
+                        'betnumber': item.numberXd,
                         'betprice': item.betvalue,
                         'betdiscount': item.discount,
                         'betpay': item.betpay
@@ -311,9 +311,9 @@ export default {
                     itembet: itemValueBet,
                     totalPay
                 });
-            }else{
+            } else {
                 Swal.fire('Invalide Amount', 'Sorry, you don\'t have enough balance for this operation.', "info")
-                
+
             }
 
         },
@@ -336,14 +336,30 @@ export default {
                 }
             }
         },
-        async checkNumberBetLimit(index,item){
-            const input ={
-                numberbet:item.number2d,
-                marketcode:this.$route.params.marketcode,
-                gamecode: '2d'
+        async checkNumberBetLimit(index, item) {
+
+            const input = {
+                numberbet: item.numberXd,
+                marketcode: this.$route.params.marketcode,
+                gamecode: '2D'
             }
-            const result = await this.$axios.$post('checklimitnubmerbet',input)
-            
+            let filtered = this.items
+            let count = 0
+            if (this.marketGameSetting.bet_times !== 0) {
+                if (item.numberXd !== '') {
+                    filtered = this.items.filter(m => m.numberXd === item.numberXd)
+                    const result = await this.$axios.$post('/member/checklimitnumerberbet', input)
+                    count = parseInt(filtered.length) + parseInt(result.count)
+                    if (count > this.marketGameSetting.bet_times) {
+                        item.numberXd = ''
+                        this.items.splice(index, 1, item)
+                        Swal.fire('Guess Limit Number', 'Your input value is limited, please try other number', "info")
+                    }
+                   
+                }
+
+            }
+
         }
     }
 
