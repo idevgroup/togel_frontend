@@ -19,20 +19,19 @@
 </template>
 
 <script>
-import Header from '~/components/partials/Header';
-import NavBar from '~/components/partials/NavBar';
-import MemberSideBar from '~/components/partials/MemberSideBar';
+import Header from '~/components/partials/Header'
+import NavBar from '~/components/partials/NavBar'
+import MemberSideBar from '~/components/partials/MemberSideBar'
 export default {
-    middleware: 'guest',
-    name:'memberLayoutView',
-    components: {
-        Header,
-        NavBar,
-        MemberSideBar
-    }
+  middleware: 'guest',
+  name: 'MemberLayoutView',
+  components: {
+    Header,
+    NavBar,
+    MemberSideBar,
+  },
 }
 </script>
 
 <style>
-
 </style>

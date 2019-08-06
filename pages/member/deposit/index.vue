@@ -11,17 +11,17 @@
                     label-class="font-weight-bold"
                     class="mt-2">
                     <b-form-select
+                        v-validate="{ required: true }"
                         id="input-bank"
-                        name="bank"
                         v-model="selectedMemberBank"
                         :options="memberBank"
+                        name="bank"
                         value-field="id"
                         text-field="bank"
-                        v-validate="{ required: true }"
                         data-vv-name="bank"
                         data-vv-as="bank"
                         @change="getDepositBank"></b-form-select>
-                    <span class="form-text text-danger" v-show="veeErrors.has('bank')">{{ veeErrors.first('bank') }}</span>
+                    <span v-show="veeErrors.has('bank')" class="form-text text-danger">{{ veeErrors.first('bank') }}</span>
                 </b-form-group>
                 <b-form-group
                     label-cols-sm="4"
@@ -31,16 +31,16 @@
                     label-class="font-weight-bold"
                     class="mt-2">
                     <b-form-select
+                        v-validate="{ required: true }"
                         id="input-bank-deposit"
-                        name="depositbank"
                         v-model="selectedDepositBank"
                         :options="depositionBank"
+                        name="depositbank"
                         value-field="id"
                         text-field="bank"
-                        v-validate="{ required: true }"
                         data-vv-name="depositbank"
                         data-vv-as="bank deposit"></b-form-select>
-                    <span class="form-text text-danger" v-show="veeErrors.has('depositbank')">{{ veeErrors.first('depositbank') }}</span>
+                    <span v-show="veeErrors.has('depositbank')" class="form-text text-danger">{{ veeErrors.first('depositbank') }}</span>
                 </b-form-group>
 
                 <b-form-group
@@ -50,16 +50,16 @@
                     label-for="input-amount"
                     label-class="font-weight-bold">
                     <money
+                        v-validate="{ required: true,is_not:0 }"
                         id="input-amount"
-                        name="amount"
                         v-model="amountDeposit"
                         v-bind="formatmoney"
+                        name="amount"
                         class="form-control"
-                        v-validate="{ required: true,is_not:0 }"
                         data-vv-name="amount"
                         data-vv-as="amount">
                     </money>
-                    <span class="form-text text-danger" v-show="veeErrors.has('amount')">{{ veeErrors.first('amount') }}</span>
+                    <span v-show="veeErrors.has('amount')" class="form-text text-danger">{{ veeErrors.first('amount') }}</span>
                 </b-form-group>
                 <b-form-group
                     label-cols-sm="4"
@@ -68,17 +68,17 @@
                     label-for="input-message"
                     label-class="font-weight-bold">
                     <b-form-textarea
-                        v-model="messageDeposit"
+                        v-validate="{ min:10 }"
                         id="input-message"
+                        v-model="messageDeposit"
                         name="message"
                         placeholder="Enter message..."
                         rows="3"
                         max-rows="6"
-                        v-validate="{ min:10 }"
                         data-vv-name="message"
                         data-vv-as="message">
                         ></b-form-textarea>
-                    <span class="form-text text-danger" v-show="veeErrors.has('message')">{{ veeErrors.first('message') }}</span>
+                    <span v-show="veeErrors.has('message')" class="form-text text-danger">{{ veeErrors.first('message') }}</span>
                 </b-form-group>
 
                 <b-form-group
@@ -86,17 +86,17 @@
                     label-cols-lg="3"
                     label="">
                     <VueRecaptcha
+                        v-validate="{ required:true }"
                         ref="recaptcha"
-                        name="recapcha"
                         v-model="recaptcha"
                         :sitekey="recaptchaKey"
-                        @verify="onVerify"
-                        @expired="resetCaptcha"
-                        v-validate="{ required:true }"
+                        name="recapcha"
                         data-vv-name="recapcha"
-                        data-vv-as="recapcha" />
+                        data-vv-as="recapcha"
+                        @verify="onVerify"
+                        @expired="resetCaptcha" />
 
-                    <span class="form-text text-danger" v-show="veeErrors.has('recapcha')">{{ veeErrors.first('recapcha') }}</span>
+                    <span v-show="veeErrors.has('recapcha')" class="form-text text-danger">{{ veeErrors.first('recapcha') }}</span>
                 </b-form-group>
 
                 <b-form-group
@@ -104,9 +104,9 @@
                     label-cols-lg="3"
                     label="">
                     <b-button
+                        :disabled="veeErrors.any()"
                         type="submit"
-                        variant="primary"
-                        :disabled="veeErrors.any()">Submit</b-button>
+                        variant="primary">Submit</b-button>
                 </b-form-group>
             </b-form>
         </b-col>
@@ -114,117 +114,124 @@
 </template>
 
 <script>
-import {
-    mapGetters
-} from "vuex";
-import {
-    Money
-} from "v-money";
-import VueRecaptcha from "vue-recaptcha";
-import Swal from 'sweetalert2';
+import { mapGetters } from 'vuex'
+import { Money } from 'v-money'
+import VueRecaptcha from 'vue-recaptcha'
+import Swal from 'sweetalert2'
 export default {
-    layout: "member",
-    components: {
-        Money,
-        VueRecaptcha
+  layout: 'member',
+  components: {
+    Money,
+    VueRecaptcha,
+  },
+  data: () => ({
+    getBankMember: [],
+    memberBank: [],
+    selectedMemberBank: null,
+    depositionBank: [
+      {
+        id: null,
+        bank: 'Select One',
+      },
+    ],
+    selectedDepositBank: null,
+    amountDeposit: '',
+    messageDeposit: '',
+    recaptcha: '',
+    recaptchaKey: '',
+    formatmoney: {
+      decimal: '.',
+      thousands: ',',
+      prefix: '$ ',
+      suffix: '',
+      precision: 2,
+      masked: false,
+      allowBlank: false,
     },
-    data: () => ({
-        getBankMember: [],
-        memberBank: [],
-        selectedMemberBank: null,
-        depositionBank: [{
-            id: null,
-            bank: "Select One"
-        }],
-        selectedDepositBank: null,
-        amountDeposit: '',
-        messageDeposit: "",
-        recaptcha: "",
-        recaptchaKey: '',
-        formatmoney: {
-            decimal: ".",
-            thousands: ",",
-            prefix: "$ ",
-            suffix: "",
-            precision: 2,
-            masked: false,
-            allowBlank: false
-        }
+  }),
+  computed: {
+    ...mapGetters({
+      setting: 'frontendconfig/setting',
     }),
-    computed: {
-        ...mapGetters({
-            setting: "frontendconfig/setting"
-        }),
-    },
-    mounted() {
-        this.getBankMember = this.user.get_player_bank;
+  },
+  mounted() {
+    this.getBankMember = this.user.get_player_bank
 
-        this.getMemberBank();
+    this.getMemberBank()
+  },
+  created() {
+    this.recaptchaKey = process.env.RECAPTCHA_KEY
+    this.formatmoney.prefix = this.setting.general.symbol + ' '
+  },
+  methods: {
+    onVerify(response) {
+      let self = this
+      self.recaptcha = response
     },
-    created() {
-        this.recaptchaKey = process.env.RECAPTCHA_KEY;
-        this.formatmoney.prefix = this.setting.general.symbol + " ";
+    resetCaptcha() {
+      this.$refs.recaptcha.reset()
     },
-    methods: {
-        onVerify(response) {
-            let self = this;
-            self.recaptcha = response;
-        },
-        resetCaptcha() {
-            this.$refs.recaptcha.reset();
-        },
-        async getMemberBank() {
-            await this.$axios.$post("member/getmemberbank").then(response => {
-                this.memberBank = response;
-            });
-        },
-        async getDepositBank() {
+    async getMemberBank() {
+      await this.$axios.$post('member/getmemberbank').then(response => {
+        this.memberBank = response
+      })
+    },
+    async getDepositBank() {
+      const input = {
+        memberBankId: this.selectedMemberBank,
+      }
+      await this.$axios.$post('member/getdepositbank', input).then(response => {
+        this.selectedDepositBank = null
+        this.depositionBank = response
+      })
+    },
+    async doDeposit() {
+      this.$validator.validateAll().then(response => {
+        if (response) {
+          let self = this
+          try {
             const input = {
-                memberBankId: this.selectedMemberBank
-            };
-            await this.$axios
-                .$post("member/getdepositbank", input)
-                .then(response => {
-                    this.selectedDepositBank = null;
-                    this.depositionBank = response;
-                });
-        },
-        async doDeposit() {
-
-            this.$validator.validateAll().then((response) => {
-                if (response) {
-                    let self = this
-                    try {
-                        const input = {
-                            amount: self.amountDeposit,
-                            recaptcha: self.recaptcha,
-                            note: self.messageDeposit,
-                            memberbank: self.selectedMemberBank,
-                            debank: self.selectedDepositBank
-                        }
-                        this.$axios.$post('member/deposit', input).catch(function (error) {
-                            self.recaptcha = ''
-                            self.$refs.recaptcha.reset();
-                        }).then((response) => {
-                            if (response.data.success === false) {
-                                Swal.fire(response.data.alert.title, response.data.alert.message, "info")
-                            } else {
-                                Swal.fire(response.data.alert.title, response.data.alert.message, "success")
-                            }
-                            // Redirect member dashboard.
-                            this.$router.push({
-                                name: "member-dashboard"
-                            })
-                        })
-                    } catch (error) {
-                        self.recaptcha = ''
-                        self.$refs.recaptcha.reset();
-                    }
+              amount: self.amountDeposit,
+              recaptcha: self.recaptcha,
+              note: self.messageDeposit,
+              memberbank: self.selectedMemberBank,
+              debank: self.selectedDepositBank,
+            }
+            this.$axios
+              .$post('member/deposit', input)
+              .catch(function(error) {
+                self.recaptcha = ''
+                self.$refs.recaptcha.reset()
+                console.log(error)
+              })
+              .then(response => {
+                if (response.data.success === false) {
+                  Swal.fire(
+                    response.data.alert.title,
+                    response.data.alert.message,
+                    'info',
+                  )
+                } else {
+                  Swal.fire(
+                    response.data.alert.title,
+                    response.data.alert.message,
+                    'success',
+                  )
                 }
-            })
+                // Redirect member dashboard.
+                this.$router.push({
+                  name: 'member-dashboard',
+                })
+              })
+          } catch (error) {
+            self.recaptcha = ''
+            self.$refs.recaptcha.reset()
+          }
         }
-    }
-};
+      })
+    },
+  },
+}
 </script>
 
 <style>

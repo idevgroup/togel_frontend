@@ -1,10 +1,10 @@
 <template>
-    <h1>Working on index game market</h1>
+    <div>Working</div>
 </template>
 
 <script>
 export default {
-  layout: 'gamemarket',
+  layout: 'member',
 }
 </script>
 

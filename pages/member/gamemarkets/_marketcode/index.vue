@@ -1,17 +1,19 @@
 <template>
     <div>
-        <h2>Working - {{ this.$route.params.marketcode }}</h2>
+         <market-head-active />
     </div>
 
 </template>
 
 <script>
+import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
 export default {
-    layout: "gamemarket",
-
+  layout: 'gamemarket',
+  components: {
+    MarketHeadActive,
+  },
 }
 </script>
 
 <style>
-
 </style>

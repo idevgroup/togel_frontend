@@ -1,5 +1,6 @@
 <template>
     <div>
+        <market-head-active />
         <p>
             <span> 4D Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
             <span> 4D Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}} </span>
@@ -23,16 +24,16 @@
                     <td>{{ index + 1 }}</td>
                     <td>
                         <b-form-input
+                            v-validate="{is_not:0,max:4,max_value:9999, min:4 }"
+                            v-model.trim="item.numberXd"
+                            :name="`number`+index"
+                            :data-vv-name="`number`+index"
+                            :disabled="item.is_not"
+                            :state="!veeErrors.has('number'+index)"
                             class="form-control form-control-sm"
                             type="text"
                             maxlength="4"
-                            v-model.trim="item.numberXd"
-                            v-validate="{is_not:0,max:4,max_value:9999, min:4 }"
-                            :name="`number`+index"
-                            :data-vv-name="`number`+index"
                             data-vv-as="bet number"
-                            :disabled="item.is_not"
-                            :state="!veeErrors.has('number'+index)"
                             @blur="checkNumberBetLimit(index,item)"
                             @keypress="isNumberInt($event)">
                         </b-form-input>
@@ -40,18 +41,18 @@
                     </td>
                     <td>
                         <vue-numeric
-                            class="form-control form-control-sm"
-                            :currency="setting.general.symbol"
-                            separator=","
-                            v-model.number="item.betvalue"
-                            v-bind:precision="2"
-                            decimal-separator="."
                             v-validate="{max_value:marketGameSetting.max_bet}"
+                            :currency="setting.general.symbol"
+                            v-model.number="item.betvalue"
+                            :precision="2"
                             :name="`betprice`+index"
                             :data-vv-name="`betprice`+index"
-                            data-vv-as="bet price"
                             :disabled="item.is_not"
                             :state="!veeErrors.has('betprice'+index)"
+                            class="form-control form-control-sm"
+                            separator=","
+                            decimal-separator="."
+                            data-vv-as="bet price"
                             @blur="checkAmount(index,item)"></vue-numeric>
                     </td>
                     <td>
@@ -82,8 +83,8 @@
                         <b-row>
                             <b-col cols="9">
                                 <b-button
-                                    variant="success"
                                     :disabled="veeErrors.any()"
+                                    variant="success"
                                     @click="ShowPreview">Preview Bet</b-button>
                                 <b-button variant="outline-primary" @click="loadRowTable">Reset</b-button>
                             </b-col>
@@ -96,12 +97,12 @@
             </tbody>
         </table>
         <modal
-            name="preview-bet"
-            @before-open="beforeOpen"
-            @before-close="beforeClose"
-            height="auto"
             :scrollable="true"
-            draggable=".modal-header">
+            name="preview-bet"
+            height="auto"
+            draggable=".modal-header"
+            @before-open="beforeOpen"
+            @before-close="beforeClose">
 
             <div class="modal-header">
                 <h5 class="modal-title">Your Bet</h5>
@@ -162,7 +163,7 @@
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" @click="$modal.hide('preview-bet')">Close</button>
-                <button type="button" class="btn btn-primary" @click="saveBetGame" :disabled="user.reg_remain_balance < totalBet" v-if=" previewbet.length > 0">Save</button>
+                <button v-if=" previewbet.length > 0" :disabled="user.reg_remain_balance < totalBet" type="button" class="btn btn-primary" @click="saveBetGame">Save</button>
             </div>
 
         </modal>
@@ -170,226 +171,255 @@
 </template>
 
 <script>
-import {
-    mapGetters
-} from "vuex"
+import { mapGetters } from 'vuex'
 import VueNumeric from 'vue-numeric'
 import Swal from 'sweetalert2'
+import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
 export default {
-    layout: "gamemarket",
-    name: 'game4DForm',
-    components: {
-        VueNumeric
-    },
-    data() {
-        return {
-            noIndex: null,
-            originalData: null,
-            getDicount: 0,
-            marketGameSetting: [],
-            items: [{
-                numberXd: '',
-                betvalue: 0,
-                discount: 0,
-                betpay: 0,
-                is_not: false
-            }],
-            previewbet: [],
-            totalBet: 0
-        }
-    },
-    computed: {
-        subTotalPay: function () {
-            let self = this
-            var total = self.items.reduce(function (value, item) {
-                return value + item.betpay;
-            }, 0)
-            return total;
+  layout: 'gamemarket',
+  name: 'Game4DForm',
+  components: {
+    VueNumeric,
+    MarketHeadActive,
+  },
+  data() {
+    return {
+      noIndex: null,
+      originalData: null,
+      getDicount: 0,
+      marketGameSetting: [],
+      items: [
+        {
+          numberXd: '',
+          betvalue: 0,
+          discount: 0,
+          betpay: 0,
+          is_not: false,
         },
-        ...mapGetters({
-            setting: "frontendconfig/setting"
-        })
-
-    },
-    created() {
-        this.getMarketGameSetting()
-        this.loadRowTable()
-    },
-    methods: {
-        subtotal(item) {
-            return (item.numberXd !== '') ? item.betvalue - (item.betvalue * this.marketGameSetting.discount / 100) : 0
-        },
-        subDiscount(item) {
-            item.discount = (item.numberXd !== '') ? (item.betvalue * this.marketGameSetting.discount) / 100 : 0
-            item.betpay = (item.numberXd !== '') ? item.betvalue - item.discount : 0
-            return (item.numberXd !== '') ? item.discount : 0
-        },
-
-        async getMarketGameSetting() {
-            const input = {
-                game: '4D',
-                market: this.$route.params.marketcode
-            }
-            const data = await this.$axios.$post('/member/getmarketgamesetting', input)
-            this.marketGameSetting = data
-        },
-        loadRowTable() {
-            let self = this
-            var i = 0;
-            self.items = []
-            for (i = 0; i < 20; i++) {
-                self.items[i] = {
-                    numberXd: '',
-                    betvalue: 0,
-                    discount: 0,
-                    betpay: 0,
-                    is_not: false
-                }
-
-            }
-
-            this.veeErrors.items.clean
-            //  this.veeFields = []
-        },
-        addRowTable() {
-            var i = 0;
-            for (i = 0; i < 10; i++) {
-                this.items.push({
-                    numberXd: '',
-                    betvalue: 0,
-                    discount: 0,
-                    betpay: 0,
-                    is_not: false
-                })
-            }
-        },
-        isNotBet(index, item) {
-            item.is_not = true
-            this.items.splice(index, 1, item)
-        },
-        isBet(index, item) {
-            item.is_not = false
-            this.items.splice(index, 1, item)
-        },
-        async saveBetGame() {
-            let self = this
-            const input = {
-                'betitem': self.previewbet,
-                'market': this.$route.params.marketcode,
-                'totalpay': self.totalBet,
-                'gamecode': '4D'
-            }
-            //if(!this.$validator.validateAll()) return
-
-            const data = await this.$axios.$post('/member/dobetgame', input)
-            //refresh user account to update balance
-            Swal.fire(data.alert.title, data.alert.message, "success")
-            this.$auth.fetchUser()
-            this.$modal.hide('preview-bet');
-            this.$router.push({
-                name: "member-dashboard"
-            })
-        },
-        ShowPreview() {
-            let self = this
-            let itemValueBet = []
-            let totalPay = 0;
-            self.items.forEach(item => {
-                if (item.numberXd !== '' && !item.is_not && item.betpay > 0) {
-                    itemValueBet.push({
-                        'betnumber': item.numberXd,
-                        'betprice': item.betvalue,
-                        'betdiscount': item.discount,
-                        'betpay': item.betpay
-                    })
-                    totalPay += item.betpay
-                }
-
-            })
-
-            if (totalPay < this.user.reg_remain_balance) {
-                this.$modal.show('preview-bet', {
-                    itembet: itemValueBet,
-                    totalPay
-                });
-            } else {
-                Swal.fire('Invalide Amount', 'Sorry, you don\'t have enough balance for this operation.', "info")
-
-            }
-
-        },
-        beforeOpen(event) {
-            this.totalBet = event.params.totalPay
-            this.previewbet = event.params.itembet
-        },
-        beforeClose(item) {
-            this.previewbet = []
-
-        },
-        checkAmount(index, item) {
-            let limitMax = this.marketGameSetting.max_bet
-            let limitMin = this.marketGameSetting.min_bet
-            let modulus = this.marketGameSetting.bet_mod
-            let value_mod = 0
-            if (item.betvalue !== 0) {
-
-                value_mod = parseFloat(item.betvalue) % parseFloat(modulus)
-
-                if (limitMax < item.betvalue || limitMin > item.betvalue || value_mod !== 0) {
-                    item.betvalue = 0
-                    this.items.splice(index, 1, item)
-                    Swal.fire('Invalide Amount', 'Amount cannot less then ' + this.setting.general.symbol + ' ' + limitMin + ' or greater than ' + this.setting.general.symbol + ' ' + limitMax + ' and also modulus of ' + this.setting.general.symbol + ' ' + modulus, "info")
-                }
-            }
-        },
-        async checkNumberBetLimit(index, item) {
-
-            const input = {
-                numberbet: item.numberXd,
-                marketcode: this.$route.params.marketcode,
-                gamecode: '4D'
-            }
-            let filtered = this.items
-            let count = 0
-            if (this.marketGameSetting.bet_times !== 0) {
-                if (item.numberXd !== '') {
-                    filtered = this.items.filter(m => m.numberXd === item.numberXd)
-                    const result = await this.$axios.$post('/member/checklimitnumerberbet', input)
-                    count = parseInt(filtered.length) + parseInt(result.count)
-                    console.log(count)
-                    if (count > this.marketGameSetting.bet_times) {
-                        item.numberXd = ''
-                        this.items.splice(index, 1, item)
-                        Swal.fire('Guess Limit Number', 'Your input value is limited, please try other number', "info")
-                    }
-
-                }
-
-            }
-
-        }
+      ],
+      previewbet: [],
+      totalBet: 0,
     }
+  },
+  computed: {
+    subTotalPay: function() {
+      let self = this
+      var total = self.items.reduce(function(value, item) {
+        return value + item.betpay
+      }, 0)
+      return total
+    },
+    ...mapGetters({
+      setting: 'frontendconfig/setting',
+    }),
+  },
+  created() {
+    this.getMarketGameSetting()
+    this.loadRowTable()
+  },
+  methods: {
+    subtotal(item) {
+      return item.numberXd !== ''
+        ? item.betvalue -
+            (item.betvalue * this.marketGameSetting.discount) / 100
+        : 0
+    },
+    subDiscount(item) {
+      item.discount =
+        item.numberXd !== ''
+          ? (item.betvalue * this.marketGameSetting.discount) / 100
+          : 0
+      item.betpay = item.numberXd !== '' ? item.betvalue - item.discount : 0
+      return item.numberXd !== '' ? item.discount : 0
+    },
 
+    async getMarketGameSetting() {
+      const input = {
+        game: '4D',
+        market: this.$route.params.marketcode,
+      }
+      const data = await this.$axios.$post(
+        '/member/getmarketgamesetting',
+        input,
+      )
+      this.marketGameSetting = data
+    },
+    loadRowTable() {
+      let self = this
+      var i = 0
+      self.items = []
+      for (i = 0; i < 20; i++) {
+        self.items[i] = {
+          numberXd: '',
+          betvalue: 0,
+          discount: 0,
+          betpay: 0,
+          is_not: false,
+        }
+      }
+
+      this.veeErrors.items.clean
+      //  this.veeFields = []
+    },
+    addRowTable() {
+      var i = 0
+      for (i = 0; i < 10; i++) {
+        this.items.push({
+          numberXd: '',
+          betvalue: 0,
+          discount: 0,
+          betpay: 0,
+          is_not: false,
+        })
+      }
+    },
+    isNotBet(index, item) {
+      item.is_not = true
+      this.items.splice(index, 1, item)
+    },
+    isBet(index, item) {
+      item.is_not = false
+      this.items.splice(index, 1, item)
+    },
+    async saveBetGame() {
+      let self = this
+      const input = {
+        betitem: self.previewbet,
+        market: this.$route.params.marketcode,
+        totalpay: self.totalBet,
+        gamecode: '4D',
+      }
+      //if(!this.$validator.validateAll()) return
+
+      const data = await this.$axios.$post('/member/dobetgame', input)
+      //refresh user account to update balance
+      Swal.fire(data.alert.title, data.alert.message, 'success')
+      this.$auth.fetchUser()
+      this.$modal.hide('preview-bet')
+      this.$router.push({
+        name: 'member-dashboard',
+      })
+    },
+    ShowPreview() {
+      let self = this
+      let itemValueBet = []
+      let totalPay = 0
+      self.items.forEach(item => {
+        if (item.numberXd !== '' && !item.is_not && item.betpay > 0) {
+          itemValueBet.push({
+            betnumber: item.numberXd,
+            betprice: item.betvalue,
+            betdiscount: item.discount,
+            betpay: item.betpay,
+          })
+          totalPay += item.betpay
+        }
+      })
+
+      if (totalPay < this.user.reg_remain_balance) {
+        this.$modal.show('preview-bet', {
+          itembet: itemValueBet,
+          totalPay,
+        })
+      } else {
+        Swal.fire(
+          'Invalide Amount',
+          "Sorry, you don't have enough balance for this operation.",
+          'info',
+        )
+      }
+    },
+    beforeOpen(event) {
+      this.totalBet = event.params.totalPay
+      this.previewbet = event.params.itembet
+    },
+    beforeClose() {
+      this.previewbet = []
+    },
+    checkAmount(index, item) {
+      let limitMax = this.marketGameSetting.max_bet
+      let limitMin = this.marketGameSetting.min_bet
+      let modulus = this.marketGameSetting.bet_mod
+      let value_mod = 0
+      if (item.betvalue !== 0) {
+        value_mod = parseFloat(item.betvalue) % parseFloat(modulus)
+
+        if (
+          limitMax < item.betvalue ||
+          limitMin > item.betvalue ||
+          value_mod !== 0
+        ) {
+          item.betvalue = 0
+          this.items.splice(index, 1, item)
+          Swal.fire(
+            'Invalide Amount',
+            'Amount cannot less then ' +
+              this.setting.general.symbol +
+              ' ' +
+              limitMin +
+              ' or greater than ' +
+              this.setting.general.symbol +
+              ' ' +
+              limitMax +
+              ' and also modulus of ' +
+              this.setting.general.symbol +
+              ' ' +
+              modulus,
+            'info',
+          )
+        }
+      }
+    },
+    async checkNumberBetLimit(index, item) {
+      const input = {
+        numberbet: item.numberXd,
+        marketcode: this.$route.params.marketcode,
+        gamecode: '4D',
+      }
+      let filtered = this.items
+      let count = 0
+      if (this.marketGameSetting.bet_times !== 0) {
+        if (item.numberXd !== '') {
+          filtered = this.items.filter(m => m.numberXd === item.numberXd)
+          const result = await this.$axios.$post(
+            '/member/checklimitnumerberbet',
+            input,
+          )
+          count = parseInt(filtered.length) + parseInt(result.count)
+          console.log(count)
+          if (count > this.marketGameSetting.bet_times) {
+            item.numberXd = ''
+            this.items.splice(index, 1, item)
+            Swal.fire(
+              'Guess Limit Number',
+              'Your input value is limited, please try other number',
+              'info',
+            )
+          }
+        }
+      }
+    },
+  },
 }
 </script>
 
 <style scoped>
 table tr td input {
-    text-align: right;
+  text-align: right;
 }
 
 .form-control.is-valid {
-    border-color: #28a745;
-    padding-right: 5px;
-    background-image: none;
-    background-repeat: no-repeat;
-    background-position: center right calc(0.375em + 0.1875rem);
-    background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
+  border-color: #28a745;
+  padding-right: 5px;
+  background-image: none;
+  background-repeat: no-repeat;
+  background-position: center right calc(0.375em + 0.1875rem);
+  background-size: calc(0.75em + 0.375rem) calc(0.75em + 0.375rem);
 }
 
 p span {
-    display: block;
-    font-weight: bold;
-    line-height: 20px;
+  display: block;
+  font-weight: bold;
+  line-height: 20px;
 }
 </style>

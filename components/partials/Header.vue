@@ -24,7 +24,7 @@
                                     <b-dropdown-item :to="{name:'member-'+item.path}" :key="item.path">{{ item.title }}</b-dropdown-item>
                                 </template>
                                 <template v-for="item in userprofiles">
-                                    <b-dropdown-item to="#" :key="item.path">{{ item.title }}</b-dropdown-item>
+                                    <b-dropdown-item :key="item.path" to="#">{{ item.title }}</b-dropdown-item>
                                 </template>
                                   <b-dropdown-divider></b-dropdown-divider>
                                 <b-dropdown-item to="#" @click="logoutSubmit">Logout</b-dropdown-item>
@@ -48,47 +48,46 @@
 </template>
 
 <script>
-import {
-    mapGetters
-} from "vuex"
+import { mapGetters } from 'vuex'
 export default {
-    data: () => ({
-        transactions: [
-            {
-                title: 'Deposit',
-                path: "deposit"
-            },
-            {
-                title: 'Withdraw',
-                path: "withdraw"
-            }
-        ],
-        itemSelected: null,
-        userprofiles: [{
-                title: 'Bank',
-                path: "bank"
-            },
-            {
-                title: 'Referal',
-                path: "referrals"
-            },
-            {
-                title: 'Contact',
-                path: "contact"
-            }
-        ]
+  data: () => ({
+    transactions: [
+      {
+        title: 'Deposit',
+        path: 'deposit',
+      },
+      {
+        title: 'Withdraw',
+        path: 'withdraw',
+      },
+    ],
+    itemSelected: null,
+    userprofiles: [
+      {
+        title: 'Bank',
+        path: 'bank',
+      },
+      {
+        title: 'Referal',
+        path: 'referrals',
+      },
+      {
+        title: 'Contact',
+        path: 'contact',
+      },
+    ],
+  }),
+  computed: {
+    ...mapGetters({
+      setting: 'frontendconfig/setting',
     }),
-    computed:{
-  ...mapGetters({
-            setting: "frontendconfig/setting"
-        })
+  },
+  methods: {
+    async logoutSubmit() {
+      await this.$auth.logout()
     },
-    methods: {
-        async logoutSubmit() {
-            await this.$auth.logout()
-        }
-    }
-};
+  },
+}
 </script>
 
 <style>

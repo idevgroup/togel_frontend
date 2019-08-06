@@ -1,36 +1,53 @@
 {
-  "name": "zentogel",
-  "version": "1.0.0",
-  "description": "My stunning Nuxt.js project",
-  "author": "chanroeun",
-  "private": true,
-  "scripts": {
-    "dev": "nuxt",
-    "build": "nuxt build",
-    "start": "nuxt start",
-    "generate": "nuxt generate"
-  },
-  "dependencies": {
-    "@nuxtjs/auth": "^4.8.1",
-    "@nuxtjs/axios": "^5.5.4",
-    "@nuxtjs/dotenv": "^1.3.0",
-    "bootstrap": "^4.1.3",
-    "bootstrap-vue": "^2.0.0-rc.11",
-    "jquery": "^1.9.1",
-    "js-beautify": "^1.10.1",
-    "nuxt": "^2.0.0",
-    "pug-beautify": "^0.1.1",
-    "v-money": "^0.8.1",
-    "vee-validate": "^2.2.13",
-    "vue-bootstrap4-table": "^1.1.9",
-    "vue-comma-formatted-number": "^1.0.0",
-    "vue-js-modal": "^1.3.31",
-    "vue-numeric": "^2.3.0",
-    "vue-recaptcha": "^1.2.0",
-    "vue-sweetalert2": "^2.1.1",
-    "vue2-filters": "^0.7.0"
-  },
-  "devDependencies": {
-    "nodemon": "^1.18.9"
-  }
+    "name": "zentogel",
+    "version": "1.0.0",
+    "description": "My stunning Nuxt.js project",
+    "author": "chanroeun",
+    "private": true,
+    "scripts": {
+        "dev": "nuxt",
+        "build": "nuxt build",
+        "start": "nuxt start",
+        "generate": "nuxt generate",
+        "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+        "precommit": "npm run lint",
+        "lint:fix": "eslint ./ --fix",
+        "fix": "eslint --fix --ext .js,.vue --ignore-path .gitignore ."
+    },
+    "dependencies": {
+        "@nuxtjs/auth": "^4.8.1",
+        "@nuxtjs/axios": "^5.5.4",
+        "@nuxtjs/dotenv": "^1.4.0",
+        "bootstrap": "^4.1.3",
+        "bootstrap-vue": "^2.0.0-rc.27",
+        "cross-env": "^5.2.0",
+        "eslint-plugin-standard": "^4.0.0",
+        "jquery": "^3.4.1",
+        "js-beautify": "^1.10.1",
+        "modernizr": "^3.6.0",
+        "nuxt": "^2.0.0",
+        "pug-beautify": "^0.1.1",
+        "v-money": "^0.8.1",
+        "vee-validate": "^2.2.13",
+        "vue-bootstrap4-table": "^1.1.10",
+        "vue-comma-formatted-number": "^1.0.0",
+        "vue-js-modal": "^1.3.31",
+        "vue-numeric": "^2.3.0",
+        "vue-recaptcha": "^1.2.0",
+        "vue-sweetalert2": "^2.1.1",
+        "vue2-filters": "^0.7.0",
+        "webpack-modernizr-loader": "^4.0.1"
+    },
+    "devDependencies": {
+        "babel-eslint": "^8.2.1",
+        "eslint": "^4.19.1",
+        "eslint-config-airbnb": "^17.1.1",
+        "eslint-config-prettier": "^3.1.0",
+        "eslint-loader": "^2.0.0",
+        "eslint-plugin-import": "^2.18.2",
+        "eslint-plugin-prettier": "^2.6.2",
+        "eslint-plugin-vue": "^4.0.0",
+        "nodemon": "^1.18.9",
+        "prettier": "1.14.3"
+    }
 }

@@ -10,26 +10,23 @@
 </template>
 
 <script>
-import {
-    mapGetters
-} from "vuex"
+import { mapGetters } from 'vuex'
 export default {
-    data: () => ({
-        gameItem: [],
-        marketCode:''
+  data: () => ({
+    gameItem: [],
+    marketCode: '',
+  }),
+  computed: {
+    ...mapGetters({
+      setting: 'frontendconfig/setting',
     }),
-    computed: {
-        ...mapGetters({
-            setting: "frontendconfig/setting"
-        })
-    },
-    created() {
-        this.gameItem = this.setting.gameitem
-        this.marketCode = this.$route.params.marketcode
-    }
+  },
+  created() {
+    this.gameItem = this.setting.gameitem
+    this.marketCode = this.$route.params.marketcode
+  },
 }
 </script>
 
 <style>
-
 </style>

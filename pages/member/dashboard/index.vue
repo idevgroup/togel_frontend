@@ -5,15 +5,14 @@
 </template>
 
 <script>
-import TransactionList from '~/components/member/TransactionList.vue';
+import TransactionList from '~/components/member/TransactionList.vue'
 export default {
-layout:'member',
-components:{
-    TransactionList
-}
+  layout: 'member',
+  components: {
+    TransactionList,
+  },
 }
 </script>
 
 <style>
-
 </style>

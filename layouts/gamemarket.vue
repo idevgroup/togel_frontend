@@ -33,11 +33,6 @@
                 </template>
             </b-col>
             <b-col md="9" class="pl-0">
-                <template v-if="$route.params.marketcode">
-
-                 <market-head-active />
-
-                </template>
                 <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                     <nuxt />
                 </transition>
@@ -48,39 +43,33 @@
 </template>
 
 <script>
-import {
-    mapGetters
-} from "vuex"
-import Header from '~/components/partials/Header';
-import NavBar from '~/components/partials/NavBar';
-import MarketHeadActive from '~/components/gamemarket/MarketHeadActive';
-import Swal from 'sweetalert2';
+import { mapGetters } from 'vuex'
+import Header from '~/components/partials/Header'
+import NavBar from '~/components/partials/NavBar'
 export default {
-    middleware: 'guest',
-    name: 'marketCodeLayoutView',
-    components: {
-        Header,
-        NavBar,
-    MarketHeadActive
-    },
-    data: () => ({
-        marketItem: [],
-        gameItem: [],
-        getMarketActive: [],
-       periodMarket:''
+  middleware: 'guest',
+  name: 'MarketCodeLayoutView',
+  components: {
+    Header,
+    NavBar,
+  },
+  data: () => ({
+    marketItem: [],
+    gameItem: [],
+    getMarketActive: [],
+    periodMarket: '',
+  }),
+  computed: {
+    ...mapGetters({
+      setting: 'frontendconfig/setting',
     }),
-    computed: {
-        ...mapGetters({
-            setting: "frontendconfig/setting"
-        })
-    },
-    mounted() {
-        this.gameItem = this.setting.gameitem
-        this.marketItem = this.setting.market
-    }
+  },
+  mounted() {
+    this.gameItem = this.setting.gameitem
+    this.marketItem = this.setting.market
+  },
 }
 </script>
 
 <style>
-
 </style>

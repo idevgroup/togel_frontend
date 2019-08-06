@@ -8,20 +8,19 @@
 </template>
 
 <script>
-import Slider from '~/components/partials/Slider';
-import { mapGetters } from "vuex"
+import Slider from '~/components/partials/Slider'
+import { mapGetters } from 'vuex'
 export default {
   components: {
-     Slider
+    Slider,
   },
-  computed:{
-    	...mapGetters({
-			setting: "frontendconfig/setting"
-		})
-  }
+  computed: {
+    ...mapGetters({
+      setting: 'frontendconfig/setting',
+    }),
+  },
 }
 </script>
 
 <style>
-
 </style>
