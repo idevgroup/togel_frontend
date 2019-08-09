@@ -1,6 +1,7 @@
 <template>
     <div>
         <market-head-active ></market-head-active>
+        <div v-if="isSiteLock">
         <p>
             <span> 2D Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
             <span> 2D Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}} </span>
@@ -176,8 +177,11 @@
             </div>
 
         </modal>
-        {{ isSiteLock }}<br/>
-        {{ nowDateTime }}
+        </div>
+    <div v-else>
+        <site-lock-info />
+    </div>
+       
     </div>
 </template>
 
@@ -185,13 +189,14 @@
 import VueNumeric from 'vue-numeric'
 import Swal from 'sweetalert2'
 import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
-import * as moment from 'moment-timezone'
+import SiteLockInfo from '~/components/gamemarket/SiteLockInfo'
 export default {
     layout: 'gamemarket',
     name: 'Game2DForm',
     components: {
         VueNumeric,
         MarketHeadActive,
+        SiteLockInfo,
     },
     data() {
         return {
@@ -219,23 +224,6 @@ export default {
                 return value + item.betpay
             }, 0)
             return total
-        },
-        isSiteLock: function() {
-            let getTime = moment(this.nowDateTime).format('H:mm')
-            let getSiteLock = this.setting.sitelock
-            let getItem = []
-            getSiteLock.forEach(item => {
-                if (item.market === this.$route.params.marketcode) {
-                    getItem = item
-                }
-            })
-            let timeFrom = moment(getItem.lock_from).format('H:mm')
-            let timeTo = moment(getItem.lock_to).format('H:mm')
-            console.log(timeFrom)
-            console.log(timeTo)
-            console.log(getTime)
-            console.log(getItem)
-            return true
         },
     },
 
