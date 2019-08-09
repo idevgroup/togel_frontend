@@ -1,6 +1,6 @@
 <template>
     <div>
-         <b-modal v-model="modalShow">Hello From Modal!</b-modal>
+        <b-modal v-model="modalShow">Hello From Modal!</b-modal>
     </div>
 </template>
 

@@ -1,16 +1,16 @@
 <template>
-    
-        <transaction-list />
-    
+
+    <transaction-list ></transaction-list>
+
 </template>
 
 <script>
 import TransactionList from '~/components/member/TransactionList.vue'
 export default {
-  layout: 'member',
-  components: {
-    TransactionList,
-  },
+    layout: 'member',
+    components: {
+        TransactionList,
+    },
 }
 </script>
 

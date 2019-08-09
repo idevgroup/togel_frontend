@@ -1,12 +1,12 @@
 <template>
     <div>
-        <Header />
-        <nav-bar />
+        <Header ></Header>
+        <nav-bar ></nav-bar>
         <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-        <nuxt />
+            <nuxt ></nuxt>
         </transition>
-        <Login />
-        <Register />
+        <Login ></Login>
+        <Register ></Register>
     </div>
 </template>
 
@@ -16,12 +16,12 @@ import NavBar from '~/components/partials/NavBar'
 import Login from '~/components/auth/Login'
 import Register from '~/components/auth/Register'
 export default {
-  components: {
-    Header,
-    NavBar,
-    Login,
-    Register,
-  },
+    components: {
+        Header,
+        NavBar,
+        Login,
+        Register,
+    },
 }
 </script>
 <style scoped>

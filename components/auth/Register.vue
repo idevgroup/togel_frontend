@@ -125,7 +125,7 @@
                         data-vv-name="recapcha"
                         data-vv-as="recapcha"
                         @verify="onVerify"
-                        @expired="resetCaptcha" />
+                        @expired="resetCaptcha" ></VueRecaptcha>
                     <span v-show="veeErrors.has('recapcha')" class="form-text text-danger">{{ veeErrors.first('recapcha') }}</span>
                 </b-form-group>
             </form>
@@ -134,101 +134,95 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import VueRecaptcha from 'vue-recaptcha'
 export default {
-  components: {
-    VueRecaptcha,
-  },
-  data() {
-    return {
-      form: {
-        name: '',
-        username: '',
-        password: '',
-        email: '',
-        password_confirmation: '',
-        phone: '',
-        bank: '',
-        accountid: '',
-        accountname: '',
-        recaptcha: '',
-      },
-      recaptchaKey: '',
-      itemBank: [],
-    }
-  },
-  computed: {
-    ...mapGetters({
-      setting: 'frontendconfig/setting',
-    }),
-  },
-  created() {
-    this.recaptchaKey = process.env.RECAPTCHA_KEY
-    this.itemBank = this.setting.bank
-  },
-  methods: {
-    onVerify(response) {
-      let self = this
-      self.form.recaptcha = response
+    components: {
+        VueRecaptcha,
     },
-    resetCaptcha() {
-      this.$refs.recaptcha.reset()
-    },
-    resetModal() {
-      this.form.name = ''
-      this.form.username = ''
-      this.form.password = ''
-      this.form.email = ''
-      this.form.password_confirmation = ''
-      this.form.phone = ''
-      this.form.bank = ''
-      this.form.accountid = ''
-      this.form.accountname = ''
-      this.form.recaptcha = ''
-    },
-    handleOk(bvModalEvt) {
-      // Prevent modal from closing
-      bvModalEvt.preventDefault()
-      // Trigger submit handler
-      this.registerSubmit()
-    },
-    async registerSubmit() {
-      this.$validator.validateAll().then(result => {
-        let self = this
-        if (result) {
-          try {
-            this.$axios
-              .$post('member/register', self.form)
-              .then(() => {
-                this.$auth
-                  .loginWith('local', {
-                    data: {
-                      username: self.form.username,
-                      password: self.form.password,
-                    },
-                  })
-                  .then(() => {
-                    this.$router.push({
-                      name: 'member-dashboard',
-                    })
-                    this.$nextTick(() => {
-                      self.$refs.modal.hide()
-                    })
-                  })
-                  .catch(function(error) {
-                    console.log(error)
-                  })
-              })
-              .catch(() => {
-                this.$refs.recaptcha.reset()
-              })
-          } catch (e) {
-            console.log(e)
-          }
+    data() {
+        return {
+            form: {
+                name: '',
+                username: '',
+                password: '',
+                email: '',
+                password_confirmation: '',
+                phone: '',
+                bank: '',
+                accountid: '',
+                accountname: '',
+                recaptcha: '',
+            },
+            recaptchaKey: '',
+            itemBank: [],
         }
-      })
     },
-  },
+    created() {
+        this.recaptchaKey = process.env.RECAPTCHA_KEY
+        this.itemBank = this.setting.bank
+    },
+    methods: {
+        onVerify(response) {
+            let self = this
+            self.form.recaptcha = response
+        },
+        resetCaptcha() {
+            this.$refs.recaptcha.reset()
+        },
+        resetModal() {
+            this.form.name = ''
+            this.form.username = ''
+            this.form.password = ''
+            this.form.email = ''
+            this.form.password_confirmation = ''
+            this.form.phone = ''
+            this.form.bank = ''
+            this.form.accountid = ''
+            this.form.accountname = ''
+            this.form.recaptcha = ''
+        },
+        handleOk(bvModalEvt) {
+            // Prevent modal from closing
+            bvModalEvt.preventDefault()
+            // Trigger submit handler
+            this.registerSubmit()
+        },
+        async registerSubmit() {
+            this.$validator.validateAll().then(result => {
+                let self = this
+                if (result) {
+                    try {
+                        this.$axios
+                            .$post('member/register', self.form)
+                            .then(() => {
+                                this.$auth
+                                    .loginWith('local', {
+                                        data: {
+                                            username: self.form.username,
+                                            password: self.form.password,
+                                        },
+                                    })
+                                    .then(() => {
+                                        this.$router.push({
+                                            name: 'member-dashboard',
+                                        })
+                                        this.$nextTick(() => {
+                                            self.$refs.modal.hide()
+                                        })
+                                    })
+                                    .catch(function(error) {
+                                        console.log(error)
+                                    })
+                            })
+                            .catch(() => {
+                                this.$refs.recaptcha.reset()
+                            })
+                    } catch (e) {
+                        console.log(e)
+                    }
+                }
+            })
+        },
+    },
 }
 </script>

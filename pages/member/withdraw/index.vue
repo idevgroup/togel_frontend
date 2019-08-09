@@ -74,7 +74,7 @@
                         data-vv-name="recapcha"
                         data-vv-as="recapcha"
                         @verify="onVerify"
-                        @expired="resetCaptcha" />
+                        @expired="resetCaptcha" ></VueRecaptcha>
 
                     <span v-show="veeErrors.has('recapcha')" class="form-text text-danger">{{ veeErrors.first('recapcha') }}</span>
                 </b-form-group>
@@ -94,105 +94,100 @@
 </template>
 
 <script>
-import { mapGetters } from 'vuex'
 import { Money } from 'v-money'
 import VueRecaptcha from 'vue-recaptcha'
 import Swal from 'sweetalert2'
 export default {
-  layout: 'member',
-  components: {
-    Money,
-    VueRecaptcha,
-  },
-  data: () => ({
-    memberBank: [],
-    selectedMemberBank: null,
-    amountWithdraw: '',
-    messageWithdraw: '',
-    recaptcha: '',
-    recaptchaKey: '',
-    formatmoney: {
-      decimal: '.',
-      thousands: ',',
-      prefix: '$ ',
-      suffix: '',
-      precision: 2,
-      masked: false,
-      allowBlank: false,
+    layout: 'member',
+    components: {
+        Money,
+        VueRecaptcha,
     },
-  }),
-  computed: {
-    ...mapGetters({
-      setting: 'frontendconfig/setting',
+    data: () => ({
+        memberBank: [],
+        selectedMemberBank: null,
+        amountWithdraw: '',
+        messageWithdraw: '',
+        recaptcha: '',
+        recaptchaKey: '',
+        formatmoney: {
+            decimal: '.',
+            thousands: ',',
+            prefix: '$ ',
+            suffix: '',
+            precision: 2,
+            masked: false,
+            allowBlank: false,
+        },
     }),
-  },
-  mounted() {
-    this.getMemberBank()
-  },
-  created() {
-    this.recaptchaKey = process.env.RECAPTCHA_KEY
-    this.formatmoney.prefix = this.setting.general.symbol + ' '
-  },
-  methods: {
-    onVerify(response) {
-      let self = this
-      self.recaptcha = response
+
+    mounted() {
+        this.getMemberBank()
     },
-    resetCaptcha() {
-      this.$refs.recaptcha.reset()
+    created() {
+        this.recaptchaKey = process.env.RECAPTCHA_KEY
+        this.formatmoney.prefix = this.setting.general.symbol + ' '
     },
-    async getMemberBank() {
-      await this.$axios.$post('member/getmemberbank').then(response => {
-        this.memberBank = response
-      })
-    },
-    async doWithdraw() {
-      this.$validator.validateAll().then(response => {
-        if (response) {
-          let self = this
-          try {
-            const input = {
-              amount: self.amountWithdraw,
-              recaptcha: self.recaptcha,
-              note: self.messageWithdraw,
-              memberbank: self.selectedMemberBank,
-            }
-            this.$axios
-              .$post('member/withdraw', input)
-              .catch(function(error) {
-                self.recaptcha = ''
-                self.$refs.recaptcha.reset()
-                console.log(error)
-              })
-              .then(response => {
-                if (response.data.success === false) {
-                  Swal.fire(
-                    response.data.alert.title,
-                    response.data.alert.message,
-                    'info',
-                  )
-                } else {
-                  Swal.fire(
-                    response.data.alert.title,
-                    response.data.alert.message,
-                    'success',
-                  )
+    methods: {
+        onVerify(response) {
+            let self = this
+            self.recaptcha = response
+        },
+        resetCaptcha() {
+            this.$refs.recaptcha.reset()
+        },
+        async getMemberBank() {
+            await this.$axios.$post('member/getmemberbank').then(response => {
+                this.memberBank = response
+            })
+        },
+        async doWithdraw() {
+            this.$validator.validateAll().then(response => {
+                if (response) {
+                    let self = this
+                    try {
+                        const input = {
+                            amount: self.amountWithdraw,
+                            recaptcha: self.recaptcha,
+                            note: self.messageWithdraw,
+                            memberbank: self.selectedMemberBank,
+                        }
+                        this.$axios
+                            .$post('member/withdraw', input)
+                            .catch(function(error) {
+                                self.recaptcha = ''
+                                self.$refs.recaptcha.reset()
+                                console.log(error)
+                            })
+                            .then(response => {
+                                if (response.data.success === false) {
+                                    Swal.fire(
+                                        response.data.alert.title,
+                                        response.data.alert.message,
+                                        'info',
+                                    )
+                                } else {
+                                    Swal.fire(
+                                        response.data.alert.title,
+                                        response.data.alert.message,
+                                        'success',
+                                    )
+                                }
+                                // refresh user account to update balance
+                                this.$auth.fetchUser()
+                                // Redirect member dashboard.
+                                this.$router.push({
+                                    name: 'member-dashboard',
+                                })
+                            })
+                    } catch (error) {
+                        self.recaptcha = ''
+                        self.$refs.recaptcha.reset()
+                    }
                 }
-                //refresh user account to update balance
-                this.$auth.fetchUser()
-                // Redirect member dashboard.
-                this.$router.push({
-                  name: 'member-dashboard',
-                })
-              })
-          } catch (error) {
-            self.recaptcha = ''
-            self.$refs.recaptcha.reset()
-          }
-        }
-      })
+            })
+        },
     },
-  },
 }
 </script>
 

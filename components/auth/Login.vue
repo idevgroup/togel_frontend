@@ -30,7 +30,7 @@
                         data-vv-name="password"
                         data-vv-as="password"
                         @keyup.enter="handleOk"
-                        >
+                    >
                         ></b-form-input>
                     <span v-show="veeErrors.has('password')" class="form-text text-danger">{{ veeErrors.first('password') }}</span>
                 </b-form-group>
@@ -41,51 +41,51 @@
 
 <script>
 export default {
-  name: 'LoginModalView',
-  data() {
-    return {
-      form: {
-        username: '',
-        password: '',
-      },
-    }
-  },
-  methods: {
-    resetModal() {
-      this.form.username = ''
-      this.form.password = ''
-    },
-    handleOk(bvModalEvt) {
-      // Prevent modal from closing
-      bvModalEvt.preventDefault()
-      // Trigger submit handler
-      this.loginSubmit()
-    },
-    async loginSubmit() {
-      this.$validator.validateAll().then(result => {
-        if (result) {
-          try {
-            this.$auth
-              .loginWith('local', {
-                data: this.form,
-              })
-              .then(() => {
-                this.$router.push({
-                  name: 'member-dashboard',
-                })
-                this.$nextTick(() => {
-                  this.$refs.modal.hide()
-                })
-              })
-              .catch(function(error) {
-                console.log(error)
-              })
-          } catch (e) {
-            console.log(e)
-          }
+    name: 'LoginModalView',
+    data() {
+        return {
+            form: {
+                username: '',
+                password: '',
+            },
         }
-      })
     },
-  },
+    methods: {
+        resetModal() {
+            this.form.username = ''
+            this.form.password = ''
+        },
+        handleOk(bvModalEvt) {
+            // Prevent modal from closing
+            bvModalEvt.preventDefault()
+            // Trigger submit handler
+            this.loginSubmit()
+        },
+        async loginSubmit() {
+            this.$validator.validateAll().then(result => {
+                if (result) {
+                    try {
+                        this.$auth
+                            .loginWith('local', {
+                                data: this.form,
+                            })
+                            .then(() => {
+                                this.$router.push({
+                                    name: 'member-dashboard',
+                                })
+                                this.$nextTick(() => {
+                                    this.$refs.modal.hide()
+                                })
+                            })
+                            .catch(function(error) {
+                                console.log(error)
+                            })
+                    } catch (e) {
+                        console.log(e)
+                    }
+                }
+            })
+        },
+    },
 }
 </script>
