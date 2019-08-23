@@ -61,7 +61,6 @@ const Corefunction = {
                     }
                 },
                 isTimeBetween: function(aStartTime, anEndTime, aCurrTime) {
-                    // you may pass in aCurrTime or use the *actual* current time
                     var currentTime = !aCurrTime
                         ? moment()
                         : moment(aCurrTime, 'HH:mm a')
@@ -69,7 +68,7 @@ const Corefunction = {
                     var endTime = moment(anEndTime, 'HH:mm a')
 
                     if (startTime.hour() >= 12 && endTime.hour() <= 12) {
-                        endTime.add(1, 'days') // handle spanning days
+                        endTime.add(1, 'days')
                     }
 
                     var isBetween = currentTime.isBetween(startTime, endTime)

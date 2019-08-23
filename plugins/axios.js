@@ -21,7 +21,7 @@ export default function({ $axios, store, app, redirect, $option }) {
 
     $axios.onError(error => {
         if (!error.response) {
-            swal.fire('Error', '.Oops... Something went wrong', 'error')
+            // swal.fire('Error', '.Oops... Something went wrong', 'error')
             // this.$store.commit('todos/add', e.target.value)
             this.$auth.reset()
             this.$auth.logout()
@@ -51,6 +51,9 @@ export default function({ $axios, store, app, redirect, $option }) {
             redirect('/errors/403')
         } else if (status >= 500) {
             swal.fire('Error', 'Somethin went wrong.', 'error')
+        } else {
+            this.$auth.reset()
+            this.$auth.logout()
         }
     })
 }

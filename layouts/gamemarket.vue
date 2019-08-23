@@ -41,6 +41,7 @@
                         <nuxt ></nuxt>
                     </transition>
                 </b-col>
+                <Footer />
             </b-row>
         </b-container>
     </div>
@@ -49,12 +50,14 @@
 <script>
 import Header from '~/components/partials/Header'
 import NavBar from '~/components/partials/NavBar'
+import Footer from '~/components/partials/Footer'
 export default {
     middleware: 'guest',
     name: 'MarketCodeLayoutView',
     components: {
         Header,
         NavBar,
+        Footer,
     },
     data: () => ({
         marketItem: [],

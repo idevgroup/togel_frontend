@@ -3,13 +3,14 @@
         <market-head-active></market-head-active>
         <div v-if="isSiteLock">
             <p>
-                <span> Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol)}}</span>
-                <span> Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol)}} </span>
-                <span> Discount: {{ marketGameSetting.discount }}%</span>
-                <span> Bet Modulus: {{ marketGameSetting.bet_mod |currency(setting.general.symbol)}}</span>
-                <span> Win: {{ (marketGameSetting.menang ===1)?100:marketGameSetting.menang }}%</span>
+               <span> Odd Min Bet: {{ gameSettingGanjil.min_bet |currency(setting.general.symbol)}} | Even Min Bet: {{ gameSettingGenap.min_bet |currency(setting.general.symbol)}} | Large Min Bet: {{ gameSettingBesar.min_bet |currency(setting.general.symbol)}} | Small Min Bet: {{ gameSettingKecil.min_bet |currency(setting.general.symbol)}} </span>
+               <span> Odd Max Bet: {{ gameSettingGanjil.max_bet |currency(setting.general.symbol)}} | Even Max Bet: {{ gameSettingGenap.max_bet |currency(setting.general.symbol)}} | Large Max Bet: {{ gameSettingBesar.max_bet |currency(setting.general.symbol)}} | Small Max Bet: {{ gameSettingKecil.max_bet |currency(setting.general.symbol)}} </span>
+               <span> Odd Bet Modulus: {{ gameSettingGanjil.bet_mod |currency(setting.general.symbol)}} | Even Bet Modulus: {{ gameSettingGenap.bet_mod |currency(setting.general.symbol)}} | Large Bet Modulus: {{ gameSettingBesar.bet_mod |currency(setting.general.symbol)}} | Small Bet Modulus: {{ gameSettingKecil.bet_mod |currency(setting.general.symbol)}} </span>
+               <span> Odd Bet Discs: {{ gameSettingGanjil.discount }} % | Even Bet Discs: {{ gameSettingGenap.discount}} % | Large Bet Discs: {{ gameSettingBesar.discount }} % | Small Bet Discs: {{ gameSettingKecil.discount }} % </span>
+               <span> Odd Win: {{ (gameSettingGanjil.menang === 1)?100:gameSettingGanjil.menang }}% | Even Win: {{ gameSettingGenap.menang ===1?100:gameSettingGenap.menang }} % | Large Win: {{ gameSettingBesar.menang === 1?100:gameSettingBesar.menang }} % | Small Win: {{ gameSettingKecil.menang === 1?100:gameSettingKecil.menang  }} % </span>
+ 
             </p>
-            <table class="table table-bordered game5050">
+              <table class="table table-bordered game5050">
                 <thead>
                     <tr>
                         <th colspan="9" class="text-center">Odd / Even</th>
@@ -17,9 +18,6 @@
                     <tr>
                         <th>
                             #
-                        </th>
-                        <th width="50">
-                            Position
                         </th>
                         <th width="160">
                             Guess
@@ -40,27 +38,27 @@
                 </thead>
                 <tbody>
                     <template v-for="(item,index) in OddEvent">
-                        <tr :key="item.key">
+                        <tr :key="index">
                             <td>{{ index+1 }}</td>
-                            <td>{{ item.position }}</td>
                             <td>
                                 <b-form-radio-group
                                     v-model="item.Selected"
                                     :options="item.guess"
-                                    :name="`oddeven`+item.key">
+                                    :name="`oddeven`+index">
                                 </b-form-radio-group>
                             </td>
-                            <td width="15">{{ marketGameSetting.kei }}%</td>
-                            <td width="15">{{ marketGameSetting.kei }}%</td>
+                            <td width="15">{{ gameSettingGanjil.kei }}%</td>
+                            <td width="15">{{ gameSettingGenap.kei }}%</td>
                             <td>
                                 <vue-numeric
                                     v-validate="{max_value:marketGameSetting.max_bet}"
                                     :currency="setting.general.symbol"
                                     v-model.number="item.bet"
                                     :precision="2"
-                                    :name="`betprice`+item.key"
-                                    :data-vv-name="`betprice`+item.key"
-                                    :state="!veeErrors.has('betprice'+item.key)"
+                                    :name="`betprice`+index"
+                                    :data-vv-name="`betprice`+index"
+                                    :disabled="item.is_not"
+                                    :state="!veeErrors.has('betprice'+index)"
                                     class="form-control form-control-sm"
                                     separator=","
                                     decimal-separator="."
@@ -78,121 +76,10 @@
                     </template>
                 </tbody>
             </table>
-            <table class="table table-bordered game5050">
-                <thead>
-                    <tr>
-                        <th colspan="8" class="text-center">Big / Small</th>
-                    </tr>
-                    <tr>
-                        <th>
-                            #
-                        </th>
-                        <th width="50">
-                            Position
-                        </th>
-                        <th width="160">
-                            Guess
-                        </th>
-                        <th colspan="2">
-                            Kei(%)
-                        </th>
-                        <th width="135">
-                            Bet Price
-                        </th>
-                        <th>
-                            Kei
-                        </th>
-                        <th>
-                            Pay
-                        </th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <template v-for="(item,index) in SmallLarge">
-                        <tr :key="item.key">
-                            <td>{{ index+1 }}</td>
-                            <td>{{ item.position }}</td>
-                            <td>
-                                <b-form-radio-group
-                                    v-model="item.Selected"
-                                    :options="item.guess"
-                                    :name="`oddeven`+item.key">
-                                </b-form-radio-group>
-                            </td>
-                            <td width="15">{{ marketGameSetting.kei }}%</td>
-                            <td width="15">{{ marketGameSetting.kei }}%</td>
-                            <td>
-                                <vue-numeric
-                                    v-validate="{max_value:marketGameSetting.max_bet}"
-                                    :currency="setting.general.symbol"
-                                    v-model.number="item.bet"
-                                    :precision="2"
-                                    :name="`betprice`+item.key"
-                                    :data-vv-name="`betprice`+item.key"
-                                    :state="!veeErrors.has('betprice'+item.key)"
-                                    class="form-control form-control-sm"
-                                    separator=","
-                                    decimal-separator="."
-                                    data-vv-as="bet price"
-                                    @blur="checkAmount(index,item,SmallLarge)"></vue-numeric>
-                            </td>
-                            <td class="text-right">
-                                {{ totalKei(item) | currency(setting.general.symbol)}}
-                            </td>
-                            <td class="text-right">
-                                {{ totalPay(item) | currency(setting.general.symbol)}}
-                            </td>
-                        </tr>
-                    </template>
-                </tbody>
-            </table>
-            <b-row>
-                <b-col>
-                    <b-button variant="success" @click="showConfirm">Save</b-button>
-                </b-col>
-                <b-col>
-                    <b-button variant="outline-primary" @click="reset">Reset</b-button>
-                </b-col>
-            </b-row>
-             <modal
-            :scrollable="true"
-            :classes="['v--modal', 'vue-dialog']"
-            :adaptive="true"
-            name="preview-bet"
-            height="auto"
-            draggable=".modal-header">
-
-            <div class="modal-header">
-                <h5 class="modal-title">Confirm Information</h5>
-                <button type="button" class="close" aria-label="Close" @click="$modal.hide('preview-bet')">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h5>
-                    Wallet: <span class="text-info">{{ user.reg_remain_balance| currency(setting.general.symbol)}}</span>
-                </h5>
-                <h5>
-                    Payment: <span class="text-info">{{ parseFloat(totalPayOddEven) +
-                parseFloat(totalPayBigSmall)| currency(setting.general.symbol)}}</span>
-                </h5>
-            </div>
-
-            <div class="vue-dialog-buttons">
-                <button :style="buttonStyle" class="vue-dialog-button text-bold" @click="save">
-                    OK
-                </button>
-                <button :style="buttonStyle" class="vue-dialog-button"  @click="$modal.hide('preview-bet')">
-                    CANCEL
-                </button>
-            </div>
-
-        </modal>
         </div>
         <div v-else>
             <site-lock-info />
         </div>
-       
     </div>
 </template>
 
@@ -203,7 +90,7 @@ import VueNumeric from 'vue-numeric'
 import Swal from 'sweetalert2'
 export default {
     layout: 'gamemarket',
-    name: 'Game5050Form',
+    name: 'GameBesarForm',
     components: {
         MarketHeadActive,
         SiteLockInfo,
@@ -214,8 +101,6 @@ export default {
             OddEvent: [
                 {
                     Selected: 1,
-                    key: 1,
-                    position: 'US',
                     guess: [
                         {
                             text: 'Odd',
@@ -231,63 +116,7 @@ export default {
                     discount: 0,
                     kei: 0,
                     pay: 0,
-                },
-                {
-                    Selected: 1,
-                    key: 2,
-                    position: 'Kop',
-                    guess: [
-                        {
-                            text: 'Odd',
-                            value: '1',
-                        },
-                        {
-                            text: 'Even',
-                            value: '2',
-                        },
-                    ],
-                    bet: 0,
-                    discount: 0,
-                    kei: 0,
-                    pay: 0,
-                },
-                {
-                    Selected: 1,
-                    key: 3,
-                    position: 'Head',
-                    guess: [
-                        {
-                            text: 'Odd',
-                            value: '1',
-                        },
-                        {
-                            text: 'Even',
-                            value: '2',
-                        },
-                    ],
-                    bet: 0,
-                    discount: 0,
-                    kei: 0,
-                    pay: 0,
-                },
-                {
-                    Selected: 1,
-                    key: 4,
-                    position: 'Tail',
-                    guess: [
-                        {
-                            text: 'Odd',
-                            value: '1',
-                        },
-                        {
-                            text: 'Even',
-                            value: '2',
-                        },
-                    ],
-                    bet: 0,
-                    discount: 0,
-                    kei: 0,
-                    pay: 0,
+                    is_not: false,
                 },
             ],
             SmallLarge: [
@@ -309,66 +138,14 @@ export default {
                     discount: 0,
                     kei: 0,
                     pay: 0,
-                },
-                {
-                    Selected: 1,
-                    key: 6,
-                    position: 'Kop',
-                    guess: [
-                        {
-                            text: 'Big',
-                            value: '1',
-                        },
-                        {
-                            text: 'Small',
-                            value: '2',
-                        },
-                    ],
-                    bet: 0,
-                    discount: 0,
-                    kei: 0,
-                    pay: 0,
-                },
-                {
-                    Selected: 1,
-                    key: 7,
-                    position: 'Head',
-                    guess: [
-                        {
-                            text: 'Big',
-                            value: '1',
-                        },
-                        {
-                            text: 'Small',
-                            value: '2',
-                        },
-                    ],
-                    bet: 0,
-                    discount: 0,
-                    kei: 0,
-                    pay: 0,
-                },
-                {
-                    Selected: 1,
-                    key: 8,
-                    position: 'Tail',
-                    guess: [
-                        {
-                            text: 'Big',
-                            value: '1',
-                        },
-                        {
-                            text: 'Small',
-                            value: '2',
-                        },
-                    ],
-                    bet: 0,
-                    discount: 0,
-                    kei: 0,
-                    pay: 0,
+                    is_not: false,
                 },
             ],
             marketGameSetting: [],
+            gameSettingGanjil: [],
+            gameSettingGenap: [],
+            gameSettingKecil: [],
+            gameSettingBesar: [],
         }
     },
     computed: {
@@ -428,14 +205,25 @@ export default {
 
         async getMarketGameSetting() {
             const input = {
-                game: '50-50',
+                game: ['Ganjil', 'Genap', 'Kecil', 'Besar'],
                 market: this.$route.params.marketcode,
             }
             const data = await this.$axios.$post(
                 '/member/getmarketgamesetting',
                 input,
             )
-            this.marketGameSetting = data
+            let self = this
+            data.forEach(setting => {
+                if (setting.game_name === 'Ganjil') {
+                    self.gameSettingGanjil = setting
+                } else if (setting.game_name === 'Genap') {
+                    self.gameSettingGenap = setting
+                } else if (setting.game_name === 'Kecil') {
+                    self.gameSettingKecil = setting
+                } else if (setting.game_name === 'Besar') {
+                    self.gameSettingBesar = setting
+                }
+            })
         },
 
         checkAmount(index, item, collect) {
@@ -530,7 +318,6 @@ export default {
     },
 }
 </script>
-
 <style scoped>
 p span {
     display: block;

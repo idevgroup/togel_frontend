@@ -24,6 +24,7 @@
                 </b-col>
 
             </b-row>
+            <Footer />
         </b-container>
     </div>
 </template>
@@ -32,6 +33,7 @@
 import Header from '~/components/partials/Header'
 import NavBar from '~/components/partials/NavBar'
 import MemberSideBar from '~/components/partials/MemberSideBar'
+import Footer from '~/components/partials/Footer'
 export default {
     middleware: 'guest',
     name: 'MemberLayoutView',
@@ -39,6 +41,7 @@ export default {
         Header,
         NavBar,
         MemberSideBar,
+        Footer,
     },
 }
 </script>

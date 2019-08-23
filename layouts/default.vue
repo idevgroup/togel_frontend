@@ -7,6 +7,7 @@
         </transition>
         <Login ></Login>
         <Register ></Register>
+        <Footer/>
     </div>
 </template>
 
@@ -15,12 +16,14 @@ import Header from '~/components/partials/Header'
 import NavBar from '~/components/partials/NavBar'
 import Login from '~/components/auth/Login'
 import Register from '~/components/auth/Register'
+import Footer from '~/components/partials/Footer'
 export default {
     components: {
         Header,
         NavBar,
         Login,
         Register,
+        Footer,
     },
 }
 </script>

@@ -99,6 +99,8 @@
         </table>
         <modal
             :scrollable="true"
+            :classes="['v--modal', 'vue-dialog']"
+            :adaptive="true"
             name="preview-bet"
             height="auto"
             draggable=".modal-header"

@@ -99,8 +99,21 @@
                         {{ data.item.win | currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true }) }}
                     </template>
                      <template slot="discount" slot-scope="data">
-                        {{ data.item.discount | currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true }) }}
+                        {{ data.item.discount | currency(setting.general.symbol) }}
                     </template>
+                      <template slot="bottom-row">
+                           <td colspan="3">
+                            </td>
+                             <td class="text-right">
+                     <strong>{{ totalInvDisc | currency(setting.general.symbol) }}</strong>
+                 </td>
+                         <td class="text-right">
+                     <strong>{{ totalInvPaid | currency(setting.general.symbol) }}</strong>
+                 </td>
+                    <td class="text-right">
+                     <strong>{{ totalInvWin | currency(setting.general.symbol) }}</strong>
+                 </td>
+                      </template>
                 </b-table>
             </div>
  <b-col lg="4" class="pb-2"><b-button variant="success" @click="print">Print invoice</b-button></b-col>
@@ -197,6 +210,21 @@ export default {
         },
         totalWin: function() {
             return this.listBetTransaction.reduce(function(a, c) {
+                return a + Number(c.win || 0)
+            }, 0)
+        },
+        totalInvDisc: function() {
+            return this.itemDetailInvoice.reduce(function(a, c) {
+                return a + Number(c.discount || 0)
+            }, 0)
+        },
+        totalInvPaid: function() {
+            return this.itemDetailInvoice.reduce(function(a, c) {
+                return a + Number(c.pay || 0)
+            }, 0)
+        },
+        totalInvWin: function() {
+            return this.itemDetailInvoice.reduce(function(a, c) {
                 return a + Number(c.win || 0)
             }, 0)
         },
