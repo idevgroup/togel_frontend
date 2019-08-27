@@ -108,6 +108,14 @@ table.table tbody tr:hover {
     border-left: 1px solid #eee;
 }
 
+.custom-radio .custom-control-label {
+    position: relative;
+    margin-bottom: 0;
+    vertical-align: top;
+    padding-top: 5px;
+    font-size: 13px;
+}
+
 @media (max-width: 1199.98px) {
     .container {
         width: 990px;

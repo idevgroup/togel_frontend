@@ -39,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <template v-for="(item,index) in OddEvent">
+                    <template v-for="(item,index) in OddEven">
                         <tr :key="item.key">
                             <td>{{ index+1 }}</td>
                             <td>{{ item.position }}</td>
@@ -65,7 +65,7 @@
                                     separator=","
                                     decimal-separator="."
                                     data-vv-as="bet price"
-                                    @blur="checkAmount(index,item,OddEvent)">
+                                    @blur="checkAmount(index,item,OddEven)">
                                 </vue-numeric>
                             </td>
                             <td class="text-right">
@@ -81,7 +81,7 @@
             <table class="table table-bordered game5050">
                 <thead>
                     <tr>
-                        <th colspan="8" class="text-center">Big / Small</th>
+                        <th colspan="8" class="text-center">Large / Small</th>
                     </tr>
                     <tr>
                         <th>
@@ -154,45 +154,45 @@
                     <b-button variant="outline-primary" @click="reset">Reset</b-button>
                 </b-col>
             </b-row>
-             <modal
-            :scrollable="true"
-            :classes="['v--modal', 'vue-dialog']"
-            :adaptive="true"
-            name="preview-bet"
-            height="auto"
-            draggable=".modal-header">
+            <modal
+                :scrollable="true"
+                :classes="['v--modal', 'vue-dialog']"
+                :adaptive="true"
+                name="preview-bet"
+                height="auto"
+                draggable=".modal-header">
 
-            <div class="modal-header">
-                <h5 class="modal-title">Confirm Information</h5>
-                <button type="button" class="close" aria-label="Close" @click="$modal.hide('preview-bet')">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h5>
-                    Wallet: <span class="text-info">{{ user.reg_remain_balance| currency(setting.general.symbol)}}</span>
-                </h5>
-                <h5>
-                    Payment: <span class="text-info">{{ parseFloat(totalPayOddEven) +
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Information</h5>
+                    <button type="button" class="close" aria-label="Close" @click="$modal.hide('preview-bet')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>
+                        Wallet: <span class="text-info">{{ user.reg_remain_balance| currency(setting.general.symbol)}}</span>
+                    </h5>
+                    <h5>
+                        Payment: <span class="text-info">{{ parseFloat(totalPayOddEven) +
                 parseFloat(totalPayBigSmall)| currency(setting.general.symbol)}}</span>
-                </h5>
-            </div>
+                    </h5>
+                </div>
 
-            <div class="vue-dialog-buttons">
-                <button :style="buttonStyle" class="vue-dialog-button text-bold" @click="save">
-                    OK
-                </button>
-                <button :style="buttonStyle" class="vue-dialog-button"  @click="$modal.hide('preview-bet')">
-                    CANCEL
-                </button>
-            </div>
+                <div class="vue-dialog-buttons">
+                    <button :style="buttonStyle" class="vue-dialog-button text-bold" @click="save">
+                        OK
+                    </button>
+                    <button :style="buttonStyle" class="vue-dialog-button" @click="$modal.hide('preview-bet')">
+                        CANCEL
+                    </button>
+                </div>
 
-        </modal>
+            </modal>
         </div>
         <div v-else>
             <site-lock-info />
         </div>
-       
+
     </div>
 </template>
 
@@ -211,7 +211,7 @@ export default {
     },
     data() {
         return {
-            OddEvent: [
+            OddEven: [
                 {
                     Selected: 1,
                     key: 1,
@@ -373,7 +373,7 @@ export default {
     },
     computed: {
         totalPayOddEven: function() {
-            return this.OddEvent.reduce(function(a, c) {
+            return this.OddEven.reduce(function(a, c) {
                 return a + Number(c.pay || 0)
             }, 0)
         },
@@ -477,7 +477,7 @@ export default {
                 parseFloat(this.totalPayOddEven) +
                 parseFloat(this.totalPayBigSmall)
             const input = {
-                betOddEven: this.OddEvent,
+                betOddEven: this.OddEven,
                 betSmallLarge: this.SmallLarge,
                 betTotalPay: totalPay,
                 market: this.$route.params.marketcode,
@@ -518,9 +518,9 @@ export default {
         },
         reset() {
             let self = this
-            Object.keys(this.OddEvent).forEach(function(key, index) {
-                self.OddEvent[key].Selected = 1
-                self.OddEvent[key].bet = 0
+            Object.keys(this.OddEven).forEach(function(key, index) {
+                self.OddEven[key].Selected = 1
+                self.OddEven[key].bet = 0
             })
             Object.keys(this.SmallLarge).forEach(function(key, index) {
                 self.SmallLarge[key].Selected = 1

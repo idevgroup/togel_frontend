@@ -240,7 +240,7 @@ export default {
                 period: this.selectPeriod,
             }
             const data = await this.$axios.$post('member/transgamelist', input)
-            this.listBetTransaction = data
+            this.listBetTransaction = data.filter(value => value.buy !== 0)
         },
         async getTransactionPeriod() {
             const input = {

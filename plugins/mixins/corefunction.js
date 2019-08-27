@@ -49,6 +49,11 @@ const Corefunction = {
                     }
                     return true
                 },
+                getIpClient: function() {
+                    //https://github.com/indutny/node-ip
+                    let val = require('ip')
+                    return val.address()
+                },
             },
             methods: {
                 isNumberInt(evt) {
