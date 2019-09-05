@@ -52,23 +52,25 @@ import Header from '~/components/partials/Header'
 import NavBar from '~/components/partials/NavBar'
 import Footer from '~/components/partials/Footer'
 export default {
-    middleware: 'guest',
-    name: 'MarketCodeLayoutView',
-    components: {
-        Header,
-        NavBar,
-        Footer,
-    },
-    data: () => ({
-        marketItem: [],
-        gameItem: [],
-        getMarketActive: [],
-        periodMarket: '',
-    }),
-    mounted() {
-        this.gameItem = this.setting.gameitem
-        this.marketItem = this.setting.market
-    },
+	middleware: 'guest',
+	name: 'MarketCodeLayoutView',
+	components: {
+		Header,
+		NavBar,
+		Footer,
+	},
+	data: () => ({
+		marketItem: [],
+		gameItem: [],
+		getMarketActive: [],
+		periodMarket: '',
+	}),
+	mounted() {
+		this.gameItem = this.setting.gameitem.filter(
+			item => !this.isNotIn.includes(parseInt(item.id))
+		)
+		this.marketItem = this.setting.market
+	},
 }
 </script>
 

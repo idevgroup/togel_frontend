@@ -10,7 +10,7 @@
                 <span> Win: {{ (marketGameSetting.menang ===1)?100:marketGameSetting.menang }}%</span>
             </p>
             <table class="table table-bordered game5050">
-                <thead>
+                <thead class="thead-light">
                     <tr>
                         <th colspan="9" class="text-center">Odd / Even</th>
                     </tr>
@@ -79,7 +79,7 @@
                 </tbody>
             </table>
             <table class="table table-bordered game5050">
-                <thead>
+                <thead class="thead-light">
                     <tr>
                         <th colspan="8" class="text-center">Large / Small</th>
                     </tr>
@@ -158,6 +158,8 @@
                 :scrollable="true"
                 :classes="['v--modal', 'vue-dialog']"
                 :adaptive="true"
+                resizable
+                reset
                 name="preview-bet"
                 height="auto"
                 draggable=".modal-header">
@@ -211,13 +213,11 @@ export default {
     },
     data() {
         return {
-            OddEven: [
-                {
+            OddEven: [{
                     Selected: 1,
                     key: 1,
                     position: 'US',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Odd',
                             value: '1',
                         },
@@ -236,8 +236,7 @@ export default {
                     Selected: 1,
                     key: 2,
                     position: 'Kop',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Odd',
                             value: '1',
                         },
@@ -255,8 +254,7 @@ export default {
                     Selected: 1,
                     key: 3,
                     position: 'Head',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Odd',
                             value: '1',
                         },
@@ -274,8 +272,7 @@ export default {
                     Selected: 1,
                     key: 4,
                     position: 'Tail',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Odd',
                             value: '1',
                         },
@@ -290,13 +287,11 @@ export default {
                     pay: 0,
                 },
             ],
-            SmallLarge: [
-                {
+            SmallLarge: [{
                     Selected: 1,
                     key: 5,
                     position: 'US',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Big',
                             value: '1',
                         },
@@ -314,8 +309,7 @@ export default {
                     Selected: 1,
                     key: 6,
                     position: 'Kop',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Big',
                             value: '1',
                         },
@@ -333,8 +327,7 @@ export default {
                     Selected: 1,
                     key: 7,
                     position: 'Head',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Big',
                             value: '1',
                         },
@@ -352,8 +345,7 @@ export default {
                     Selected: 1,
                     key: 8,
                     position: 'Tail',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Big',
                             value: '1',
                         },
@@ -372,17 +364,17 @@ export default {
         }
     },
     computed: {
-        totalPayOddEven: function() {
-            return this.OddEven.reduce(function(a, c) {
+        totalPayOddEven: function () {
+            return this.OddEven.reduce(function (a, c) {
                 return a + Number(c.pay || 0)
             }, 0)
         },
-        totalPayBigSmall: function() {
-            return this.SmallLarge.reduce(function(a, c) {
+        totalPayBigSmall: function () {
+            return this.SmallLarge.reduce(function (a, c) {
                 return a + Number(c.pay || 0)
             }, 0)
         },
-        buttonStyle: function() {
+        buttonStyle: function () {
             return {
                 flex: `1 1 ${100 / 2}%`,
             }
@@ -390,6 +382,7 @@ export default {
     },
     created() {
         this.getMarketGameSetting()
+        this.getIp()
     },
     methods: {
         totalKei(item) {
@@ -456,17 +449,17 @@ export default {
                     Swal.fire(
                         'Invalide Amount',
                         'Amount cannot less then ' +
-                            this.setting.general.symbol +
-                            ' ' +
-                            limitMin +
-                            '  or greater than ' +
-                            this.setting.general.symbol +
-                            ' ' +
-                            limitMax +
-                            ' and also modulus of ' +
-                            this.setting.general.symbol +
-                            ' ' +
-                            modulus,
+                        this.setting.general.symbol +
+                        ' ' +
+                        limitMin +
+                        '  or greater than ' +
+                        this.setting.general.symbol +
+                        ' ' +
+                        limitMax +
+                        ' and also modulus of ' +
+                        this.setting.general.symbol +
+                        ' ' +
+                        modulus,
                         'info',
                     )
                 }
@@ -481,6 +474,7 @@ export default {
                 betSmallLarge: this.SmallLarge,
                 betTotalPay: totalPay,
                 market: this.$route.params.marketcode,
+                ip: this.ipPublicClient,
             }
             if (totalPay < this.user.reg_remain_balance && totalPay > 0) {
                 const data = await this.$axios.$post(
@@ -518,11 +512,11 @@ export default {
         },
         reset() {
             let self = this
-            Object.keys(this.OddEven).forEach(function(key, index) {
+            Object.keys(this.OddEven).forEach(function (key, index) {
                 self.OddEven[key].Selected = 1
                 self.OddEven[key].bet = 0
             })
-            Object.keys(this.SmallLarge).forEach(function(key, index) {
+            Object.keys(this.SmallLarge).forEach(function (key, index) {
                 self.SmallLarge[key].Selected = 1
                 self.SmallLarge[key].bet = 0
             })

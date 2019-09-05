@@ -11,7 +11,7 @@
 
             </p>
             <table class="table table-bordered mt-5">
-                <thead>
+                <thead class="thead-light">
                     <tr>
                         <th colspan="9" class="text-center">Odd / Even</th>
                     </tr>
@@ -95,7 +95,7 @@
                 </b-col>
             </b-row>
             <table class="table table-bordered mt-5">
-                <thead>
+                <thead class="thead-light">
                     <tr>
                         <th colspan="9" class="text-center">Large / Small</th>
                     </tr>
@@ -186,12 +186,14 @@
                 <b-col md="3">
                     <b-button variant="outline-primary" @click="reset">Reset</b-button>
                 </b-col>
-                {{ getIpClient }}
+               
             </b-row>
             <modal
                 :scrollable="true"
                 :classes="['v--modal', 'vue-dialog']"
                 :adaptive="true"
+                 resizable
+                reset
                 name="preview-bet"
                 height="auto"
                 draggable=".modal-header">
@@ -210,7 +212,11 @@
                         Payment: <span class="text-info">{{ parseFloat(totalPayOddEven) +
                 parseFloat(totalPayBigSmall)| currency(setting.general.symbol)}}</span>
                     </h5>
-      
+                          <b-col>
+                      <p class="text-center mt-3 " style="font-weight:bold">
+                          Are you want to process this transaction !!!
+                      </p> 
+                    </b-col>  
                 </div>
 
                 <div class="vue-dialog-buttons">
@@ -316,6 +322,7 @@ export default {
     },
     created() {
         this.getMarketGameSetting()
+        this.getIp()
     },
     methods: {
         totalKeiOddEven(item) {
@@ -597,6 +604,7 @@ export default {
                 ),
                 betTotalPay: totalPay,
                 market: this.$route.params.marketcode,
+                ip: this.ipPublicClient,
             }
             if (totalPay < this.user.reg_remain_balance && totalPay > 0) {
                 const data = await this.$axios.$post(

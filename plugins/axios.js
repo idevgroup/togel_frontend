@@ -28,7 +28,7 @@ export default function({ $axios, store, app, redirect, $option }) {
             return
         }
         const { status } = error.response
-        // Error 402
+            // Error 402
         if (status === 422) {
             const obj = error.response.data.errors
             const arr = []
@@ -44,13 +44,15 @@ export default function({ $axios, store, app, redirect, $option }) {
                 text: arr.join(' '),
             })
         } else if (status === 401) {
+            this.$auth.reset()
+            this.$auth.logout()
             console.log(store)
             console.log(app)
             console.log($option)
         } else if (status === 403) {
             redirect('/errors/403')
         } else if (status >= 500) {
-            swal.fire('Error', 'Somethin went wrong.', 'error')
+            swal.fire('Error', 'Something went wrong.', 'error')
         } else {
             this.$auth.reset()
             this.$auth.logout()

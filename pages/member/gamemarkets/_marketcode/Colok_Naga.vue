@@ -7,14 +7,14 @@
                 <span> Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol)}} </span>
                 <span> Discount: {{ marketGameSetting.discount }}%</span>
                 <span> Bet Modulus: {{ marketGameSetting.bet_mod |currency(setting.general.symbol)}}</span>
-                <span> Win: x{{ marketGameSetting.menang }} | Double Win: x{{ marketGameSetting.menang_dbl }} | Triple Win: x{{ marketGameSetting.menang_triple }}</span><br/>
-                <span> Note:</span> Number cannot be the same in any input box  (Ex. 11,22,33,44,55,66,77,88,99)
+                <span> Win: x{{ marketGameSetting.menang }} | Double Win: x{{ marketGameSetting.menang_dbl }} </span><br/>
+                <span> Note:</span> Number cannot be the same in any input box  (Ex. 112,122,533,844,455,166,775,884,997...)
             </p>
             <table class="table table-bordered">
                 <thead class="thead-light">
                     <tr>
                         <th width="1">#</th>
-                        <th width="20%">2 Digit Number</th>
+                        <th width="20%">Number</th>
                         <th width="25%">Bet</th>
                         <th width="20%">Discount</th>
                         <th>Pay</th>
@@ -26,7 +26,7 @@
                         <td>{{ index + 1 }}</td>
                         <td>
                             <b-form-input
-                                v-validate="{is_not:0,max:2,max_value:99, min:2 }"
+                                v-validate="{is_not:0,max:3,max_value:999, min:2 }"
                                 v-model="item.numberXd"
                                 :name="`number`+index"
                                 :data-vv-name="`number`+index"
@@ -34,7 +34,7 @@
                                 :state="!veeErrors.has('number'+index)"
                                 class="form-control form-control-sm"
                                 type="text"
-                                maxlength="2"
+                                maxlength="3"
                                 data-vv-as="bet number"
                                 @blur="checkNumberBetLimit(index,item)"
                                 @keypress="isNumberInt($event)"
@@ -248,7 +248,7 @@ export default {
 
 		async getMarketGameSetting() {
 			const input = {
-				game: 'Colok 2D',
+				game: 'Colok Naga',
 				market: this.$route.params.marketcode,
 			}
 			const data = await this.$axios.$post(
@@ -302,7 +302,7 @@ export default {
 				betitem: self.previewbet,
 				market: this.$route.params.marketcode,
 				totalpay: self.totalBet,
-				gamecode: 'Colok 2D',
+				gamecode: 'Colok Naga',
 			}
 			// if(!this.$validator.validateAll()) return
 
@@ -389,7 +389,7 @@ export default {
 			const input = {
 				numberbet: item.numberXd,
 				marketcode: this.$route.params.marketcode,
-				gamecode: 'Colok 2D',
+				gamecode: 'Colok Naga',
 			}
 			let filtered = this.items
 			let count = 0
@@ -408,7 +408,7 @@ export default {
 						this.items.splice(index, 1, item)
 						Swal.fire(
 							'Guess Limit Number',
-							'Your input value is limited, please try other number',
+							'Your input value is limited time, please try other number',
 							'info'
 						)
 					}
@@ -417,11 +417,12 @@ export default {
 		},
 		keymonitor: function(event, item) {
 			event = event ? event : window.event
+			const n = item.numberXd
+			var arr = Array.from(n.toString()).map(Number)
 			if (event.key >= 0 && event.key <= 9) {
-				if (event.key === item.numberXd) {
-					if (event.preventDefault()) {
-						item.showtooltip = true
-					}
+				if (arr.includes(parseInt(event.key))) {
+					event.preventDefault()
+					item.showtooltip = true
 				}
 				//item.showtooltip = false
 				return true
