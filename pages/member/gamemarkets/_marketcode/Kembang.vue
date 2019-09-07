@@ -1,6 +1,6 @@
 <template>
     <div>
-        <market-head-active></market-head-active>
+     
         <div v-if="isSiteLock">
             <p>
                 <span> Kembang Min Bet: {{ gameSettingKembang.min_bet |currency(setting.general.symbol)}} | Kempis Min Bet: {{ gameSettingKempis.min_bet |currency(setting.general.symbol)}} | Kembar Min Bet: {{ gameSettingKembar.min_bet |currency(setting.general.symbol)}}</span>
@@ -251,7 +251,6 @@
 
 <script>
 import SiteLockInfo from '~/components/gamemarket/SiteLockInfo'
-import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
 import VueNumeric from 'vue-numeric'
 import Swal from 'sweetalert2'
 export default {
@@ -259,7 +258,6 @@ export default {
 	name: 'GameKembangForm',
 	components: {
 		VueNumeric,
-		MarketHeadActive,
 		SiteLockInfo,
 	},
 	data() {

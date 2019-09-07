@@ -1,6 +1,5 @@
 <template>
     <div>
-        <market-head-active ></market-head-active>
         <div v-if="isSiteLock">
         <p>
             <span> 2D Depan Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
@@ -191,14 +190,14 @@
 <script>
 import VueNumeric from 'vue-numeric'
 import Swal from 'sweetalert2'
-import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
+
 import SiteLockInfo from '~/components/gamemarket/SiteLockInfo'
 export default {
 	layout: 'gamemarket',
 	name: 'Game2DDepanForm',
 	components: {
 		VueNumeric,
-		MarketHeadActive,
+
 		SiteLockInfo,
 	},
 	data() {

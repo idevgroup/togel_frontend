@@ -1,6 +1,5 @@
 <template>
     <div>
-        <market-head-active></market-head-active>
         <div v-if="isSiteLock">
             <table class="table table-bordered mt-2">
                 <thead class="thead-light">
@@ -296,7 +295,6 @@
 
 <script>
 import SiteLockInfo from '~/components/gamemarket/SiteLockInfo'
-import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
 import VueNumeric from 'vue-numeric'
 import Swal from 'sweetalert2'
 export default {
@@ -304,7 +302,6 @@ export default {
 	name: 'GameKombinasiForm',
 	components: {
 		VueNumeric,
-		MarketHeadActive,
 		SiteLockInfo,
 	},
 	data() {

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <market-head-active></market-head-active>
         <div v-if="isSiteLock">
             <p>
                 <span> 2D Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>

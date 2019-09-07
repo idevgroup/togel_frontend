@@ -1,6 +1,5 @@
 <template>
     <div>
-        <market-head-active></market-head-active>
         <div v-if="isSiteLock">
             <p>
                 <span> Silang Min Bet: {{ gameSettingSilang.min_bet |currency(setting.general.symbol)}} | Homo Min Bet: {{ gameSettingHomo.min_bet |currency(setting.general.symbol)}} </span>
@@ -188,7 +187,6 @@
 
 <script>
 import SiteLockInfo from '~/components/gamemarket/SiteLockInfo'
-import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
 import VueNumeric from 'vue-numeric'
 import Swal from 'sweetalert2'
 export default {
@@ -196,7 +194,6 @@ export default {
 	name: 'GameSilangForm',
 	components: {
 		VueNumeric,
-		MarketHeadActive,
 		SiteLockInfo,
 	},
 	data() {

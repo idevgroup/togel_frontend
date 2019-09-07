@@ -1,6 +1,5 @@
 <template>
     <div>
-        <market-head-active></market-head-active>
         <div v-if="isSiteLock">
              <p>
             <span> Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol )}}</span>
@@ -123,7 +122,6 @@
 </template>
 <script>
 import SiteLockInfo from '~/components/gamemarket/SiteLockInfo'
-import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
 import VueNumeric from 'vue-numeric'
 import Swal from 'sweetalert2'
 export default {
@@ -131,7 +129,6 @@ export default {
 	name: 'GameColokBabasForm',
 	components: {
 		VueNumeric,
-		MarketHeadActive,
 		SiteLockInfo,
 	},
 	data() {

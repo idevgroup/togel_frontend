@@ -1,6 +1,5 @@
 <template>
     <div>
-        <market-head-active></market-head-active>
         <div v-if="isSiteLock">
             <p>
                 <span> Odd Min Bet: {{ gameSettingGanjil.min_bet |currency(setting.general.symbol)}} | Even Min Bet: {{ gameSettingGenap.min_bet |currency(setting.general.symbol)}} | Large Min Bet: {{ gameSettingBesar.min_bet |currency(setting.general.symbol)}} | Small Min Bet: {{ gameSettingKecil.min_bet |currency(setting.general.symbol)}} </span>
@@ -237,7 +236,7 @@
 </template>
 
 <script>
-import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
+
 import SiteLockInfo from '~/components/gamemarket/SiteLockInfo'
 import VueNumeric from 'vue-numeric'
 import Swal from 'sweetalert2'
@@ -245,7 +244,6 @@ export default {
     layout: 'gamemarket',
     name: 'GameBesarForm',
     components: {
-        MarketHeadActive,
         SiteLockInfo,
         VueNumeric,
     },

@@ -1,6 +1,5 @@
 <template>
     <div>
-        <market-head-active></market-head-active>
         <div v-if="isSiteLock">
             <p>
                 <span> Tengah Min Bet: {{ gameSettingTengah.min_bet |currency(setting.general.symbol)}} | Tepi Min Bet: {{ gameSettingTepi.min_bet |currency(setting.general.symbol)}}  </span>
@@ -150,7 +149,6 @@
 </template>
 
 <script>
-import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
 import SiteLockInfo from '~/components/gamemarket/SiteLockInfo'
 import VueNumeric from 'vue-numeric'
 import Swal from 'sweetalert2'
@@ -158,7 +156,6 @@ export default {
 	layout: 'gamemarket',
 	name: 'GameTepiForm',
 	components: {
-		MarketHeadActive,
 		SiteLockInfo,
 		VueNumeric,
 	},

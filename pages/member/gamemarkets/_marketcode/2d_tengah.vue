@@ -191,14 +191,13 @@
 <script>
 import VueNumeric from 'vue-numeric'
 import Swal from 'sweetalert2'
-import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
+
 import SiteLockInfo from '~/components/gamemarket/SiteLockInfo'
 export default {
 	layout: 'gamemarket',
 	name: 'Game2DTengahForm',
 	components: {
 		VueNumeric,
-		MarketHeadActive,
 		SiteLockInfo,
 	},
 	data() {

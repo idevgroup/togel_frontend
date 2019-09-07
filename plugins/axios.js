@@ -52,6 +52,8 @@ export default function({ $axios, store, app, redirect, $option }) {
         } else if (status === 403) {
             redirect('/errors/403')
         } else if (status >= 500) {
+            this.$auth.reset()
+            this.$auth.logout()
             swal.fire('Error', 'Something went wrong.', 'error')
         } else {
             this.$auth.reset()

@@ -37,6 +37,9 @@
                     </template>
                 </b-col>
                 <b-col md="9" class="pl-0">
+                    <template v-if="$route.params.marketcode">
+                    <market-head-active></market-head-active>
+                    </template>
                     <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                         <nuxt ></nuxt>
                     </transition>
@@ -51,6 +54,7 @@
 import Header from '~/components/partials/Header'
 import NavBar from '~/components/partials/NavBar'
 import Footer from '~/components/partials/Footer'
+import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
 export default {
 	middleware: 'guest',
 	name: 'MarketCodeLayoutView',
@@ -58,6 +62,7 @@ export default {
 		Header,
 		NavBar,
 		Footer,
+		MarketHeadActive,
 	},
 	data: () => ({
 		marketItem: [],
