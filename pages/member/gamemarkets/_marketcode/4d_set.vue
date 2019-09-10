@@ -31,66 +31,89 @@
                             @keypress="isNumberInt($event)">
                         </b-form-input>
                         <label class="mr-sm-2">x 1000</label>
-                        <b-button
-                            :disabled="veeErrors.any()"
-                            variant="primary"
-                            @click="generateNumber">Submit</b-button>
+                        <b-button :disabled="veeErrors.any()" variant="primary" @click="generateNumber">Submit</b-button>
                         <b-button variant="info" @click="reset">Reset</b-button>
                     </b-form>
                 </b-col>
             </b-row>
-            <table class="table table-bordered mt-3">
+			   <table class="table table-bordered mt-3">
                 <thead class="thead-light">
                     <tr>
                         <th width="1">#</th>
-                        <th width="60%"> Number</th>
+                        <th width="20%">Digit Number</th>
+                        <th width="25%">Bet</th>
+                        <th width="20%">Discount</th>
                         <th>Pay</th>
                         <th width="45"></th>
                     </tr>
                 </thead>
-                <template v-if="items.length > 0">
-                    <tbody>
-                        <tr v-for="(items, index) in newArray" :key="index">
-                            <td v-if="items.price > 0">
-                                {{ index +1 }}
-                            </td>
-                            <td v-if="items.price > 0">
-                                {{ items.list }}
-                            </td>
-                            <td v-if="items.price > 0">
-                                {{ items.price |currency(setting.general.symbol) }}
-                            </td>
-                            <td v-if="items.price > 0">
-								  <span v-if="items.is_not !== true">
-                                <button class="btn btn-sm  mr-2 btn-success" @click="isNotBet(index,items,items.xd)"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>
+                <tbody>
+                    <tr v-for="(item, index) in items" :key="index">
+                        <td>{{ index + 1 }}</td>
+                        <td>
+                            <b-form-input
+                                v-validate="{is_not:0,max:4,max_value:9999, min:2 }"
+                                v-model.trim="item.numberXd"
+                                :name="`number`+index"
+                                :data-vv-name="`number`+index"
+                                :disabled="item.is_not"
+                                :state="!veeErrors.has('number'+index)"
+                                class="form-control form-control-sm"
+                                type="text"
+                                maxlength="4"
+                                data-vv-as="bet number"
+                                @keypress="isNumberInt($event)">
+                            </b-form-input>
+                        </td>
+                        <td>
+                            <vue-numeric
+                                :currency="setting.general.symbol"
+                                v-model.number="item.betvalue"
+                                :precision="2"
+                                :name="`betprice`+index"
+                                :data-vv-name="`betprice`+index"
+                                :disabled="item.is_not"
+                                :state="!veeErrors.has('betprice'+index)"
+                                class="form-control form-control-sm"
+                                separator=","
+                                decimal-separator="."
+                                data-vv-as="bet price"
+                                @blur="checkAmount(index,item)"></vue-numeric>
+                        </td>
+                        <td>
+                            <div class="text-right">{{ subDiscount(item) | currency(setting.general.symbol) }}</div>
+                        </td>
+                        <td>
+                            <div class="text-right">{{ subtotal(item) | currency(setting.general.symbol ) }}</div>
+                        </td>
+                        <td>
+                            <span v-if="item.is_not !== true">
+                                <button class="btn btn-sm  mr-2 btn-success" @click="isNotBet(index,item)"><i class="fa fa-check-square-o" aria-hidden="true"></i></button>
                             </span>
                             <span v-else>
-                                <button class="btn btn-sm  mr-2  btn-warning" @click="isBet(index,items,items.xd)"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
+                                <button class="btn btn-sm  mr-2  btn-warning" @click="isBet(index,item)"><i class="fa fa-minus-circle" aria-hidden="true"></i></button>
                             </span>
-                            </td>
-                        </tr>
-                    </tbody>
-                </template>
+
+                        </td>
+                    </tr>
+                </tbody>
             </table>
-            <b-col class="mb-5">
-                <b-button
-                    :disabled="veeErrors.any()"
-                    variant="success"
-                    @click="showConfirm">Save</b-button>
-            </b-col>
-            <p>
+			 <b-col class="mb-5">
+                    <b-button :disabled="veeErrors.any()" variant="success" @click="showConfirm">Save</b-button>
+                </b-col>
+				    <p>
                 <span> 4D Min Bet: {{ gameSetting4d.min_bet |currency(setting.general.symbol)}} | 3D Min Bet: {{ gameSetting3d.min_bet |currency(setting.general.symbol)}} | 2D Min Bet: {{ gameSetting2d.min_bet |currency(setting.general.symbol)}} </span>
                 <span> 4D Max Bet: {{ gameSetting4d.max_bet |currency(setting.general.symbol)}} | 3D Max Bet: {{ gameSetting3d.max_bet |currency(setting.general.symbol)}} | 2D Max Bet: {{ gameSetting2d.max_bet |currency(setting.general.symbol)}} </span>
                 <span> 4D Bet Modulus: {{ gameSetting4d.bet_mod |currency(setting.general.symbol)}} | 3D Bet Modulus: {{ gameSetting3d.bet_mod |currency(setting.general.symbol)}} | 2D Bet Modulus: {{ gameSetting2d.bet_mod |currency(setting.general.symbol)}} </span>
                 <span> 4D Bet Discs: {{ gameSetting4d.discount }} % | 3D Bet Discs: {{ gameSetting3d.discount}} % | 2D Bet Discs: {{ gameSetting2d.discount }} % </span>
-                <span> 4D Win: x {{ gameSetting4d.menang }} | 3D Win: x {{ gameSetting3d.menang }} | 2D Win: x {{ gameSetting2d.menang }} </span>
+                <span> 4D Win: x {{ gameSetting4d.menang }} | 3D Win: x {{ gameSetting3d.menang }} | 2D Win: x  {{ gameSetting2d.menang }}  </span>
 
             </p>
-            <modal
+			 <modal
                 :scrollable="true"
                 :classes="['v--modal', 'vue-dialog']"
                 :adaptive="true"
-                resizable
+				 resizable
                 reset
                 name="preview-bet"
                 height="auto"
@@ -110,10 +133,10 @@
                         Payment: <span class="text-info">{{ totalPay | currency(setting.general.symbol)}}</span>
                     </h5>
                     <b-col>
-                        <p class="text-center mt-3 " style="font-weight:bold">
-                            Are you want to process this transaction !!!
-                        </p>
-                    </b-col>
+                      <p class="text-center mt-3 " style="font-weight:bold">
+                          Are you want to process this transaction !!!
+                      </p> 
+                    </b-col>      
                 </div>
 
                 <div class="vue-dialog-buttons">
@@ -126,7 +149,7 @@
                 </div>
 
             </modal>
-
+	
         </div>
         <div v-else>
             <site-lock-info />
@@ -155,8 +178,6 @@ export default {
 			gameSetting2d: [],
 			gameSetting3d: [],
 			gameSetting4d: [],
-			is_not: false,
-			newArray: [],
 		}
 	},
 	computed: {
@@ -186,12 +207,7 @@ export default {
 			} else if (len == 4) {
 				settingdiscount = this.gameSetting4d.discount
 			}
-			item.discount =
-				item.numberXd !== ''
-					? (item.betvalue * settingdiscount) / 100
-					: 0
-			item.betpay =
-				item.numberXd !== '' ? item.betvalue - item.discount : 0
+
 			return item.numberXd !== ''
 				? item.betvalue - (item.betvalue * settingdiscount) / 100
 				: 0
@@ -236,27 +252,13 @@ export default {
 				}
 			})
 		},
-		isNotBet(indexs, items, xd) {
-			let self = this
-			self.items.forEach((item, index) => {
-				if (item.numberXd.length === xd) {
-					item.is_not = true
-					self.items.splice(index, 1, item)
-				}
-			})
-			items.is_not = true
-			self.newArray.splice(indexs, 1, items)
+		isNotBet(index, item) {
+			item.is_not = true
+			this.items.splice(index, 1, item)
 		},
-		isBet(indexs, items, xd) {
-			let self = this
-			self.items.forEach((item, index) => {
-				if (item.numberXd.length === xd) {
-					item.is_not = false
-					self.items.splice(index, 1, item)
-				}
-			})
-			items.is_not = false
-			self.newArray.splice(indexs, 1, items)
+		isBet(index, item) {
+			item.is_not = false
+			this.items.splice(index, 1, item)
 		},
 		async saveBetGame() {
 			let self = this
@@ -376,48 +378,6 @@ export default {
 					is_not: false,
 				})
 			})
-
-			let numberBet4d = []
-			let numberBet3d = []
-			let numberBet2d = []
-			let price4d = 0
-			let price3d = 0
-			let price2d = 0
-			self.items.forEach(item => {
-				if (item.numberXd.length === 4) {
-					numberBet4d.push(item.numberXd)
-					price4d += this.subtotal(item)
-				}
-				if (item.numberXd.length === 3) {
-					numberBet3d.push(item.numberXd)
-					price3d += this.subtotal(item)
-				}
-				if (item.numberXd.length === 2) {
-					numberBet2d.push(item.numberXd)
-					price2d += this.subtotal(item)
-				}
-			})
-
-			self.newArray = [
-				{
-					list: numberBet4d.join(', '),
-					price: price4d,
-					is_not: false,
-					xd: 4,
-				},
-				{
-					list: numberBet3d.join(', '),
-					price: price3d,
-					is_not: false,
-					xd: 3,
-				},
-				{
-					list: numberBet2d.join(', '),
-					price: price2d,
-					is_not: false,
-					xd: 2,
-				},
-			]
 		},
 		reset() {
 			let self = this
@@ -452,23 +412,6 @@ export default {
 			arr.map((e, i) => !final.includes(e) && final.push(e))
 			return final
 		},
-		filterXd(xd) {
-			let self = this
-			let str = []
-			self.items.forEach(item => {
-				if (item.numberXd.length === xd) str.push(item.numberXd)
-			})
-			return str.join(', ')
-		},
-		totalPaybyXd(xd) {
-			let self = this
-			let pay = 0
-			self.items.forEach((item, index) => {
-				if (item.numberXd.length === xd && item.is_not === false)
-					pay += this.subtotal(item)
-			})
-			return pay
-		},
 	},
 }
 </script>
@@ -491,18 +434,16 @@ export default {
 #frm-quick button {
 	margin-right: 3px;
 }
-
 .form-control.is-invalid {
 	padding-right: 5px;
 }
-
 table tr td input {
 	text-align: right;
 }
-
 p span {
 	display: block;
 	font-weight: bold;
 	line-height: 20px;
 }
 </style>
+

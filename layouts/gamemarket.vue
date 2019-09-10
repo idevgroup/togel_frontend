@@ -13,7 +13,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            <b-row class="mt-2">
+            <b-row class="mt-4">
                 <b-col col md="3">
                     <b-card no-body class="mb-2">
                         <h4 slot="header" class="m-0"><i class="fa fa-bookmark"></i> Market</h4>
