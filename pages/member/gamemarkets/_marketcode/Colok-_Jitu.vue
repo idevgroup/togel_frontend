@@ -1,21 +1,22 @@
 <template>
     <div>
+        
         <div v-if="isSiteLock">
             <p>
                 <span> Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol)}}</span>
                 <span> Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol)}} </span>
                 <span> Discount: {{ marketGameSetting.discount }}%</span>
                 <span> Bet Modulus: {{ marketGameSetting.bet_mod |currency(setting.general.symbol)}}</span>
-                <span> Win: x{{ marketGameSetting.menang }} | Double Win: x{{ marketGameSetting.menang_dbl }} | Triple Win: x{{ marketGameSetting.menang_triple }}</span><br/>
-                <span> Note:</span> Number cannot be the same in any input box  (Ex. 11,22,33,44,55,66,77,88,99)
+                <span> Win: x{{ marketGameSetting.menang }} </span><br />
             </p>
             <table class="table table-bordered">
                 <thead class="thead-light">
                     <tr>
                         <th width="1">#</th>
-                        <th width="20%">2 Digit Number</th>
-                        <th width="25%">Bet</th>
-                        <th width="20%">Discount</th>
+                        <th width="10%">Number</th>
+                        <th>Position</th>
+                        <th width="20%">Bet</th>
+                        <th width="18%">Discount</th>
                         <th>Pay</th>
                         <th width="45"></th>
                     </tr>
@@ -25,7 +26,7 @@
                         <td>{{ index + 1 }}</td>
                         <td>
                             <b-form-input
-                                v-validate="{is_not:0,max:2,max_value:99, min:2 }"
+                                v-validate="{is_not:0,max:1,max_value:9, min:1 }"
                                 v-model="item.numberXd"
                                 :name="`number`+index"
                                 :data-vv-name="`number`+index"
@@ -33,13 +34,15 @@
                                 :state="!veeErrors.has('number'+index)"
                                 class="form-control form-control-sm"
                                 type="text"
-                                maxlength="2"
+                                maxlength="1"
                                 data-vv-as="bet number"
                                 @blur="checkNumberBetLimit(index,item)"
                                 @keypress="isNumberInt($event)"
-                                @keydown="keymonitor($event,item)"
-                                >
+                                @keydown="keymonitor($event,item)">
                             </b-form-input>
+                        </td>
+                        <td>
+                              <b-form-select v-model="item.selected" :options="position"   :disabled="item.is_not" size="sm"></b-form-select>
                         </td>
                         <td>
                             <vue-numeric
@@ -76,12 +79,12 @@
                     <tr style="display:none">
                         <td colspan="6">
                             <div class="text-right" style="padding-right:55px">
-                                <strong> Total Pay: {{ subTotalPay |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true }) }}</strong>
+                                <strong> Total Pay: {{ subTotalPay |currency(setting.general.symbol) }}</strong>
                             </div>
                         </td>
                     </tr>
                     <tr>
-                        <td colspan="6">
+                        <td colspan="7">
                             <b-row>
                                 <b-col cols="9">
                                     <b-button
@@ -97,7 +100,7 @@
                         </td>
                     </tr>
                 </tbody>
-            </table>         
+            </table>
             <modal
                 :scrollable="true"
                 :classes="['v--modal', 'vue-dialog']"
@@ -135,7 +138,7 @@
                             <tr v-for="(item, index) in previewbet" :key="index">
                                 <td>{{ index + 1 }}</td>
                                 <td>
-                                    {{ item.betnumber }}
+                                   {{ item.betpositionname }} - {{ item.betnumber }}
                                 </td>
                                 <td>
                                     <div class="text-right"> {{ item.betprice |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</div>
@@ -206,10 +209,29 @@ export default {
 					betpay: 0,
 					is_not: false,
 					showtooltip: false,
+					selected: 1,
 				},
 			],
 			previewbet: [],
 			totalBet: 0,
+			position: [
+				{
+					value: 1,
+					text: 'As',
+				},
+				{
+					value: 2,
+					text: 'Kop',
+				},
+				{
+					value: 3,
+					text: 'Kepala',
+				},
+				{
+					value: 4,
+					text: 'Ekor',
+				},
+			],
 		}
 	},
 	computed: {
@@ -225,6 +247,7 @@ export default {
 	created() {
 		this.getMarketGameSetting()
 		this.loadRowTable()
+		this.getIp()
 	},
 	methods: {
 		subtotal(item) {
@@ -245,7 +268,7 @@ export default {
 
 		async getMarketGameSetting() {
 			const input = {
-				game: 'Colok 2D',
+				game: 'Colok Jitu',
 				market: this.$route.params.marketcode,
 			}
 			const data = await this.$axios.$post(
@@ -266,6 +289,7 @@ export default {
 					betpay: 0,
 					is_not: false,
 					showtooltip: false,
+					selected: 1,
 				}
 			}
 
@@ -282,6 +306,7 @@ export default {
 					betpay: 0,
 					is_not: false,
 					showtooltip: false,
+					selected: 1,
 				})
 			}
 		},
@@ -299,11 +324,15 @@ export default {
 				betitem: self.previewbet,
 				market: this.$route.params.marketcode,
 				totalpay: self.totalBet,
-				gamecode: 'Colok 2D',
+				gamecode: 'Colok Jitu',
+				ip: this.ipPublicClient,
 			}
 			// if(!this.$validator.validateAll()) return
 
-			const data = await this.$axios.$post('/member/dobetgame', input)
+			const data = await this.$axios.$post(
+				'/member/dobetgamecolokjitu',
+				input
+			)
 			// refresh user account to update balance
 			Swal.fire(data.alert.title, data.alert.message, 'success')
 			this.$auth.fetchUser()
@@ -318,11 +347,16 @@ export default {
 			let totalPay = 0
 			self.items.forEach(item => {
 				if (item.numberXd !== '' && !item.is_not && item.betpay > 0) {
+					var position = this.position.filter(
+						a => a.value === item.selected
+					)
 					itemValueBet.push({
 						betnumber: item.numberXd,
 						betprice: item.betvalue,
 						betdiscount: item.discount,
 						betpay: item.betpay,
+						betposition: item.selected,
+						betpositionname: position[0].text,
 					})
 					totalPay += item.betpay
 				}
@@ -386,7 +420,7 @@ export default {
 			const input = {
 				numberbet: item.numberXd,
 				marketcode: this.$route.params.marketcode,
-				gamecode: 'Colok 2D',
+				gamecode: 'Colok Jitu',
 			}
 			let filtered = this.items
 			let count = 0
@@ -405,7 +439,7 @@ export default {
 						this.items.splice(index, 1, item)
 						Swal.fire(
 							'Guess Limit Number',
-							'Your input value is limited, please try other number',
+							'Your input value is limited time, please try other number',
 							'info'
 						)
 					}
@@ -414,11 +448,12 @@ export default {
 		},
 		keymonitor: function(event, item) {
 			event = event ? event : window.event
+			const n = item.numberXd
+			var arr = Array.from(n.toString()).map(Number)
 			if (event.key >= 0 && event.key <= 9) {
-				if (event.key === item.numberXd) {
-					if (event.preventDefault()) {
-						item.showtooltip = true
-					}
+				if (arr.includes(parseInt(event.key))) {
+					event.preventDefault()
+					item.showtooltip = true
 				}
 				//item.showtooltip = false
 				return true

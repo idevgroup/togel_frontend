@@ -13,7 +13,7 @@
                     </b-card>
                 </b-col>
             </b-row>
-            <b-row class="mt-2">
+            <b-row class="mt-4">
                 <b-col col md="3">
                     <b-card no-body class="mb-2">
                         <h4 slot="header" class="m-0"><i class="fa fa-bookmark"></i> Market</h4>
@@ -37,6 +37,9 @@
                     </template>
                 </b-col>
                 <b-col md="9" class="pl-0">
+                    <template v-if="$route.params.marketcode">
+                    <market-head-active></market-head-active>
+                    </template>
                     <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
                         <nuxt ></nuxt>
                     </transition>
@@ -51,24 +54,28 @@
 import Header from '~/components/partials/Header'
 import NavBar from '~/components/partials/NavBar'
 import Footer from '~/components/partials/Footer'
+import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
 export default {
-    middleware: 'guest',
-    name: 'MarketCodeLayoutView',
-    components: {
-        Header,
-        NavBar,
-        Footer,
-    },
-    data: () => ({
-        marketItem: [],
-        gameItem: [],
-        getMarketActive: [],
-        periodMarket: '',
-    }),
-    mounted() {
-        this.gameItem = this.setting.gameitem
-        this.marketItem = this.setting.market
-    },
+	middleware: 'guest',
+	name: 'MarketCodeLayoutView',
+	components: {
+		Header,
+		NavBar,
+		Footer,
+		MarketHeadActive,
+	},
+	data: () => ({
+		marketItem: [],
+		gameItem: [],
+		getMarketActive: [],
+		periodMarket: '',
+	}),
+	mounted() {
+		this.gameItem = this.setting.gameitem.filter(
+			item => !this.isNotIn.includes(parseInt(item.id))
+		)
+		this.marketItem = this.setting.market
+	},
 }
 </script>
 

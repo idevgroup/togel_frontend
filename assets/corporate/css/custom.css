@@ -108,6 +108,14 @@ table.table tbody tr:hover {
     border-left: 1px solid #eee;
 }
 
+.custom-radio .custom-control-label {
+    position: relative;
+    margin-bottom: 0;
+    vertical-align: top;
+    padding-top: 5px;
+    font-size: 13px;
+}
+
 @media (max-width: 1199.98px) {
     .container {
         width: 990px;
@@ -118,4 +126,49 @@ table.table tbody tr:hover {
     .container {
         width: 990px;
     }
+}
+
+.table th,
+.table td {
+    padding: 0.5rem;
+    vertical-align: middle;
+    border-top: 1px solid #dee2e6;
+}
+
+.fa.fa-minus {
+    margin-right: 10px;
+}
+
+.list-group-item::before {
+    content: '';
+    font-size: 10px;
+    padding-right: 10px;
+    position: relative;
+    top: -1px;
+    font-family: FontAwesome !important;
+}
+
+.m-menu.list-group a::before {
+    font-size: 10px;
+    padding-right: 10px;
+    position: relative;
+    top: -1px;
+    font-family: FontAwesome !important;
+}
+
+.menu-ico-collapse {
+    float: right;
+}
+
+.list-group-submenu .list-group-item {
+    padding-left: 30px;
+}
+
+.list-group-submenu a::before {
+    content: '\f068';
+    font-size: 9px;
+    padding-right: 10px;
+    position: relative;
+    top: -1px;
+    font-family: FontAwesome !important;
 }

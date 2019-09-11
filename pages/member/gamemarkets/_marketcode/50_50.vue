@@ -1,6 +1,6 @@
 <template>
     <div>
-        <market-head-active></market-head-active>
+      
         <div v-if="isSiteLock">
             <p>
                 <span> Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol)}}</span>
@@ -10,7 +10,7 @@
                 <span> Win: {{ (marketGameSetting.menang ===1)?100:marketGameSetting.menang }}%</span>
             </p>
             <table class="table table-bordered game5050">
-                <thead>
+                <thead class="thead-light">
                     <tr>
                         <th colspan="9" class="text-center">Odd / Even</th>
                     </tr>
@@ -39,7 +39,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <template v-for="(item,index) in OddEvent">
+                    <template v-for="(item,index) in OddEven">
                         <tr :key="item.key">
                             <td>{{ index+1 }}</td>
                             <td>{{ item.position }}</td>
@@ -65,7 +65,7 @@
                                     separator=","
                                     decimal-separator="."
                                     data-vv-as="bet price"
-                                    @blur="checkAmount(index,item,OddEvent)">
+                                    @blur="checkAmount(index,item,OddEven)">
                                 </vue-numeric>
                             </td>
                             <td class="text-right">
@@ -79,9 +79,9 @@
                 </tbody>
             </table>
             <table class="table table-bordered game5050">
-                <thead>
+                <thead class="thead-light">
                     <tr>
-                        <th colspan="8" class="text-center">Big / Small</th>
+                        <th colspan="8" class="text-center">Large / Small</th>
                     </tr>
                     <tr>
                         <th>
@@ -154,50 +154,52 @@
                     <b-button variant="outline-primary" @click="reset">Reset</b-button>
                 </b-col>
             </b-row>
-             <modal
-            :scrollable="true"
-            :classes="['v--modal', 'vue-dialog']"
-            :adaptive="true"
-            name="preview-bet"
-            height="auto"
-            draggable=".modal-header">
+            <modal
+                :scrollable="true"
+                :classes="['v--modal', 'vue-dialog']"
+                :adaptive="true"
+                resizable
+                reset
+                name="preview-bet"
+                height="auto"
+                draggable=".modal-header">
 
-            <div class="modal-header">
-                <h5 class="modal-title">Confirm Information</h5>
-                <button type="button" class="close" aria-label="Close" @click="$modal.hide('preview-bet')">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <h5>
-                    Wallet: <span class="text-info">{{ user.reg_remain_balance| currency(setting.general.symbol)}}</span>
-                </h5>
-                <h5>
-                    Payment: <span class="text-info">{{ parseFloat(totalPayOddEven) +
+                <div class="modal-header">
+                    <h5 class="modal-title">Confirm Information</h5>
+                    <button type="button" class="close" aria-label="Close" @click="$modal.hide('preview-bet')">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <h5>
+                        Wallet: <span class="text-info">{{ user.reg_remain_balance| currency(setting.general.symbol)}}</span>
+                    </h5>
+                    <h5>
+                        Payment: <span class="text-info">{{ parseFloat(totalPayOddEven) +
                 parseFloat(totalPayBigSmall)| currency(setting.general.symbol)}}</span>
-                </h5>
-            </div>
+                    </h5>
+                </div>
 
-            <div class="vue-dialog-buttons">
-                <button :style="buttonStyle" class="vue-dialog-button text-bold" @click="save">
-                    OK
-                </button>
-                <button :style="buttonStyle" class="vue-dialog-button"  @click="$modal.hide('preview-bet')">
-                    CANCEL
-                </button>
-            </div>
+                <div class="vue-dialog-buttons">
+                    <button :style="buttonStyle" class="vue-dialog-button text-bold" @click="save">
+                        OK
+                    </button>
+                    <button :style="buttonStyle" class="vue-dialog-button" @click="$modal.hide('preview-bet')">
+                        CANCEL
+                    </button>
+                </div>
 
-        </modal>
+            </modal>
         </div>
         <div v-else>
             <site-lock-info />
         </div>
-       
+
     </div>
 </template>
 
 <script>
-import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
+
 import SiteLockInfo from '~/components/gamemarket/SiteLockInfo'
 import VueNumeric from 'vue-numeric'
 import Swal from 'sweetalert2'
@@ -205,19 +207,16 @@ export default {
     layout: 'gamemarket',
     name: 'Game5050Form',
     components: {
-        MarketHeadActive,
         SiteLockInfo,
         VueNumeric,
     },
     data() {
         return {
-            OddEvent: [
-                {
+            OddEven: [{
                     Selected: 1,
                     key: 1,
                     position: 'US',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Odd',
                             value: '1',
                         },
@@ -236,8 +235,7 @@ export default {
                     Selected: 1,
                     key: 2,
                     position: 'Kop',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Odd',
                             value: '1',
                         },
@@ -255,8 +253,7 @@ export default {
                     Selected: 1,
                     key: 3,
                     position: 'Head',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Odd',
                             value: '1',
                         },
@@ -274,8 +271,7 @@ export default {
                     Selected: 1,
                     key: 4,
                     position: 'Tail',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Odd',
                             value: '1',
                         },
@@ -290,13 +286,11 @@ export default {
                     pay: 0,
                 },
             ],
-            SmallLarge: [
-                {
+            SmallLarge: [{
                     Selected: 1,
                     key: 5,
                     position: 'US',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Big',
                             value: '1',
                         },
@@ -314,8 +308,7 @@ export default {
                     Selected: 1,
                     key: 6,
                     position: 'Kop',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Big',
                             value: '1',
                         },
@@ -333,8 +326,7 @@ export default {
                     Selected: 1,
                     key: 7,
                     position: 'Head',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Big',
                             value: '1',
                         },
@@ -352,8 +344,7 @@ export default {
                     Selected: 1,
                     key: 8,
                     position: 'Tail',
-                    guess: [
-                        {
+                    guess: [{
                             text: 'Big',
                             value: '1',
                         },
@@ -372,17 +363,17 @@ export default {
         }
     },
     computed: {
-        totalPayOddEven: function() {
-            return this.OddEvent.reduce(function(a, c) {
+        totalPayOddEven: function () {
+            return this.OddEven.reduce(function (a, c) {
                 return a + Number(c.pay || 0)
             }, 0)
         },
-        totalPayBigSmall: function() {
-            return this.SmallLarge.reduce(function(a, c) {
+        totalPayBigSmall: function () {
+            return this.SmallLarge.reduce(function (a, c) {
                 return a + Number(c.pay || 0)
             }, 0)
         },
-        buttonStyle: function() {
+        buttonStyle: function () {
             return {
                 flex: `1 1 ${100 / 2}%`,
             }
@@ -390,6 +381,7 @@ export default {
     },
     created() {
         this.getMarketGameSetting()
+        this.getIp()
     },
     methods: {
         totalKei(item) {
@@ -456,17 +448,17 @@ export default {
                     Swal.fire(
                         'Invalide Amount',
                         'Amount cannot less then ' +
-                            this.setting.general.symbol +
-                            ' ' +
-                            limitMin +
-                            '  or greater than ' +
-                            this.setting.general.symbol +
-                            ' ' +
-                            limitMax +
-                            ' and also modulus of ' +
-                            this.setting.general.symbol +
-                            ' ' +
-                            modulus,
+                        this.setting.general.symbol +
+                        ' ' +
+                        limitMin +
+                        '  or greater than ' +
+                        this.setting.general.symbol +
+                        ' ' +
+                        limitMax +
+                        ' and also modulus of ' +
+                        this.setting.general.symbol +
+                        ' ' +
+                        modulus,
                         'info',
                     )
                 }
@@ -477,10 +469,11 @@ export default {
                 parseFloat(this.totalPayOddEven) +
                 parseFloat(this.totalPayBigSmall)
             const input = {
-                betOddEven: this.OddEvent,
+                betOddEven: this.OddEven,
                 betSmallLarge: this.SmallLarge,
                 betTotalPay: totalPay,
                 market: this.$route.params.marketcode,
+                ip: this.ipPublicClient,
             }
             if (totalPay < this.user.reg_remain_balance && totalPay > 0) {
                 const data = await this.$axios.$post(
@@ -518,11 +511,11 @@ export default {
         },
         reset() {
             let self = this
-            Object.keys(this.OddEvent).forEach(function(key, index) {
-                self.OddEvent[key].Selected = 1
-                self.OddEvent[key].bet = 0
+            Object.keys(this.OddEven).forEach(function (key, index) {
+                self.OddEven[key].Selected = 1
+                self.OddEven[key].bet = 0
             })
-            Object.keys(this.SmallLarge).forEach(function(key, index) {
+            Object.keys(this.SmallLarge).forEach(function (key, index) {
                 self.SmallLarge[key].Selected = 1
                 self.SmallLarge[key].bet = 0
             })

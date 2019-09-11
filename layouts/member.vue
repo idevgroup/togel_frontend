@@ -1,9 +1,9 @@
 <template>
     <div>
-        <Header ></Header>
-        <nav-bar ></nav-bar>
+        <Header></Header>
+        <nav-bar></nav-bar>
         <b-container>
-               <b-row class="mt-2">
+            <b-row class="mt-2">
                 <b-col>
                     <b-card
                         overlay
@@ -15,11 +15,14 @@
             </b-row>
             <b-row class="mt-4">
                 <b-col col md="3">
-                    <member-side-bar ></member-side-bar>
+                    <member-side-bar></member-side-bar>
                 </b-col>
                 <b-col md="9" class="pl-0">
-                    <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-                        <nuxt ></nuxt>
+                    <transition
+                        name="router-anim"
+                        enter-active-class="animated fadeIn"
+                        leave-active-class="animated fadeOut">
+                        <nuxt></nuxt>
                     </transition>
                 </b-col>
 
@@ -35,14 +38,14 @@ import NavBar from '~/components/partials/NavBar'
 import MemberSideBar from '~/components/partials/MemberSideBar'
 import Footer from '~/components/partials/Footer'
 export default {
-    middleware: 'guest',
-    name: 'MemberLayoutView',
-    components: {
-        Header,
-        NavBar,
-        MemberSideBar,
-        Footer,
-    },
+	middleware: 'guest',
+	name: 'MemberLayoutView',
+	components: {
+		Header,
+		NavBar,
+		MemberSideBar,
+		Footer,
+	},
 }
 </script>
 

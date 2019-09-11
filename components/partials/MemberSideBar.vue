@@ -43,93 +43,53 @@
 
 <script>
 export default {
-    data: () => ({
-        transactions: [
-            {
-                title: 'Dashboard',
-                path: 'dashboard',
-            },
-            {
-                title: 'Deposit',
-                path: 'deposit',
-            },
-            {
-                title: 'Withdraw',
-                path: 'withdraw',
-            },
-            {
-                title: 'Report',
-                path: 'reports',
-                subitems: [],
-            },
-        ],
-        itemSelected: null,
-        userprofiles: [
-            {
-                title: 'Profile',
-                path: 'profile',
-            },
-            {
-                title: 'Bank',
-                path: 'bank',
-            },
-            {
-                title: 'Referal',
-                path: 'referal',
-            },
-            {
-                title: 'Contact',
-                path: 'contact',
-            },
-        ],
-    }),
+	data: () => ({
+		transactions: [
+			{
+				title: 'Dashboard',
+				path: 'dashboard',
+			},
+			{
+				title: 'Deposit',
+				path: 'deposit',
+			},
+			{
+				title: 'Withdraw',
+				path: 'withdraw',
+			},
+			{
+				title: 'Bet Report',
+				path: 'reports',
+				subitems: [],
+			},
+		],
+		itemSelected: null,
+		userprofiles: [
+			{
+				title: 'Profile',
+				path: 'profile',
+			},
+			{
+				title: 'Bank',
+				path: 'bank',
+			},
+			{
+				title: 'Referal',
+				path: 'referal',
+			},
+			{
+				title: 'Contact',
+				path: 'contact',
+			},
+		],
+	}),
 
-    mounted() {
-        this.transactions.forEach(element => {
-            if (element.title === 'Report') {
-                element.subitems = this.setting.market
-            }
-        })
-    },
+	mounted() {
+		this.transactions.forEach(element => {
+			if (element.path === 'reports') {
+				element.subitems = this.setting.market
+			}
+		})
+	},
 }
 </script>
-
-<style scoped>
-.fa.fa-minus {
-    margin-right: 10px;
-}
-
-.list-group-item::before {
-    content: '';
-    font-size: 10px;
-    padding-right: 10px;
-    position: relative;
-    top: -1px;
-    font-family: FontAwesome !important;
-}
-
-.m-menu.list-group a::before {
-    font-size: 10px;
-    padding-right: 10px;
-    position: relative;
-    top: -1px;
-    font-family: FontAwesome !important;
-}
-
-.menu-ico-collapse {
-    float: right;
-}
-
-.list-group-submenu .list-group-item {
-    padding-left: 30px;
-}
-
-.list-group-submenu a::before {
-    content: '\f068';
-    font-size: 9px;
-    padding-right: 10px;
-    position: relative;
-    top: -1px;
-    font-family: FontAwesome !important;
-}
-</style>
