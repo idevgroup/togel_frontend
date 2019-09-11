@@ -1,0 +1,220 @@
+/*General.css*/
+
+* {
+    padding: 0px;
+    margin: 0px;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+    /* font-family: Time New Roman; */
+}
+
+.clear {
+    clear: both;
+}
+
+.pull-left {
+    float: left;
+}
+
+.pull-right {
+    float: right;
+}
+
+
+/* import font */
+
+
+/* @font-face {
+    font-family: myFirstFont;
+    src: url(../../media/font/Acme-Regular.ttf);
+} */
+
+
+/* end import font */
+
+
+/*reset.css*/
+
+
+/* css rest */
+
+html,
+body,
+div,
+span,
+applet,
+object,
+iframe,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+a,
+abbr,
+acronym,
+address,
+big,
+cite,
+code,
+del,
+dfn,
+em,
+img,
+ins,
+kbd,
+q,
+s,
+samp,
+small,
+strike,
+strong,
+sub,
+sup,
+tt,
+var,
+b,
+u,
+i,
+center,
+dl,
+dt,
+dd,
+ol,
+ul,
+li,
+fieldset,
+form,
+label,
+legend,
+table,
+caption,
+tbody,
+tfoot,
+thead,
+tr,
+th,
+td,
+article,
+aside,
+canvas,
+details,
+embed,
+figure,
+figcaption,
+footer,
+header,
+hgroup,
+menu,
+nav,
+output,
+ruby,
+section,
+summary,
+time,
+mark,
+audio,
+video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+
+
+/* HTML5 display-role reset for older browsers */
+
+article,
+aside,
+details,
+figcaption,
+figure,
+footer,
+header,
+hgroup,
+menu,
+nav,
+section {
+    display: block;
+}
+
+body {
+    line-height: 1;
+}
+
+ol,
+ul {
+    list-style: none;
+}
+
+blockquote,
+q {
+    quotes: none;
+}
+
+blockquote:before,
+blockquote:after,
+q:before,
+q:after {
+    content: '';
+    content: none;
+}
+
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+
+/*end reset*/
+
+.header {
+    margin-bottom: 0px;
+}
+
+.sidebar-menu {
+    width: 25px;
+    float: left;
+}
+
+.bm-burger-bars {
+    background-color: white !important;
+}
+
+.bm-burger-button {
+    height: 22px !important;
+    left: 18px !important;
+    top: 18px !important;
+    width: 26px !important;
+}
+
+.logo-wrap img {
+    width: 120px;
+    margin-left: 58px;
+    margin-top: 4px;
+}
+
+.pull-right form {
+    margin-right: 10px;
+}
+
+.daftar,
+.login {
+    background: url(~assets/media/mobile-images/daftar.png) center no-repeat;
+    width: 90px;
+    height: 45px;
+    border: none;
+    outline: none;
+    margin-top: 10px;
+}
+
+.login {
+    background: url(~assets/media/mobile-images/login.png) center no-repeat;
+}

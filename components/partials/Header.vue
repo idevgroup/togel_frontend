@@ -1,45 +1,68 @@
 <template>
+    <div class="mt-3">
+        <div id="contact-wrap" class="contact-wrap"  style="left: -190px"  @mouseover="mouseOver"  @mouseleave="hover = false">
+            <div class="contact">
 
-    <div class="pre-header">
+            </div>
+        </div>
+        <div id="contact-wrap-right" class="contact-wrap-right"  style="right: -190px">
+            <ul class="contact">
+                <a href="#">
+                    <div class="fb">
+                        <p>350TOTO</p>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="line">
+                        <p>350TOTO</p>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="telegram">
+                        <p>350TOTO</p>
+                    </div>
+                </a>
+                <a href="#">
+                    <div class="wechat">
+                        <p>350TOTO</p>
+                    </div>
+                </a>
+            </ul>
+        </div>
         <b-container>
             <b-row>
-                <b-col class="additional-shop-info">
-                    <b-nav class="list-unstyled list-inline">
-                        <b-nav-item><i class="fa fa-phone"></i><span>+1 456 6717</span></b-nav-item>
-                        <b-nav-item><i class="fa fa-envelope-o"></i><span>info@keenthemes.com</span></b-nav-item>
-                    </b-nav>
+                <b-col>
+                      <div class="logo">
+                        <b-img src="~/assets/media/images/logo.png" class="img-fluid" alt="logo" />
+                    </div>
                 </b-col>
-                <b-col class="additional-nav">
-                    <template v-if="authenticated">
-                        <b-nav class="pull-right">
-                            <b-nav-item to="/member/gamemarkets">Play</b-nav-item>
-                            <b-nav-item to="/member/dashboard">{{user.reg_remain_balance| currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</b-nav-item>
-                            <b-nav-item-dropdown
-                                id="my-nav-dropdown"
-                                :text="user.reg_name"
-                                toggle-class="nav-link-custom"
-                                right>
-
-                                <template v-for="item in transactions">
-                                    <b-dropdown-item :to="{name:'member-'+item.path}" :key="item.path">{{ item.title }}</b-dropdown-item>
-                                </template>
-                                <template v-for="item in userprofiles">
-                                    <b-dropdown-item :key="item.path" to="#">{{ item.title }}</b-dropdown-item>
-                                </template>
-                                <b-dropdown-divider></b-dropdown-divider>
-                                <b-dropdown-item to="#" @click="logoutSubmit">Logout</b-dropdown-item>
-
-                            </b-nav-item-dropdown>
-
-                        </b-nav>
-                    </template>
-                    <template v-else>
-                        <b-nav class="list-unstyled list-inline pull-right">
-                            <b-nav-item v-b-modal.modal-login> Log In</b-nav-item>
-                            <b-nav-item v-b-modal.modal-register>Registration</b-nav-item>
-                        </b-nav>
-                    </template>
-
+                <b-col class="mt-4 pull-right form-wrap">
+                    <div class="row">
+                                    <div class="col-sm-12 col-md-6 col-lg-6 pr-0 live-chat-wrap">
+                                        <div class="live-chat ml-5">
+                                            <p class="live-chat"><span>LIVE CHAT</span><span><img
+                                                    src="~/assets/media/images/icons/live-chat.png" class="img-fluid"
+                                                    alt="live-chat"></span></p>
+                                        </div>
+                                        <div class="timezone mt-4 ml-2">
+                                            <p>{{currentTime}} (GMT+7)</p>
+                                            <!-- {{currentTime}} -->
+                                        </div>
+                                    </div>
+                                    <div class="col-sm-12 col-md-6 col-lg-6 ml-0">
+                                        <!-- Form -->
+                                        <form method="POST" action="#" class="my-form">
+                                            <input type="text" name="txtUsername" placeholder="USERNAME">
+                                            <input type="password" name="txtPassword" placeholder="PASSWORD" />
+                                            <div class="clear"></div>
+                                            <!-- <button class="daftar hvr-wobble-skew" name="daftar"></button>
+                                            <button class="login hvr-wobble-skew" name="login"></button> -->
+                                            <input type="button" name="daftar" value="DAFTAR" />
+                                            <input type="button" name="login" value="LOGIN" />
+                                        </form>
+                                        <!-- /Form -->
+                                    </div>
+                                </div>
                 </b-col>
             </b-row>
         </b-container>
@@ -48,8 +71,10 @@
 </template>
 
 <script>
+import moment from 'moment'
 export default {
     data: () => ({
+        hover: false,
         transactions: [
             {
                 title: 'Deposit',
@@ -75,12 +100,21 @@ export default {
                 path: 'contact',
             },
         ],
+        currentTime: null,
     }),
-
+    created() {
+        this.currentTime = moment().format('YYYY/MM/DD H:mm:ss')
+        let vm = this
+        setInterval(() => vm.updateCurrentTime(), 1 * 1000)
+    },
     methods: {
+        updateCurrentTime() {
+            this.currentTime = moment().format('YYYY/MM/DD H:mm:ss')
+        },
         async logoutSubmit() {
             await this.$auth.logout()
         },
+
     },
 }
 </script>

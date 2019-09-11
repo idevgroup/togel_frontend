@@ -35,6 +35,14 @@ module.exports = {
                 singleQuote: true,
                 trailingComma: 'all',
             },
-        ]
+        ],
+        'prettier/prettier': 'off',
+        'vue/require-default-prop': 'off',
+        'vue/html-indent': 'off',
+        'vue/max-attributes-per-line': 'off',
+        'vue/singleline-html-element-content-newline': 'off',
+        'vue/multiline-html-element-content-newline': 'off',
+        'vue/html-self-closing': 'off',
+        'vue/mustache-interpolation-spacing': 'off'
     }
 }

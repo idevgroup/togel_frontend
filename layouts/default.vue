@@ -12,6 +12,7 @@
 </template>
 
 <script>
+// Vue.loadScript("assets/media/js/jquery.js")
 import Header from '~/components/partials/Header'
 import NavBar from '~/components/partials/NavBar'
 import Login from '~/components/auth/Login'
@@ -27,5 +28,10 @@ export default {
     },
 }
 </script>
+<style src="assets/media/css/style.css">
+</style>
+<style src="assets/media/slide/style.css">
+</style>
+
 <style scoped>
 </style>
