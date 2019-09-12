@@ -28,10 +28,3 @@ export default {
     },
 }
 </script>
-<style src="assets/media/css/style.css">
-</style>
-<style src="assets/media/slide/style.css">
-</style>
-
-<style scoped>
-</style>

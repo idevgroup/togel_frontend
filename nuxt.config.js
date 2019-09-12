@@ -47,6 +47,8 @@ export default {
         '~/assets/corporate/css/style.css',
         '~/assets/corporate/css/style-responsive.css',
         '~/assets/corporate/css/custom.css',
+        '~/assets/media/css/style.css',
+        '~/assets/media/slide/style.css',
     ],
 
     /*

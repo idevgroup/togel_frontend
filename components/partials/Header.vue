@@ -1,6 +1,6 @@
 <template>
     <div class="mt-3">
-        <div id="contact-wrap" class="contact-wrap"  style="left: -190px"  @mouseover="mouseOver"  @mouseleave="hover = false">
+        <div id="contact-wrap" class="contact-wrap"  style="left: -190px" >
             <div class="contact">
 
             </div>

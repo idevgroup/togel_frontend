@@ -26,18 +26,7 @@ module.exports = {
     rules: {
         'no-console': process.env.NODE_ENV === 'production' ? 'error' : 'off',
         'no-debugger': process.env.NODE_ENV === 'production' ? 'error' : 'off',
-<<<<<<< HEAD
-        "no-unused-vars": ['error', { "args": "none" }],
-        'prettier/prettier': [
-            'error',
-            {
-                singleQuote: true,
-                trailingComma: 'all',
-            },
-        ],
-=======
         'no-unused-vars': ['error', { args: 'none' }],
->>>>>>> 14039b0efc8cdf941513e1a0c9e7d3c041be7034
         'prettier/prettier': 'off',
         'vue/require-default-prop': 'off',
         'vue/html-indent': 'off',
@@ -45,11 +34,6 @@ module.exports = {
         'vue/singleline-html-element-content-newline': 'off',
         'vue/multiline-html-element-content-newline': 'off',
         'vue/html-self-closing': 'off',
-<<<<<<< HEAD
-        'vue/mustache-interpolation-spacing': 'off'
-    }
-=======
         'vue/mustache-interpolation-spacing': 'off',
     },
->>>>>>> 14039b0efc8cdf941513e1a0c9e7d3c041be7034
 }
