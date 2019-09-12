@@ -23,8 +23,8 @@ export default function({ $axios, store, app, redirect, $option }) {
         if (!error.response) {
             // swal.fire('Error', '.Oops... Something went wrong', 'error')
             // this.$store.commit('todos/add', e.target.value)
-            app.$auth.reset()
-            app.$auth.logout()
+            this.$auth.reset()
+            this.$auth.logout()
             return
         }
         const { status } = parseInt(error.response && error.response.status)
@@ -44,20 +44,20 @@ export default function({ $axios, store, app, redirect, $option }) {
                 text: arr.join(' '),
             })
         } else if (status === 401) {
-            app.$auth.reset()
-            app.$auth.logout()
+            this.$auth.reset()
+            this.$auth.logout()
             console.log(store)
             console.log(app)
             console.log($option)
         } else if (status === 403) {
             redirect('/errors/403')
         } else if (status >= 500) {
-            app.$auth.reset()
-            app.$auth.logout()
+            this.$auth.reset()
+            this.$auth.logout()
             swal.fire('Error', 'Something went wrong.', 'error')
         } else {
-            app.$auth.reset()
-            app.$auth.logout()
+            this.$auth.reset()
+            this.$auth.logout()
         }
     })
 }

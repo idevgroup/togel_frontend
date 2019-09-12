@@ -214,8 +214,8 @@ p.live-chat img {
     color: white
 }
 
-form.my-form input[name="txtUsername"],
-form.my-form input[name="txtPassword"],
+form.my-form input[name="username"],
+form.my-form input[name="password"],
 form.my-form input[name="daftar"],
 form.my-form input[name="login"] {
     width: 138px;
@@ -231,7 +231,7 @@ form.my-form input[name="login"] {
     padding-left: 10px;
 }
 
-form.my-form input[name="txtPassword"] {
+form.my-form input[name="password"] {
     background: url(~assets/media/images/password.png) center no-repeat;
     position: absolute;
 }

@@ -5,7 +5,6 @@
                 <b-list-group-item :to="{path:'/member/gamemarkets/'+marketCode+'/'+item.code}" :key="item.id" >{{ item.name }}</b-list-group-item>
             </template>
         </b-list-group>
-        {{ isNotIn }}
     </div>
 
 </template>
@@ -23,7 +22,6 @@ export default {
 			item => !this.isNotIn.includes(parseInt(item.id))
 		)
 		this.marketCode = this.$route.params.marketcode
-		console.log(isNotIn)
 	},
 }
 </script>
