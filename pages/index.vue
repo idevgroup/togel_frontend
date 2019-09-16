@@ -1,6 +1,6 @@
 <template>
-    <div>
-        <b-container fluid>
+    <div> 
+        <b-container fluid class="pl-0 pr-0">
             <Slider></Slider>
             <div class="bg-lucky">
                 <div class="wrapper">

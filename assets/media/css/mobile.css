@@ -229,9 +229,10 @@ table {
     height: 91px;
 }
 
-@media only screen and (min-width: 414px) {
+
+/* @media only screen and (min-width: 414px) {
     .bg-lucky {
         background: url(~assets/media/mobile-images/homepage/bg-lucky.jpg) no-repeat center;
         width: 414px;
     }
-}
+} */

@@ -7,6 +7,5 @@ export default {
  
 }
 </script>
-<style src="assets/media/css/mobile.css">
-</style>
+
 <style></style>

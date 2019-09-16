@@ -195,7 +195,6 @@ export default {
 	},
 }
 </script>
-
 <style scoped>
 form.my-form input[name='username'],
 form.my-form input[name='password'] {

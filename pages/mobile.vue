@@ -60,7 +60,9 @@
         </div>
         <div class="clear"></div>
         <div class="lucky-wrap">
-            <div class="bg-lucky img-fluid">o78i67iuiu</div>
+            <div class="bg-lucky img-fluid">
+                <img src="~/assets/media/mobile-images/homepage/bg-lucky.jpg">
+            </div>
         </div>
     </div>
 </template>
@@ -73,6 +75,7 @@ export default {
     },
 }
 </script>
-
+<style src="assets/media/css/mobile.css" scoped>
+</style>
 <style>
 </style>
