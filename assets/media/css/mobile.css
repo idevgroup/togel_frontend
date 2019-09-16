@@ -207,7 +207,7 @@ table {
 
 .daftar,
 .login {
-    background: url(~assets/media/mobile-images/daftar.png) center no-repeat;
+    background: url(~assets/media/mobile-images/homepage/daftar.png) center no-repeat;
     width: 90px;
     height: 45px;
     border: none;
@@ -216,5 +216,22 @@ table {
 }
 
 .login {
-    background: url(~assets/media/mobile-images/login.png) center no-repeat;
+    background: url(~assets/media/mobile-images/homepage/login.png) center no-repeat;
+}
+
+.lucky-wrap {
+    margin-top: 10px;
+}
+
+.bg-lucky {
+    background: url(~assets/media/mobile-images/homepage/bg-lucky.jpg) center no-repeat;
+    width: 990px;
+    height: 91px;
+}
+
+@media only screen and (min-width: 414px) {
+    .bg-lucky {
+        background: url(~assets/media/mobile-images/homepage/bg-lucky.jpg) no-repeat center;
+        width: 414px;
+    }
 }
