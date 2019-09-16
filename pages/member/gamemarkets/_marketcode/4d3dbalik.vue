@@ -195,6 +195,7 @@ export default {
 	},
 	created() {
 		this.getMarketGameSetting()
+		this.getIp()
 	},
 	methods: {
 		subtotal(item) {
