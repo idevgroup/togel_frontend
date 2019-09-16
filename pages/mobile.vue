@@ -15,7 +15,7 @@
 
                 <div class="logo-wrap">
                     <b-img
-                        src="~/assets/media/mobile-images/logo.png"
+                        src="~/assets/media/mobile-images/homepage/logo.png"
                         class="img-fluid"
                         alt="logo"
                     />
@@ -57,6 +57,10 @@
                 <!-- End WOWSlider.com BODY section -->
             </div>
             <!-- /Slide show -->
+        </div>
+        <div class="clear"></div>
+        <div class="lucky-wrap">
+            <div class="bg-lucky img-fluid">o78i67iuiu</div>
         </div>
     </div>
 </template>
