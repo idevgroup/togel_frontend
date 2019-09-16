@@ -42,6 +42,7 @@
         "vue-burger-menu": "^2.0.2",
         "vue-comma-formatted-number": "^1.0.0",
         "vue-html-to-paper": "^1.1.1",
+        "vue-jquery": "^1.0.6",
         "vue-js-modal": "^1.3.31",
         "vue-loader": "^15.7.1",
         "vue-numeric": "^2.3.0",

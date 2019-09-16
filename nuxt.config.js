@@ -32,6 +32,9 @@ export default {
             {
                 src: 'https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js',
             },
+            {
+                src: 'https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js',
+            },
         ],
     },
 
@@ -44,11 +47,11 @@ export default {
      ** Global CSS
      */
     css: [
+        '~/assets/media/slide/style.css',
         '~/assets/corporate/css/style.css',
         '~/assets/corporate/css/style-responsive.css',
         '~/assets/corporate/css/custom.css',
         '~/assets/media/css/style.css',
-        '~/assets/media/slide/style.css',
     ],
 
     /*
@@ -66,6 +69,7 @@ export default {
         '~/plugins/vue2-filters.js',
         '~/plugins/modal.js',
         '~/plugins/mixins/corefunction.js',
+        { src: '~/plugins/jquery.js', ssr: false },
     ],
 
     /*
@@ -122,8 +126,15 @@ export default {
      ** Build configuration
      */
     build: {
-        vendor: ['vee-validate', 'moment'],
-
+        vendor: ['vee-validate', 'moment', 'jquery'],
+        plugins: [
+            new webpack.ProvidePlugin({
+                $: 'jquery',
+                _: 'lodash',
+                jQuery: 'jquery',
+                'window.jQuery': 'jquery',
+            }),
+        ],
         /*
          ** You can extend webpack config here
          */
@@ -147,12 +158,5 @@ export default {
                 console.log('this: ', config) // eslint-disable-line
             }
         },
-        plugins: [
-            new webpack.ProvidePlugin({
-                $: 'jquery',
-                _: 'lodash',
-                // ...etc.
-            }),
-        ],
     },
 }

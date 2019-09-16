@@ -2,39 +2,40 @@
     <div>
         <div class="row bg-menu mt-2 mr-0 ml-0">
             <div class="wrapper">
-                    <ul id="menu">
-                        <li>
-                            <a href="#" class="active">
-                               <img src="~assets/media/images/icons/home.png">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                <img src="~assets/media/images/icons/phone.png">
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                BUKU MIMIPI
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                PERATURAN
-                            </a>
-                        </li>
-                        <li>
-                            <a href="#">
-                                PROMO
-                            </a>
-                        </li>
-                           <li>
-                            <a href="#">
-                                KONTAK
-                            </a>
-                        </li>
-                        <div class="clear"></div>
-                    </ul>
+                <ul id="menu">
+                    <li>
+                        <nuxt-link to="/">
+                            <img src="~assets/media/images/icons/home.png">
+                        </nuxt-link>
+
+                    </li>
+                    <li>
+                        <a href="#">
+                            <img src="~assets/media/images/icons/phone.png">
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            BUKU MIMIPI
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            PERATURAN
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            PROMO
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            KONTAK
+                        </a>
+                    </li>
+                    <div class="clear"></div>
+                </ul>
             </div>
             <!-- <b-container>
                 <div class="col-sm-12 col-md-12 mt-2">

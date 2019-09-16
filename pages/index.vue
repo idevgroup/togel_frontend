@@ -1,6 +1,6 @@
 <template>
     <div>
-        <b-container fluid class="pl-0 pr-0">
+        <b-container fluid>
             <Slider></Slider>
             <div class="bg-lucky">
                 <div class="wrapper">
@@ -302,18 +302,18 @@
 import Slider from '~/components/partials/Slider'
 import carousel from 'vue-owl-carousel'
 export default {
-    components: {
-        Slider,
-        carousel
-    },
+	components: {
+		Slider,
+		carousel,
+	},
 }
 </script>
 
 <style>
-    .owl-item{
-        width: 199px !important;
-    }
-    .owl-theme .owl-dots .owl-dot {
-        display: none !important;
-    }
+.owl-item {
+	width: 199px !important;
+}
+.owl-theme .owl-dots .owl-dot {
+	display: none !important;
+}
 </style>
