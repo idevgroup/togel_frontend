@@ -37,14 +37,14 @@
         </div>
         <b-container>
             <b-row>
-                <b-col>
+                <!-- <b-col> -->
                     <div class="logo">
                         <b-img
                             src="~/assets/media/images/logo.png"
                             class="img-fluid"
                             alt="logo" />
                     </div>
-                </b-col>
+                <!-- </b-col> -->
                 <b-col class="mt-4 pull-right form-wrap">
                     <div class="row">
                         <div class="col-sm-12 col-md-6 col-lg-6 pr-0 live-chat-wrap">
@@ -56,17 +56,18 @@
                                 <!-- {{currentTime}} -->
                             </div>
                         </div>
-                        <div class="col-sm-12 col-md-6 col-lg-6 ml-0">
+                        <div class="col-sm-12 col-md-6 col-lg-6 ml-0 pr-0 pl-0 mt-3">
                             <template v-if="authenticated">
                                 <b-nav class="pull-right">
-                                    <b-nav-item to="/member/gamemarkets">Play</b-nav-item>
-                                    <b-nav-item to="/member/dashboard">{{user.reg_remain_balance| currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</b-nav-item>
+                                    <b-nav-item to="/member/gamemarkets" class="play">Play</b-nav-item>
+                                    <!-- <b-nav-item to="/member/dashboard" variant="primary"></b-nav-item> -->
                                     <b-nav-item-dropdown
                                         id="my-nav-dropdown"
                                         :text="user.reg_name"
                                         toggle-class="nav-link-custom"
-                                        right>
-
+                                        right
+                                        class="dropdown-name">
+                                        <b-dropdown-item to="/member/dashboard">{{user.reg_remain_balance| currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</b-dropdown-item>
                                         <template v-for="item in transactions">
                                             <b-dropdown-item :to="{name:'member-'+item.path}" :key="item.path">{{ item.title }}</b-dropdown-item>
                                         </template>
@@ -196,8 +197,27 @@ export default {
 }
 </script>
 <style scoped>
+.logo{
+    width: 440px;
+}
 form.my-form input[name='username'],
 form.my-form input[name='password'] {
 	color: black;
 }
-</style>>
+.play{
+    background: url(~assets/media/images/btn.png) no-repeat;
+    width: 110px;
+    text-align: center;
+}
+
+.balance{
+    background: url(~assets/media/images/bg-balance.png) no-repeat;
+    text-align: center;
+    /* width: 110px */
+}
+.dropdown-name{
+    margin-right: -11px;
+    margin-left: 15px;
+    background-color: white;
+}
+</style>
