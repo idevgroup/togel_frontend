@@ -224,6 +224,7 @@ export default {
 	created() {
 		this.getMarketGameSetting()
 		this.loadRowTable()
+		this.getIp()
 	},
 	methods: {
 		subtotal(item) {
@@ -297,6 +298,7 @@ export default {
 				market: this.$route.params.marketcode,
 				totalpay: self.totalBet,
 				gamecode: '2D',
+				ip: this.ipPublicClient,
 			}
 			// if(!this.$validator.validateAll()) return
 

@@ -198,6 +198,7 @@ export default {
 		this.itemBank = this.setting.bank
 		this.modalWidth =
 			window.innerWidth < MODAL_WIDTH ? MODAL_WIDTH / 2 : MODAL_WIDTH
+		this.getIp()
 	},
 	methods: {
 		onVerify(response) {

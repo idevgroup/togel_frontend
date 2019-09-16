@@ -118,115 +118,117 @@ import { Money } from 'v-money'
 import VueRecaptcha from 'vue-recaptcha'
 import Swal from 'sweetalert2'
 export default {
-    layout: 'member',
-    components: {
-        Money,
-        VueRecaptcha,
-    },
-    data: () => ({
-        getBankMember: [],
-        memberBank: [],
-        selectedMemberBank: null,
-        depositionBank: [
-            {
-                id: null,
-                bank: 'Select One',
-            },
-        ],
-        selectedDepositBank: null,
-        amountDeposit: '',
-        messageDeposit: '',
-        recaptcha: '',
-        recaptchaKey: '',
-        formatmoney: {
-            decimal: '.',
-            thousands: ',',
-            prefix: '$ ',
-            suffix: '',
-            precision: 2,
-            masked: false,
-            allowBlank: false,
-        },
-    }),
-    mounted() {
-        this.getBankMember = this.user.get_player_bank
+	layout: 'member',
+	components: {
+		Money,
+		VueRecaptcha,
+	},
+	data: () => ({
+		getBankMember: [],
+		memberBank: [],
+		selectedMemberBank: null,
+		depositionBank: [
+			{
+				id: null,
+				bank: 'Select One',
+			},
+		],
+		selectedDepositBank: null,
+		amountDeposit: '',
+		messageDeposit: '',
+		recaptcha: '',
+		recaptchaKey: '',
+		formatmoney: {
+			decimal: '.',
+			thousands: ',',
+			prefix: '$ ',
+			suffix: '',
+			precision: 2,
+			masked: false,
+			allowBlank: false,
+		},
+	}),
+	mounted() {
+		this.getBankMember = this.user.get_player_bank
 
-        this.getMemberBank()
-    },
-    created() {
-        this.recaptchaKey = process.env.RECAPTCHA_KEY
-        this.formatmoney.prefix = this.setting.general.symbol + ' '
-    },
-    methods: {
-        onVerify(response) {
-            let self = this
-            self.recaptcha = response
-        },
-        resetCaptcha() {
-            this.$refs.recaptcha.reset()
-        },
-        async getMemberBank() {
-            await this.$axios.$post('member/getmemberbank').then(response => {
-                this.memberBank = response
-            })
-        },
-        async getDepositBank() {
-            const input = {
-                memberBankId: this.selectedMemberBank,
-            }
-            await this.$axios
-                .$post('member/getdepositbank', input)
-                .then(response => {
-                    this.selectedDepositBank = null
-                    this.depositionBank = response
-                })
-        },
-        async doDeposit() {
-            this.$validator.validateAll().then(response => {
-                if (response) {
-                    let self = this
-                    try {
-                        const input = {
-                            amount: self.amountDeposit,
-                            recaptcha: self.recaptcha,
-                            note: self.messageDeposit,
-                            memberbank: self.selectedMemberBank,
-                            debank: self.selectedDepositBank,
-                        }
-                        this.$axios
-                            .$post('member/deposit', input)
-                            .catch(function(error) {
-                                self.recaptcha = ''
-                                self.$refs.recaptcha.reset()
-                                console.log(error)
-                            })
-                            .then(response => {
-                                if (response.data.success === false) {
-                                    Swal.fire(
-                                        response.data.alert.title,
-                                        response.data.alert.message,
-                                        'info',
-                                    )
-                                } else {
-                                    Swal.fire(
-                                        response.data.alert.title,
-                                        response.data.alert.message,
-                                        'success',
-                                    )
-                                }
-                                // Redirect member dashboard.
-                                this.$router.push({
-                                    name: 'member-dashboard',
-                                })
-                            })
-                    } catch (error) {
-                        self.recaptcha = ''
-                        self.$refs.recaptcha.reset()
-                    }
-                }
-            })
-        },
-    },
+		this.getMemberBank()
+	},
+	created() {
+		this.recaptchaKey = process.env.RECAPTCHA_KEY
+		this.formatmoney.prefix = this.setting.general.symbol + ' '
+		this.getIp()
+	},
+	methods: {
+		onVerify(response) {
+			let self = this
+			self.recaptcha = response
+		},
+		resetCaptcha() {
+			this.$refs.recaptcha.reset()
+		},
+		async getMemberBank() {
+			await this.$axios.$post('member/getmemberbank').then(response => {
+				this.memberBank = response
+			})
+		},
+		async getDepositBank() {
+			const input = {
+				memberBankId: this.selectedMemberBank,
+			}
+			await this.$axios
+				.$post('member/getdepositbank', input)
+				.then(response => {
+					this.selectedDepositBank = null
+					this.depositionBank = response
+				})
+		},
+		async doDeposit() {
+			this.$validator.validateAll().then(response => {
+				if (response) {
+					let self = this
+					try {
+						const input = {
+							amount: self.amountDeposit,
+							recaptcha: self.recaptcha,
+							note: self.messageDeposit,
+							memberbank: self.selectedMemberBank,
+							debank: self.selectedDepositBank,
+							ip: this.ipPublicClient,
+						}
+						this.$axios
+							.$post('member/deposit', input)
+							.catch(function(error) {
+								self.recaptcha = ''
+								self.$refs.recaptcha.reset()
+								console.log(error)
+							})
+							.then(response => {
+								if (response.data.success === false) {
+									Swal.fire(
+										response.data.alert.title,
+										response.data.alert.message,
+										'info'
+									)
+								} else {
+									Swal.fire(
+										response.data.alert.title,
+										response.data.alert.message,
+										'success'
+									)
+								}
+								// Redirect member dashboard.
+								this.$router.push({
+									name: 'member-dashboard',
+								})
+							})
+					} catch (error) {
+						self.recaptcha = ''
+						self.$refs.recaptcha.reset()
+					}
+				}
+			})
+		},
+	},
 }
 </script>
 
