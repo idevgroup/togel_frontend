@@ -2,7 +2,7 @@
     <div>
         
         <div v-if="isSiteLock">
-            <p>
+            <p class="p-span-white">
                 <span> Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol)}}</span>
                 <span> Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol)}} </span>
                 <span> Discount: {{ marketGameSetting.discount }}%</span>
@@ -10,7 +10,7 @@
                 <span> Win: x{{ marketGameSetting.menang }} | Double Win: x{{ marketGameSetting.menang_dbl }} </span><br/>
                 <span> Note:</span> Number cannot be the same in any input box  (Ex. 112,122,533,844,455,166,775,884,997...)
             </p>
-            <table class="table table-bordered">
+            <table class="table table-bordered tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th width="1">#</th>

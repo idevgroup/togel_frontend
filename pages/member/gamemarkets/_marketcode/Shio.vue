@@ -2,14 +2,14 @@
     <div>
         
         <div v-if="isSiteLock">
-            <p>
+            <p class="p-span-white">
                 <span> Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
                 <span> Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}} </span>
                 <span> Discount: {{ marketGameSetting.discount }}%</span>
                 <span> Bet Modulus: {{ marketGameSetting.bet_mod |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
                 <span> Win: x {{ marketGameSetting.menang }}</span>
             </p>
-            <table class="table table-bordered mt-2">
+            <table class="table table-bordered mt-2 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th width="1">#</th>
@@ -81,7 +81,7 @@
                         @click="addRow">Add Row</b-button>
                 </b-col>
             </b-row>
-            <table id="tbl-shio" class="table table-bordered mt-2">
+            <table id="tbl-shio" class="table table-bordered mt-2 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th>Nama Shio</th>

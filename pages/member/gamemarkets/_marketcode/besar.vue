@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="isSiteLock">
-            <p>
+            <p class="p-span-white">
                 <span> Odd Min Bet: {{ gameSettingGanjil.min_bet |currency(setting.general.symbol)}} | Even Min Bet: {{ gameSettingGenap.min_bet |currency(setting.general.symbol)}} | Large Min Bet: {{ gameSettingBesar.min_bet |currency(setting.general.symbol)}} | Small Min Bet: {{ gameSettingKecil.min_bet |currency(setting.general.symbol)}} </span>
                 <span> Odd Max Bet: {{ gameSettingGanjil.max_bet |currency(setting.general.symbol)}} | Even Max Bet: {{ gameSettingGenap.max_bet |currency(setting.general.symbol)}} | Large Max Bet: {{ gameSettingBesar.max_bet |currency(setting.general.symbol)}} | Small Max Bet: {{ gameSettingKecil.max_bet |currency(setting.general.symbol)}} </span>
                 <span> Odd Bet Modulus: {{ gameSettingGanjil.bet_mod |currency(setting.general.symbol)}} | Even Bet Modulus: {{ gameSettingGenap.bet_mod |currency(setting.general.symbol)}} | Large Bet Modulus: {{ gameSettingBesar.bet_mod |currency(setting.general.symbol)}} | Small Bet Modulus: {{ gameSettingKecil.bet_mod |currency(setting.general.symbol)}} </span>
@@ -9,7 +9,7 @@
                 <span> Odd Win: {{ (gameSettingGanjil.menang === 1)?100:gameSettingGanjil.menang }}% | Even Win: {{ gameSettingGenap.menang ===1?100:gameSettingGenap.menang }} % | Large Win: {{ gameSettingBesar.menang === 1?100:gameSettingBesar.menang }} % | Small Win: {{ gameSettingKecil.menang === 1?100:gameSettingKecil.menang  }} % </span>
 
             </p>
-            <table class="table table-bordered mt-5">
+            <table class="table table-bordered mt-5 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th colspan="9" class="text-center">Odd / Even</th>
@@ -93,7 +93,7 @@
                         @click="addRowTableOddEven">Add Row</b-button>
                 </b-col>
             </b-row>
-            <table class="table table-bordered mt-5">
+            <table class="table table-bordered mt-5 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th colspan="9" class="text-center">Large / Small</th>

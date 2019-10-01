@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="isSiteLock">
-             <p>
+             <p class="p-span-white">
             <span> Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol )}}</span>
             <span> Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol )}} </span>
             <span> Discount: {{ marketGameSetting.discount }}%</span>
@@ -9,7 +9,7 @@
             <span> Win : {{ marketGameSetting.menang * 100 }} %</span>
             <span>Double Win: x{{ marketGameSetting.menang_dbl  }} | Triple Win: x{{ marketGameSetting.menang_triple  }} | Quadruple wins: x{{ marketGameSetting.menang_quadruple  }} </span>
         </p>
-             <table class="table table-bordered mt-5">
+             <table class="table table-bordered mt-5 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th colspan="9" class="text-center">Colok Bebas</th>

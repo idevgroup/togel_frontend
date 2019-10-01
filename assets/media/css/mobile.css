@@ -128,6 +128,10 @@ video {
     vertical-align: baseline;
 }
 
+body {
+    background-color: black !important;
+}
+
 
 /* HTML5 display-role reset for older browsers */
 
@@ -184,43 +188,838 @@ table {
     float: left;
 }
 
-.bm-burger-bars {
+
+/* .bm-burger-bars {
     background-color: white !important;
-}
+} */
 
 .bm-burger-button {
-    height: 22px !important;
-    left: 18px !important;
-    top: 18px !important;
-    width: 26px !important;
+    top: 45px !important;
+}
+
+.navIcon a svg {
+    margin-left: 45px;
+    margin-top: 42px;
 }
 
 .logo-wrap img {
-    width: 120px;
-    margin-left: 58px;
-    margin-top: 4px;
+    /* width: 120px; */
+    /* margin-top: -71px; */
+    margin-top: 5px;
+    margin-left: 90px;
 }
 
 .pull-right form {
     margin-right: 10px;
 }
 
-.daftar,
-.login {
-    background: url(~assets/media/mobile-images/homepage/daftar.png) center no-repeat;
-    width: 90px;
-    height: 45px;
+.daftar {
+    background: url(~assets/media/mobile-images/homepage/daftar1.png) center no-repeat;
+    width: 185px;
+    height: 79px;
     border: none;
     outline: none;
     margin-top: 10px;
+    background-size: contain;
 }
 
 .login {
-    background: url(~assets/media/mobile-images/homepage/login.png) center no-repeat;
+    background: url(~assets/media/mobile-images/homepage/login1.png) center no-repeat;
+    width: 185px;
+    height: 79px;
+    border: none;
+    outline: none;
+    margin-top: 10px;
+    background-size: contain;
 }
 
-.lucky-wrap {
+.lucky-wrap-mobile {
     margin-top: 10px;
+}
+
+#wowslider-container1 img {
+    /* max-width: none !important; */
+}
+
+.bg-lucky-mobile {
+    background: url(~assets/media/mobile-images/homepage/bg-lucky.jpg) center no-repeat;
+    /* width: 990px; */
+    height: 91px;
+}
+
+
+/* form.daftar-button-menu-mobile input[id="daftar-button-menu-mobile"] {
+    width: 252px;
+    height: 58px;
+    background: url(~assets/media/mobile-images/homepage/daftar-btn1.png) center no-repeat;
+    border: none;
+    font-family: SitkaB;
+    font-size: 26px;
+    color: #fff;
+    outline: none;
+    margin: 16px 2px 10px 0px;
+    text-align: center;
+    padding-left: 10px;
+    -webkit-text-stroke: 2px #c3bd62e3;
+} */
+
+.daftar-button-mobile {
+    background: url(~assets/media/mobile-images/homepage/daftar-btn.png) center no-repeat;
+    width: 214px;
+    height: 56px;
+    border: none;
+    outline: none;
+    margin-top: 18px;
+    margin-left: 20px;
+}
+
+.center-mobile {
+    float: left;
+    width: 490px;
+    margin-top: 4px;
+}
+
+.luck-number-mobile {
+    background: url(~assets/media/mobile-images/homepage/lucky-number.png) center no-repeat;
+    width: 164px;
+    height: 74px;
+    float: left;
+    margin-left: 60px;
+    margin-top: 5px;
+}
+
+.luck-number-win-wrap-mobile {
+    /* margin-bottom: 5px; */
+    margin-top: 12px;
+}
+
+.luck-number-win-mobile {
+    background: url(~assets/media/mobile-images/homepage/luck-number-win.png) center no-repeat;
+    width: 65px;
+    height: 56px;
+    float: left;
+    /* padding-left: 65px; */
+    position: relative;
+}
+
+.luck-number-win-mobile span {
+    position: absolute;
+    left: 37%;
+    top: 10%;
+    color: white;
+    font-size: 36px;
+    font-family: -webkit-body;
+    font-family: Sitka;
+    font-weight: 700;
+}
+
+.win-round-wrap-mobile {
+    margin-top: 25px;
+}
+
+.click-btn-mobile {
+    background: url(~assets/media/mobile-images/homepage/click-btn.png) center no-repeat;
+    width: 214px;
+    height: 56px;
+    border: none;
+    outline: none;
+    margin-top: 18px;
+    margin-left: 20px;
+}
+
+.win-round-mobile {
+    background: url(~assets/media/mobile-images/homepage/win-round-mobile.png) center no-repeat;
+    width: 245px;
+    height: 138px;
+}
+
+.win-round-mobile span p {
+    text-align: center;
+    color: white;
+    text-shadow: 0 0 7px black;
+    font-size: 26px;
+    padding-top: 10px;
+    letter-spacing: 1px;
+}
+
+.country-img-mobile {
+    margin-top: 10px;
+    float: left;
+    margin-left: 10px;
+}
+
+.country-img-mobile img {
+    width: unset !important;
+}
+
+.country-img {
+    padding-bottom: 6px;
+    margin-left: 20px;
+}
+
+.country-title {
+    margin-left: 20px;
+    color: white;
+    font-size: 10px;
+}
+
+.win-number-mobile {
+    color: #c3bd62e3;
+    font-weight: 700;
+    font-size: 32px;
+    background: -webkit-linear-gradient( #604e06, #604e06, #ffff99, #604e06, #604e06);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-right: 35px;
+    letter-spacing: 4px;
+}
+
+.wrap-result-mobile {
+    float: right;
+    margin-top: 10px;
+}
+
+.date-win-mobile {
+    color: red;
+    font-size: 12px;
+    float: right;
+    margin-top: 22px;
+    margin-right: 25px;
+    letter-spacing: 1px;
+}
+
+.link-wrap-mobile {
+    background: url(~assets/media/mobile-images/homepage/bg-last.png)center no-repeat;
+    height: 556px;
+    padding-top: 10px;
+    margin-top: 20px;
+    text-align: center;
+}
+
+.lastest-wrap-title-mobile {
+    background: url(~assets/media/mobile-images/homepage/bg-last-title.png)center no-repeat;
+    height: 137px;
+    text-align: center;
+    margin-bottom: 13px;
+}
+
+.lastest-wrap-title-mobile span p {
+    font-weight: 700;
+    font-size: 48px;
+    background: -webkit-linear-gradient( #ffff99, #ffff99, #ffff99, #ffff99, #ffff99, #604e06, #604e06);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-top: 40px;
+    letter-spacing: 4px;
+}
+
+
+/* .link-wrap-body-mobile {
+background: url(~assets/media/mobile-images/homepage/bg-link-title.png)center no-repeat;
+background-color: #4d4d4d;
+width: 815px;
+height: 62px;
+width: 815px;
+margin: 0 auto;
+border-radius: 6px;
+} */
+
+.bg-link-body-title {
+    /* background: url(~assets/media/mobile-images/homepage/bg-link-title.png)center no-repeat; */
+    background-color: #4d4d4d;
+    margin: 0 auto;
+    width: 815px;
+    border-radius: 7px;
+    padding: 18px;
+    margin-bottom: 15px;
+}
+
+.bg-link-body-title span p {
+    color: white;
+    font-size: 26px;
+    letter-spacing: 1px;
+    letter-spacing: 3px;
+}
+
+.bg-royal-mobile {
+    background-color: #4d4d4d;
+    margin: 0 auto;
+    width: 815px;
+    border-radius: 7px;
+    /* padding: 18px; */
+    padding-top: 17px;
+    padding-bottom: 43px;
+    margin-bottom: 15px;
+    font-size: 26px;
+    color: white;
+    padding-right: 124px;
+    padding-left: 144px;
+    letter-spacing: 2px;
+}
+
+.latest-win-flush-name-mobile {
+    /* position: absolute; */
+    float: left;
+}
+
+.latest-win-flush-result-mobile {
+    float: right;
+}
+
+.withdraw-wrap-mobile {
+    background: url(~assets/media/mobile-images/homepage/bg-last.png)center no-repeat;
+    height: 556px;
+    padding-top: 10px;
+    margin-top: 20px;
+    /* text-align: center; */
+}
+
+.bg-withdraw-mobile {
+    background-color: #4d4d4d;
+    margin: 0 auto;
+    width: 815px;
+    border-radius: 7px;
+    padding-top: 17px;
+    padding-bottom: 43px;
+    margin-bottom: 15px;
+    font-size: 26px;
+    color: white;
+    padding-right: 100px;
+    padding-left: 100px;
+    letter-spacing: 2px;
+}
+
+.latest-withdraw-result-mobile {
+    float: left;
+}
+
+.latest-withdraw-name-mobile {
+    /* width: 140px; */
+    width: 250px;
+    ;
+    float: left;
+}
+
+.latest-withdraw-accept-mobile {
+    float: right;
+}
+
+.instagram-mobile:nth-of-type(1) {
+    margin-left: 10px;
+}
+
+
+/* Start Socail */
+
+.socail-wrap {
+    margin-top: 25px;
+}
+
+.instagram-mobile,
+.telegram-mobile,
+.whatapp-mobile,
+.fb-mobile {
+    background: url(~assets/media/mobile-images/homepage/bg-socail.png) no-repeat;
+    text-align: center;
+    width: 201px;
+    float: left;
+    margin-left: 55px;
+    padding: 24px 0 25px;
+}
+
+.instagram-mobile img,
+.telegram-mobile img,
+.whatapp-mobile img,
+.fb-mobile img {
+    margin: 0 auto;
+    display: table;
+    padding-bottom: 25px;
+}
+
+.instagram-mobile span,
+.telegram-mobile span,
+.whatapp-mobile span,
+.fb-mobile span {
+    /* padding: 15px 0; */
+    font-size: 20px;
+    font-weight: 700;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.whatapp-mobile {
+    float: left;
+}
+
+.app-download-wrap {
+    padding: 21px 52px 110px;
+    /* border: 2px solid transparent;
+    border-image: linear-gradient(to right, #604e06, #fefd98, #604e06);
+    border-image-slice: 1; */
+    background: url(~assets/media/mobile-images/homepage/bg-download.png) center no-repeat;
+    margin-top: 20px;
+}
+
+.google-play {
+    width: 340px;
+}
+
+.google-play,
+.mobile-desktop {
+    float: left;
+}
+
+.appStore {
+    float: right
+}
+
+.content-text {
+    text-align: center;
+}
+
+.content-text h1 {
+    margin-top: 15px;
+    font-size: 30px;
+    letter-spacing: 1px;
+    font-weight: 800;
+    background: -webkit-linear-gradient( #ffff99, #ffff99, #ffff99ad, #604e06, #604e06);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    padding-bottom: 5px;
+    line-height: 38px;
+}
+
+.content-text p {
+    font-size: 12px;
+    color: white;
+    letter-spacing: 1.50px;
+    line-height: 22px;
+}
+
+.copyright-mobile {
+    text-align: center;
+    color: white;
+    margin: 15px 0;
+    /* text-shadow: 0 0 7px black; */
+}
+
+.footer-mobile {
+    padding-bottom: 113px;
+}
+
+.footer-menu-mobile {
+    /* margin-top: 20px; */
+    position: fixed;
+    z-index: 99999;
+    bottom: -5px;
+    /* background: black */
+}
+
+.buku-mobile {
+    /* border: 2px solid transparent;
+    border-image: linear-gradient(to right, #604e06, #fefd98, #604e06);
+    border-image-slice: 1; */
+    /* width: 247.50px; */
+    text-align: center;
+    /* padding: 10px 86.70px; */
+    background: url(~assets/media/mobile-images/homepage/bg-bottom-menu.png) center no-repeat;
+    float: left;
+    height: 117px;
+    width: 247.50px;
+    padding-top: 15px;
+}
+
+.buku-mobile h1 {
+    color: white;
+    font-weight: 700;
+    font-size: 13px;
+    letter-spacing: 4px;
+    margin-top: 5px;
+}
+
+@media (max-width: 375px) {
+    .wrapper.wrapper-mobile-win-round,
+    .wrapper.lucky-wrap-mobile,
+    .wrapper.slide-wrap-mobile,
+    .wrapper.header,
+    .wrapper.lastest-wrap-mobile,
+    .wrapper.socail-wrap,
+    .wrapper.app-download-wrap,
+    .wrapper.content,
+    .wrapper.footer-menu-mobile {
+        width: 375px !important;
+        margin: 0 auto;
+        position: relative;
+    }
+    .daftar-button-mobile {
+        margin-left: 6px !important;
+    }
+    .luck-number-win-mobile {
+        background-size: 100% !important;
+        margin-left: 4px !important;
+        margin-top: -12px !important;
+        width: 22px;
+    }
+    .luck-number-win-mobile:nth-of-type(1) {
+        margin-left: 3px !important;
+    }
+    .click-btn-mobile {
+        margin-left: 5px !important;
+    }
+    /* .pull-right form {
+        margin-right: 39px !important;
+    } */
+    .center-mobile {
+        width: 184px !important;
+    }
+    .luck-number-win-mobile span {
+        left: 37% !important;
+        top: 38% !important;
+        font-size: 12px !important;
+    }
+    .luck-number-mobile {
+        margin-left: 12px !important;
+    }
+    /* .center-mobile {
+        width: 188px !important; */
+    /* margin-top: 4px; */
+    /* } */
+    .owl-item {
+        width: 90px !important;
+        margin-left: 4px !important;
+    }
+    .win-round-mobile {
+        width: 90px !important;
+    }
+    .owl-item:nth-of-type(1) {
+        margin-left: 0px !important;
+    }
+    .country-img-mobile {
+        margin-top: 4px !important;
+        margin-left: 7px;
+    }
+    .win-round-mobile span p {
+        font-size: 6px !important;
+        padding-top: 7px !important;
+    }
+    .instagram-mobile,
+    .telegram-mobile,
+    .whatapp-mobile,
+    .fb-mobile {
+        max-width: 80px !important;
+    }
+    .buku-mobile {
+        /* padding: 10px 9.8px !important; */
+        width: 93.5px !important;
+    }
+    .buku-mobile img {
+        max-width: 25%;
+    }
+    .buku-mobile:nth-of-type(3) img {
+        max-width: 16%;
+    }
+    .buku-mobile:nth-of-type(4) img {
+        max-width: 18%;
+    }
+    .buku-mobile h1 {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 575.98px) {
+    .wrapper {
+        width: 414px !important;
+        margin: 0 auto;
+        position: relative;
+    }
+    .center-mobile {
+        width: 215px;
+        margin-top: 4px;
+    }
+    .sidebar-menu a {
+        display: block;
+        margin-top: 4px;
+    }
+    .navIcon a svg {
+        margin-left: 22px;
+        margin-top: 10px;
+        /* padding-top: 3px; */
+        position: absolute;
+    }
+    .logo-wrap img {
+        max-width: 125px;
+        margin-top: -4px;
+        margin-left: 64px;
+    }
+    .my-form {
+        margin-right: 5px !important;
+    }
+    .daftar,
+    .login {
+        max-width: 85px !important;
+        max-height: 48px;
+    }
+    .bg-lucky-mobile {
+        background-size: 100%;
+        height: 38px;
+    }
+    .daftar-button-mobile {
+        background-size: 100%;
+        width: 90px;
+        margin-top: -8px;
+        margin-left: 13px;
+    }
+    .luck-number-mobile {
+        width: 58px;
+        margin-left: 22px;
+        margin-top: -21px;
+        background-size: 100%;
+    }
+    .luck-number-win-mobile {
+        background-size: 36%;
+        margin-left: -38px;
+        margin-top: -12px;
+    }
+    .luck-number-win-mobile:nth-of-type(1) {
+        margin-left: -16px;
+    }
+    .luck-number-win-wrap-mobile {
+        margin-top: 0;
+    }
+    .click-btn-mobile {
+        background-size: 100%;
+        width: 90px;
+        margin-top: -8px;
+        margin-left: 0px;
+    }
+    .bg-lucky-mobile .pull-right {
+        width: 95px;
+    }
+    .luck-number-win-mobile span {
+        left: 45%;
+        top: 35%;
+        font-size: 15px;
+    }
+    .win-round-wrap-mobile {
+        margin-top: 0;
+    }
+    .win-round-mobile {
+        width: 101.50px;
+        background-size: 100%;
+        height: 58px;
+    }
+    .win-round-mobile span p {
+        font-size: 8px;
+        padding-top: 5px;
+        letter-spacing: 1px;
+    }
+    .country-img-mobile img {
+        background-size: 100%;
+        width: 24px !important;
+    }
+    .country-img {
+        padding-bottom: 0px;
+        margin-left: 5px;
+    }
+    .country-img-mobile {
+        margin-top: 5px;
+    }
+    .country-title {
+        margin-left: 2px;
+        color: white;
+        font-size: 5px;
+        letter-spacing: 1px;
+    }
+    .wrap-result-mobile {
+        float: right;
+        margin-top: 5px;
+    }
+    .win-number-mobile {
+        font-size: 12px;
+        margin-right: 15px;
+        letter-spacing: 2px;
+    }
+    .date-win-mobile {
+        color: red;
+        font-size: 5px;
+        float: right;
+        margin-top: 7px;
+        margin-right: 7px;
+        font-weight: 700;
+        margin-top: 12px;
+    }
+    .link-wrap-mobile:nth-of-type(1) {
+        margin-top: 0px;
+    }
+    .link-wrap-mobile {
+        background-size: 100%;
+        width: 358px;
+        margin: -20px auto;
+        height: 250px;
+    }
+    .lastest-wrap-title-mobile {
+        background-size: 100%;
+        width: 326px;
+        margin: 5px auto 0;
+        height: 68.50px;
+    }
+    .lastest-wrap-title-mobile span p {
+        font-weight: 900;
+        font-size: 20px;
+        padding-top: 21px;
+        letter-spacing: 1.5px;
+    }
+    .bg-link-body-title {
+        background-size: 100%;
+        max-width: 91%;
+        padding: 6px;
+        margin-bottom: 5px;
+    }
+    .bg-link-body-title span p {
+        font-size: 12px;
+        letter-spacing: 2px;
+    }
+    .bg-royal-mobile {
+        background-size: 100%;
+        max-width: 91%;
+        padding: 6px 45px 18px;
+        font-size: 12px;
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+    }
+    .latest-win-flush-name-mobile span p,
+    .latest-win-flush-result-mobile span p,
+    .latest-withdraw-name-mobile span p,
+    .latest-withdraw-result-mobile span p,
+    .latest-withdraw-accept-mobile span p {
+        font-size: 12px;
+    }
+    .withdraw-wrap-mobile {
+        background-size: 100%;
+        width: 358px;
+        margin: -20px auto;
+        height: 250px;
+    }
+    .bg-withdraw-mobile {
+        background-size: 100%;
+        max-width: 91%;
+        padding: 6px 45px 18px;
+        font-size: 12px;
+        letter-spacing: 1px;
+        margin-bottom: 5px;
+    }
+    .latest-withdraw-name-mobile {
+        width: 95px;
+    }
+    .instagram-mobile {
+        margin-left: 1px !important;
+    }
+    .instagram-mobile,
+    .telegram-mobile,
+    .whatapp-mobile,
+    .fb-mobile {
+        background-size: 100%;
+        max-width: 90px;
+        padding: 13px 0;
+        margin-left: 17px;
+    }
+    .instagram-mobile img,
+    .telegram-mobile img,
+    .whatapp-mobile img,
+    .fb-mobile img {
+        max-width: 35%;
+        padding-bottom: 4px;
+    }
+    .instagram-mobile span,
+    .telegram-mobile span,
+    .whatapp-mobile span,
+    .fb-mobile span {
+        font-size: 8px;
+        padding-bottom: 4px;
+    }
+    .google-play,
+    .appStore {
+        width: 115px;
+        margin-top: -18px;
+    }
+    .google-play img,
+    .appStore img {
+        max-width: 100%;
+    }
+    .app-download-wrap {
+        background-size: 100%;
+        padding: 25px;
+    }
+    .content-text h1 {
+        font-size: 11px;
+        line-height: 14px;
+    }
+    .content-text p {
+        font-size: 8px;
+        letter-spacing: 1px;
+        line-height: 12px;
+    }
+    .copyright-mobile h1 {
+        font-size: 12px;
+    }
+    .footer-mobile {
+        padding-bottom: 60px;
+    }
+    .buku-mobile {
+        /* padding: 10px 14.7px; */
+        width: 103.5px;
+        background-size: 100%;
+        height: 48px;
+        padding-top: 5px !important;
+    }
+    .buku-mobile img {
+        max-width: 25%;
+    }
+    .buku-mobile:nth-of-type(3) img {
+        max-width: 16%;
+    }
+    .buku-mobile:nth-of-type(4) img {
+        max-width: 18%;
+    }
+    .buku-mobile h1 {
+        font-size: 8px;
+        letter-spacing: 1px;
+    }
+}
+
+@media (max-width: 737px) and (min-width: 576px) {
+    /* .bm-burger-button {
+        height: 30px !important;
+        left: 34px !important;
+        top: 32px !important;
+        width: 36px !important;
+    } */
+    .navIcon a svg {
+        margin-left: 30px;
+        margin-top: 28px;
+        position: absolute;
+    }
+    .logo-wrap img {
+        width: 165px;
+        margin-top: 5px;
+        margin-left: 78px;
+    }
+    .my-form {
+        margin-right: 5px !important;
+    }
+    .daftar,
+    .login {
+        max-width: 111px !important;
+        max-height: 67px;
+    }
+    /* .bg-lucky-mobile {
+        background-size: 100%;
+        height: 69px;
+    } */
+    /* .bg-lucky-mobile {
+        max-width: 100%;
+    } */
 }
 
 

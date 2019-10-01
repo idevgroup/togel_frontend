@@ -180,15 +180,16 @@ table {
 
 /* @font-face {
     font-family: Sitka;
-    src: url(~/assets/media/font/Sitka.ttc)
+    src: url("../font/Sitka.ttc")
 }
 
 @font-face {
     font-family: SitkaI;
-    src: url(~/assets/media/font/SitkaI.ttc)
-}
+    src: url("../font/SitkaI.ttc")
+} */
 
-@font-face {
+
+/* @font-face {
     font-family: SitkaZ;
     src: url(~/assets/media/font/SitkaZ.ttc)
 } */
@@ -210,8 +211,168 @@ p.live-chat img {
     margin-right: -31px;
 }
 
+.pull-left .logo {
+    width: 400px;
+}
+
+.pull-right.time {
+    width: 549px;
+}
+
 .timezone p {
     color: white
+}
+
+.timezone-wrap {
+    color: white;
+    width: 142px;
+    margin-left: 354px;
+}
+
+.timezone-wrap p {
+    border-right: 2px solid #777243;
+    padding-right: 5px;
+}
+
+.timezone-auth .dropdown button img {
+    width: 25px;
+}
+
+.timezone-auth .dropdown .btn-secondary,
+.money .dropdown .btn-secondary {
+    color: #fff;
+    background-color: black;
+    /* border-color: black; */
+    border: none;
+    outline: none;
+}
+
+.timezone-auth .dropdown .btn {
+    padding: 0;
+    padding-top: 3px;
+}
+
+.dropdown-toggle::after {
+    padding-top: 8px;
+}
+
+.lang-drop.dropdown-menu {
+    background-color: black;
+    border: 1px solid #3a5189;
+}
+
+.lang-drop.dropdown-menu li .dropdown-item img {
+    float: left;
+}
+
+.lang-drop.dropdown-menu li .dropdown-item p {
+    float: left;
+    margin-top: -28px;
+    margin-left: 64px;
+    color: white
+}
+
+.lang-drop {
+    float: right;
+    margin-top: -22px;
+}
+
+.profile-wrap {
+    margin-top: 25px;
+    float: right;
+}
+
+.profile p {
+    /* border-right: 2px solid #777243; */
+    padding: 0 5px;
+}
+
+.profile {
+    /* position: absolute; */
+    float: left;
+}
+
+.money {
+    border-left: 2px solid #777243;
+}
+
+.money,
+.money p {
+    float: left;
+    margin-left: 5px
+}
+
+.money .dropdown .btn {
+    padding: 0;
+    margin-left: 5px;
+    margin-top: -3px;
+}
+
+.money .dropdown .btn.dropdown-toggle::after {
+    padding-top: 0px;
+}
+
+.sign-out {
+    float: left;
+}
+
+.contact-wrapp-top {
+    float: right;
+    margin-top: 20px;
+}
+
+.live-chat-auth {
+    float: left;
+    padding-right: 5px;
+    padding-left: 5px;
+    border-right: 2px solid #777243;
+}
+
+.live-chat-auth:nth-of-type(3) {
+    border: none;
+}
+
+.live-chat-auth span img {
+    width: 15px;
+}
+
+.live-chat-auth span {
+    font-size: 12px;
+    color: white;
+    letter-spacing: 1px;
+}
+
+.container-fluid .news-notification {
+    background: -webkit-gradient(linear, left top, right top, from(#fe5d70), to(#fe909d));
+    background: linear-gradient(to right, #fe5d70, #fe909d);
+    padding: 3px 6px;
+    margin-left: 5px;
+}
+
+.container-fluid .badge {
+    border-radius: 4px;
+    font-size: 75%;
+    padding: 4px 7px;
+    margin-right: 5px;
+    font-weight: 400;
+    color: #fff !important;
+}
+
+.badge-danger {
+    color: #fff;
+    background-color: #dc3545;
+}
+
+.badge {
+    display: inline-block;
+    padding: .25em .4em;
+    font-size: 75%;
+    font-weight: 700;
+    line-height: 1;
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25rem;
 }
 
 form.my-form input[name="username"],

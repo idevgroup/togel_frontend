@@ -1,14 +1,14 @@
 <template>
     <div>
         <div v-if="isSiteLock">
-        <p>
+        <p class="p-span-white">
             <span> 2D Depan Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
             <span> 2D Depan Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}} </span>
             <span> 2D Depan Discount: {{ marketGameSetting.discount }}%</span>
             <span> 2D Depan Bet Modulus: {{ marketGameSetting.bet_mod |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
             <span> Win 2D Depan: x {{ marketGameSetting.menang }}</span>
         </p>
-        <table class="table table-bordered">
+        <table class="table table-bordered tbl-bet-list">
             <thead class="thead-light">
                 <tr>
                     <th width="1">#</th>

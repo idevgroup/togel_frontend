@@ -1,14 +1,14 @@
 <template>
     <div>
           <div v-if="isSiteLock">
-        <p>
+        <p class="p-span-white">
             <span> 3D Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
             <span> 3D Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}} </span>
             <span> 3D Discount: {{ marketGameSetting.discount }}%</span>
             <span> 3D Bet Modulus: {{ marketGameSetting.bet_mod |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
             <span> Win 3D: x {{ marketGameSetting.menang }}</span>
         </p>
-        <table class="table table-bordered">
+        <table class="table table-bordered tbl-bet-list">
             <thead class="thead-light">
                 <tr>
                     <th width="1">#</th>

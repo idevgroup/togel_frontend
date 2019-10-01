@@ -2,14 +2,14 @@
     <div>
         
          <div v-if="isSiteLock">
-        <p>
+        <p class="p-span-white">
             <span> 4D Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol )}}</span>
             <span> 4D Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol )}} </span>
             <span> 4D Discount: {{ marketGameSetting.discount }}%</span>
             <span> 4D Bet Modulus: {{ marketGameSetting.bet_mod |currency(setting.general.symbol )}}</span>
             <span> Win 4D: x {{ marketGameSetting.menang }}</span>
         </p>
-        <table class="table table-bordered">
+        <table class="table table-bordered tbl-bet-list">
             <thead class="thead-light">
                 <tr>
                     <th width="1">#</th>

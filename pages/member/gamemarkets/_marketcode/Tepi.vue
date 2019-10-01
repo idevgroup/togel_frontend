@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="isSiteLock">
-            <p>
+            <p class="p-span-white">
                 <span> Tengah Min Bet: {{ gameSettingTengah.min_bet |currency(setting.general.symbol)}} | Tepi Min Bet: {{ gameSettingTepi.min_bet |currency(setting.general.symbol)}}  </span>
                 <span> Tengah Max Bet: {{ gameSettingTengah.max_bet |currency(setting.general.symbol)}} | Tepi Max Bet: {{ gameSettingTepi.max_bet |currency(setting.general.symbol)}}  </span>
                 <span> Tengah Bet Modulus: {{ gameSettingTengah.bet_mod |currency(setting.general.symbol)}} | Tepi Bet Modulus: {{ gameSettingTepi.bet_mod |currency(setting.general.symbol)}} </span>
@@ -9,7 +9,7 @@
                 <span> Tengah Win: {{ (gameSettingTengah.menang === 1)?100:gameSettingTengah.menang }}% | Tepi Win: {{ gameSettingTepi.menang ===1?100:gameSettingTepi.menang }} % </span>
 
             </p>
-            <table class="table table-bordered mt-5">
+            <table class="table table-bordered mt-5 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th width="20">

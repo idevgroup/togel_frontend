@@ -2,14 +2,14 @@
     <div>
         <market-head-active ></market-head-active>
         <div v-if="isSiteLock">
-        <p>
+        <p class="p-span-white">
             <span> 2D Tengah Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
             <span> 2D Tengah Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}} </span>
             <span> 2D Tengah Discount: {{ marketGameSetting.discount }}%</span>
             <span> 2D Tengah Bet Modulus: {{ marketGameSetting.bet_mod |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
             <span> Win 2D Tengah: x {{ marketGameSetting.menang }}</span>
         </p>
-        <table class="table table-bordered">
+        <table class="table table-bordered tbl-bet-list">
             <thead class="thead-light">
                 <tr>
                     <th width="1">#</th>

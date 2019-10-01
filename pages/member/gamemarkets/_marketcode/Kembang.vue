@@ -2,7 +2,7 @@
     <div>
      
         <div v-if="isSiteLock">
-            <p>
+            <p class="p-span-white">
                 <span> Kembang Min Bet: {{ gameSettingKembang.min_bet |currency(setting.general.symbol)}} | Kempis Min Bet: {{ gameSettingKempis.min_bet |currency(setting.general.symbol)}} | Kembar Min Bet: {{ gameSettingKembar.min_bet |currency(setting.general.symbol)}}</span>
                 <span> Kembang Max Bet: {{ gameSettingKembang.max_bet |currency(setting.general.symbol)}} | Kempis Max Bet: {{ gameSettingKempis.max_bet |currency(setting.general.symbol)}} | Kembar Max Bet: {{ gameSettingKembar.max_bet |currency(setting.general.symbol)}}</span>
                 <span> Kembang Bet Modulus: {{ gameSettingKembang.bet_mod |currency(setting.general.symbol)}} | Kempis Bet Modulus: {{ gameSettingKempis.bet_mod |currency(setting.general.symbol)}} | Kembar Bet Modulus: {{ gameSettingKembar.bet_mod |currency(setting.general.symbol)}} </span>
@@ -10,7 +10,7 @@
                 <span> Win Kembang: {{ (gameSettingKembang.menang === 1)?100:gameSettingKembang.menang }}% | Win Kempis: {{ gameSettingKempis.menang ===1?100:gameSettingKempis.menang }} % | Win Kempis: {{ gameSettingKembar.menang ===1?100:gameSettingKembar.menang }} %</span>
             </p>
 
-            <table class="table table-bordered mt-5">
+            <table class="table table-bordered mt-5 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th colspan="9" class="text-center">Kembang</th>
@@ -70,7 +70,7 @@
                     </template>
                 </tbody>
             </table>
-            <table class="table table-bordered mt-5">
+            <table class="table table-bordered mt-5 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th colspan="9" class="text-center">Kempis</th>
@@ -131,7 +131,7 @@
                 </tbody>
             </table>
 
-             <table class="table table-bordered mt-5">
+             <table class="table table-bordered mt-5 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th colspan="9" class="text-center">Kembar</th>

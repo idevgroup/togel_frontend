@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="isSiteLock">
-            <table class="table table-bordered mt-2">
+            <table class="table table-bordered mt-2 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th width="1">#</th>
@@ -78,7 +78,7 @@
                         @click="addRow(tebakAsItem,1,5)">Add Row</b-button>
                 </b-col>
             </b-row>
-            <table class="table table-bordered mt-2">
+            <table class="table table-bordered mt-2 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th width="1">#</th>
@@ -155,7 +155,7 @@
                         @click="addRow(tebakKepalaItem,9,13)">Add Row</b-button>
                 </b-col>
             </b-row>
-            <table class="table table-bordered mt-2">
+            <table class="table table-bordered mt-2 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th width="1">#</th>
@@ -232,7 +232,7 @@
                         @click="addRow(tebakAngkaItem,1,9)">Add Row</b-button>
                 </b-col>
             </b-row>
-            <p>
+            <p class="p-span-white">
                 <span> Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}}</span>
                 <span> Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol, 2, { thousandsSeparator: ',',spaceBetweenAmountAndSymbol: true })}} </span>
                 <span> Discount: {{ marketGameSetting.discount }}%</span>

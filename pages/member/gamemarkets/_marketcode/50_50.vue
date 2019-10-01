@@ -2,14 +2,14 @@
     <div>
       
         <div v-if="isSiteLock">
-            <p>
+            <p class="p-span-white">
                 <span> Min Bet: {{ marketGameSetting.min_bet |currency(setting.general.symbol)}}</span>
                 <span> Max Bet: {{ marketGameSetting.max_bet |currency(setting.general.symbol)}} </span>
                 <span> Discount: {{ marketGameSetting.discount }}%</span>
                 <span> Bet Modulus: {{ marketGameSetting.bet_mod |currency(setting.general.symbol)}}</span>
                 <span> Win: {{ (marketGameSetting.menang ===1)?100:marketGameSetting.menang }}%</span>
             </p>
-            <table class="table table-bordered game5050">
+            <table class="table table-bordered game5050 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th colspan="9" class="text-center">Odd / Even</th>
@@ -78,7 +78,7 @@
                     </template>
                 </tbody>
             </table>
-            <table class="table table-bordered game5050">
+            <table class="table table-bordered game5050 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th colspan="8" class="text-center">Large / Small</th>

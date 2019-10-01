@@ -8,4 +8,8 @@ export default {
 }
 </script>
 
-<style></style>
+<style scoped>
+    body{
+        background-color: black !important;
+    }
+</style>

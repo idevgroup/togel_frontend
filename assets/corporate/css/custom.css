@@ -172,3 +172,25 @@ table.table tbody tr:hover {
     top: -1px;
     font-family: FontAwesome !important;
 }
+
+.tbl-bet-list thead.thead-light tr th {
+    background-color: red;
+    color: white;
+}
+
+.tbl-bet-list {
+    color: white;
+    margin-top: 20px;
+}
+
+.w-color tr td {
+    color: white;
+}
+
+.p-span-white {
+    color: white;
+}
+
+#martket-side p {
+    color: white !important;
+}

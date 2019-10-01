@@ -1,7 +1,7 @@
 <template>
     <div>
         <div v-if="isSiteLock">
-            <p>
+            <p class="p-span-white">
                 <span> Silang Min Bet: {{ gameSettingSilang.min_bet |currency(setting.general.symbol)}} | Homo Min Bet: {{ gameSettingHomo.min_bet |currency(setting.general.symbol)}} </span>
                 <span> Silang Max Bet: {{ gameSettingSilang.max_bet |currency(setting.general.symbol)}} | Homo Max Bet: {{ gameSettingHomo.max_bet |currency(setting.general.symbol)}} </span>
                 <span> Silang Bet Modulus: {{ gameSettingSilang.bet_mod |currency(setting.general.symbol)}} | Homo Bet Modulus: {{ gameSettingHomo.bet_mod |currency(setting.general.symbol)}} </span>
@@ -9,7 +9,7 @@
                 <span> Win Silang: {{ (gameSettingSilang.menang === 1)?100:gameSettingSilang.menang }}% | Win Homo: {{ gameSettingHomo.menang ===1?100:gameSettingHomo.menang }} % </span>
             </p>
 
-            <table class="table table-bordered mt-5">
+            <table class="table table-bordered mt-5 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th colspan="9" class="text-center">Silang</th>
