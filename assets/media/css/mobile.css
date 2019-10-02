@@ -611,7 +611,7 @@ border-radius: 6px;
     /* margin-top: 20px; */
     position: fixed;
     z-index: 99999;
-    bottom: -5px;
+    bottom: 1px;
     /* background: black */
 }
 
@@ -646,6 +646,7 @@ border-radius: 6px;
     .wrapper.socail-wrap,
     .wrapper.app-download-wrap,
     .wrapper.content,
+    .wrapper.footer-mobile,
     .wrapper.footer-menu-mobile {
         width: 375px !important;
         margin: 0 auto;
@@ -725,6 +726,11 @@ border-radius: 6px;
         font-size: 8px;
         letter-spacing: 1px;
     }
+    .footer-menu-mobile {
+        /* z-index: 99999; */
+        position: fixed !important;
+        bottom: -5px !important;
+    }
 }
 
 @media (max-width: 575.98px) {
@@ -749,8 +755,14 @@ border-radius: 6px;
     }
     .logo-wrap img {
         max-width: 125px;
-        margin-top: -4px;
+        /* margin-top: -4px; */
         margin-left: 64px;
+    }
+    .bm-burger-button {
+        height: 25px !important;
+        left: 20px !important;
+        top: 20px !important;
+        width: 30px !important;
     }
     .my-form {
         margin-right: 5px !important;
@@ -912,6 +924,9 @@ border-radius: 6px;
     .latest-withdraw-name-mobile {
         width: 95px;
     }
+    .socail-wrap {
+        margin-top: 10px !important;
+    }
     .instagram-mobile {
         margin-left: 1px !important;
     }
@@ -964,7 +979,7 @@ border-radius: 6px;
         font-size: 12px;
     }
     .footer-mobile {
-        padding-bottom: 60px;
+        padding-bottom: 10px;
     }
     .buku-mobile {
         /* padding: 10px 14.7px; */
@@ -986,15 +1001,23 @@ border-radius: 6px;
         font-size: 8px;
         letter-spacing: 1px;
     }
+    .footer-menu-mobile {
+        /* z-index: 99999; */
+        position: fixed;
+        bottom: 1px;
+    }
 }
 
 @media (max-width: 737px) and (min-width: 576px) {
-    /* .bm-burger-button {
+    /* .wrapper {
+        max-width: 100%;
+    } */
+    .bm-burger-button {
         height: 30px !important;
         left: 34px !important;
         top: 32px !important;
         width: 36px !important;
-    } */
+    }
     .navIcon a svg {
         margin-left: 30px;
         margin-top: 28px;
