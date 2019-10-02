@@ -6,7 +6,7 @@
     -moz-box-sizing: border-box;
     -webkit-box-sizing: border-box;
     box-sizing: border-box;
-    font-family: Time New Roman
+    font-family: Arial, sans-serif;
 }
 
 .wrapper {
@@ -360,7 +360,7 @@ p.live-chat img {
 
 .badge-danger {
     color: #fff;
-    background-color: #dc3545;
+    background-color: #ae0016;
 }
 
 .badge {
@@ -379,7 +379,7 @@ form.my-form input[name="username"],
 form.my-form input[name="password"],
 form.my-form input[name="daftar"],
 form.my-form input[name="login"] {
-    width: 138px;
+    width: 130px;
     height: 28px;
     background: url(~assets/media/images/username.png) center no-repeat;
     border: none;
@@ -394,7 +394,6 @@ form.my-form input[name="login"] {
 
 form.my-form input[name="password"] {
     background: url(~assets/media/images/password.png) center no-repeat;
-    position: absolute;
 }
 
 form.my-form input[name="daftar"],
@@ -408,7 +407,6 @@ form.my-form input[name="login"] {
 
 form.my-form input[name="login"] {
     background: url(~assets/media/images/login.png) center no-repeat;
-    position: absolute;
 }
 
 

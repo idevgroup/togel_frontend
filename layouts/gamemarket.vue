@@ -1,51 +1,68 @@
 <template>
     <div>
-        <Header ></Header>
-        <nav-bar ></nav-bar>
+        <Header></Header>
+        <nav-bar></nav-bar>
         <b-container>
-            <b-row class="mt-2">
-                <b-col>
-                    <b-card
-                        overlay
-                        img-src="https://picsum.photos/900/250/?image=3"
-                        img-alt="Card Image"
-                        text-variant="white">
-                    </b-card>
-                </b-col>
-            </b-row>
-            <b-row class="mt-4">
-                <b-col col md="3">
-                    <b-card no-body class="mb-2">
-                        <h4 slot="header" class="m-0"><i class="fa fa-bookmark"></i> Market</h4>
-                        <b-list-group flush class="m-menu">
-                            <template v-for="item in marketItem">
-                                <b-list-group-item :to="{path:'/member/gamemarkets/'+item.code}" :key="item.id">{{ item.name }}</b-list-group-item>
-                            </template>
-                        </b-list-group>
-                    </b-card>
+            <b-col id="wrapper">
+                <b-row class="mt-2">
+                    <b-col>
+                        <b-card
+                            overlay
+                            img-src="https://picsum.photos/900/250/?image=3"
+                            img-alt="Card Image"
+                            text-variant="white">
+                        </b-card>
+                    </b-col>
+                </b-row>
+
+                <transition
+                    name="router-anim"
+                    enter-active-class="animated fadeIn"
+                    leave-active-class="animated fadeOut">
                     <template v-if="$route.params.marketcode">
-                        <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-                            <b-card no-body class="mb-2">
-                                <h4 slot="header" class="m-0"><i class="fa fa-archive" aria-hidden="true"></i> Bet Game</h4>
-                                <b-list-group flush class="m-menu">
+                        <b-row class="mt-4">
+                            <b-col id="section-game">
+                                <b-list-group horizontal class="m-menu-game">
                                     <template v-for="item in gameItem">
                                         <b-list-group-item :to="{path:'/member/gamemarkets/'+$route.params.marketcode+'/'+item.code}" :key="item.id">{{ item.name }}</b-list-group-item>
                                     </template>
                                 </b-list-group>
-                            </b-card>
+                            </b-col>
+                        </b-row>
+                    </template>
+                </transition>
+
+                <b-row class="mt-4">
+                    <b-col col md="3">
+                        <template v-if="$route.params.marketcode">
+                           <b-col id="market-active">
+                               <market-head-active></market-head-active>
+                           </b-col>     
+                            
+                        </template>
+                        <b-card no-body class="mb-2">
+                            <h4 slot="header" class="m-0"><i class="fa fa-bookmark"></i> Market</h4>
+                            <b-list-group flush class="m-menu">
+                                <template v-for="item in marketItem">
+                                    <b-list-group-item :to="{path:'/member/gamemarkets/'+item.code}" :key="item.id">{{ item.name }}</b-list-group-item>
+                                </template>
+                            </b-list-group>
+                        </b-card>
+                    </b-col>
+                    <b-col md="9" class="pl-0">
+                        <template v-if="$route.params.marketcode">
+                            <quick-games />
+                        </template>
+                        <transition
+                            name="router-anim"
+                            enter-active-class="animated fadeIn"
+                            leave-active-class="animated fadeOut">
+                            <nuxt></nuxt>
                         </transition>
-                    </template>
-                </b-col>
-                <b-col md="9" class="pl-0">
-                    <template v-if="$route.params.marketcode">
-                    <market-head-active></market-head-active>
-                    </template>
-                    <transition name="router-anim" enter-active-class="animated fadeIn" leave-active-class="animated fadeOut">
-                        <nuxt ></nuxt>
-                    </transition>
-                </b-col>
-                <Footer />
-            </b-row>
+                    </b-col>
+                    <Footer />
+                </b-row>
+            </b-col>
         </b-container>
     </div>
 </template>
@@ -55,6 +72,7 @@ import Header from '~/components/partials/Header'
 import NavBar from '~/components/partials/NavBar'
 import Footer from '~/components/partials/Footer'
 import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
+import QuickGames from '~/components/gamemarket/QuickGames'
 export default {
 	middleware: 'guest',
 	name: 'MarketCodeLayoutView',
@@ -63,6 +81,7 @@ export default {
 		NavBar,
 		Footer,
 		MarketHeadActive,
+		QuickGames,
 	},
 	data: () => ({
 		marketItem: [],

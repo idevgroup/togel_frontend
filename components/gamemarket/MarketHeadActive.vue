@@ -15,17 +15,13 @@
             </b-col>
         </b-row>
 
-        <quick-games />
+      
 
     </div>
 </template>
 
 <script>
-import QuickGames from './QuickGames'
 export default {
-	components: {
-		QuickGames,
-	},
 	data: () => ({
 		marketItem: [],
 		getMarketActive: [],

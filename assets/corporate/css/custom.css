@@ -1,7 +1,7 @@
 /* here you can put your own css to customize and override the theme */
 
 .is-input-invalid {
-    border-color: #dc3545 !important;
+    border-color: #ae0016 !important;
 }
 
 .is-input-valid {
@@ -9,7 +9,7 @@
 }
 
 .text-danger {
-    color: #dc3545 !important;
+    color: #ae0016 !important;
     position: absolute;
 }
 
@@ -139,6 +139,33 @@ table.table tbody tr:hover {
     margin-right: 10px;
 }
 
+.m-menu-game a {
+    background: #ae0016;
+    color: #fff;
+}
+
+.m-menu-game.list-group-horizontal a {
+    font-size: 14px;
+    padding: 3px;
+    line-height: 18px;
+    text-align: center;
+    display: grid;
+    font-weight: 600;
+}
+
+.m-menu-game.list-group-horizontal a:before {
+    content: '';
+    font-size: 0px;
+    padding-right: 0px;
+    position: relative;
+    top: 0px;
+    font-family: FontAwesome !important;
+}
+
+#section-game {
+    overflow: hidden;
+}
+
 .list-group-item::before {
     content: '';
     font-size: 10px;
@@ -174,8 +201,12 @@ table.table tbody tr:hover {
 }
 
 .tbl-bet-list thead.thead-light tr th {
-    background-color: red;
+    background-color: #ae0016;
     color: white;
+}
+
+.list-group-item {
+    border: 1px solid rgba(255, 255, 255, 0.3);
 }
 
 .tbl-bet-list {
@@ -193,4 +224,26 @@ table.table tbody tr:hover {
 
 #martket-side p {
     color: white !important;
+}
+
+#wrapper {
+    background: #8080804f;
+    padding-top: 10px;
+}
+
+.list-group-item.active,
+.m-menu-game .list-group-item:hover {
+    z-index: 2;
+    color: #fff;
+    background-color: #e63d3d;
+    border-color: #e63d3d;
+}
+
+#market-active {
+    background: #333;
+    text-align: center;
+}
+
+p span {
+    color: #fdfafac7;
 }
