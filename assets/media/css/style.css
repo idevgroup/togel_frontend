@@ -225,13 +225,12 @@ p.live-chat img {
 
 .timezone-wrap {
     color: white;
-    width: 142px;
-    margin-left: 354px;
 }
 
 .timezone-wrap p {
     border-right: 2px solid #777243;
     padding-right: 5px;
+    text-align: right;
 }
 
 .timezone-auth .dropdown button img {
@@ -256,27 +255,6 @@ p.live-chat img {
     padding-top: 8px;
 }
 
-.lang-drop.dropdown-menu {
-    background-color: black;
-    border: 1px solid #3a5189;
-}
-
-.lang-drop.dropdown-menu li .dropdown-item img {
-    float: left;
-}
-
-.lang-drop.dropdown-menu li .dropdown-item p {
-    float: left;
-    margin-top: -28px;
-    margin-left: 64px;
-    color: white
-}
-
-.lang-drop {
-    float: right;
-    margin-top: -22px;
-}
-
 .profile-wrap {
     margin-top: 25px;
     float: right;
@@ -290,6 +268,47 @@ p.live-chat img {
 .profile {
     /* position: absolute; */
     float: left;
+}
+
+.lang-drop {
+    position: relative;
+    display: inline-block;
+}
+
+.lang-drop .btn-secondary {
+    color: #fff;
+    background-color: transparent;
+    border-color: transparent;
+    position: absolute;
+    top: -20px;
+    left: -30px;
+    height: 35px;
+}
+
+.lang-drop .btn-secondary:hover {
+    color: #fff;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.lang-drop .btn-secondary:focus {
+    color: #fff;
+    background-color: transparent;
+    border-color: transparent;
+}
+
+.dropdown-item span {
+    line-height: 20px;
+    position: relative;
+    display: inline-block;
+    top: -7px;
+    padding: 0 7px;
+}
+
+.show>.btn-secondary.dropdown-toggle {
+    color: #fff;
+    background-color: transparent;
+    border-color: transparent;
 }
 
 .money {

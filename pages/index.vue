@@ -28,7 +28,7 @@
             <div class="clear"></div>
             <div class="win-round-wrap">
                 <div class="wrapper">
-                <carousel :autoplay="true" :nav="false" :loop="true" :items="5">
+                <carousel :autoplay="true" :nav="false" :loop="true" :items="5" :responsive="{0:{items:1,nav:false},600:{items:2,nav:false}}">
                    <div class="win-round">
                         <span>
                             <p class="pt-2">Cambodia</p>
