@@ -29,6 +29,7 @@
             bordered
             flex
             head-variant="light"
+            class="tbl-bet-list"
             @row-clicked="loadModalDetail">
             <template slot="index" slot-scope="data">
                 {{ data.index + 1 }}
@@ -144,7 +145,7 @@ const options = {
 }
 Vue.use(VueHtmlToPaper, options)
 export default {
-    layout: 'member',
+    layout: ({ isMobile }) => (isMobile ? 'layoutreport' : 'member'),
     name: 'ReportTransactionView',
     data: () => ({
         periodItem: [],

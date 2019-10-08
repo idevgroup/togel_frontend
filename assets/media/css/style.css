@@ -10,9 +10,9 @@
 }
 
 .wrapper {
-    width: 990px!important;
+    width: 990px !important;
     margin: 0 auto;
-    position: relative
+    position: relative;
 }
 
 body {
@@ -21,15 +21,15 @@ body {
 }
 
 .clear {
-    clear: both
+    clear: both;
 }
 
 .pull-left {
-    float: left
+    float: left;
 }
 
 .pull-right {
-    float: right
+    float: right;
 }
 
 
@@ -124,7 +124,7 @@ video {
     border: 0;
     font-size: 100%;
     font: inherit;
-    vertical-align: baseline
+    vertical-align: baseline;
 }
 
 article,
@@ -138,21 +138,21 @@ hgroup,
 menu,
 nav,
 section {
-    display: block
+    display: block;
 }
 
 body {
-    line-height: 1
+    line-height: 1;
 }
 
 ol,
 ul {
-    list-style: none
+    list-style: none;
 }
 
 blockquote,
 q {
-    quotes: none
+    quotes: none;
 }
 
 blockquote:before,
@@ -160,12 +160,12 @@ blockquote:after,
 q:before,
 q:after {
     content: '';
-    content: none
+    content: none;
 }
 
 table {
     border-collapse: collapse;
-    border-spacing: 0
+    border-spacing: 0;
 }
 
 
@@ -220,7 +220,7 @@ p.live-chat img {
 }
 
 .timezone p {
-    color: white
+    color: white;
 }
 
 .timezone-wrap {
@@ -318,7 +318,7 @@ p.live-chat img {
 .money,
 .money p {
     float: left;
-    margin-left: 5px
+    margin-left: 5px;
 }
 
 .money .dropdown .btn {
@@ -362,7 +362,7 @@ p.live-chat img {
 }
 
 .container-fluid .news-notification {
-    background: -webkit-gradient(linear, left top, right top, from(#fe5d70), to(#fe909d));
+    background: -webkit-gradient( linear, left top, right top, from(#fe5d70), to(#fe909d));
     background: linear-gradient(to right, #fe5d70, #fe909d);
     padding: 3px 6px;
     margin-left: 5px;
@@ -384,20 +384,20 @@ p.live-chat img {
 
 .badge {
     display: inline-block;
-    padding: .25em .4em;
+    padding: 0.25em 0.4em;
     font-size: 75%;
     font-weight: 700;
     line-height: 1;
     text-align: center;
     white-space: nowrap;
     vertical-align: baseline;
-    border-radius: .25rem;
+    border-radius: 0.25rem;
 }
 
-form.my-form input[name="username"],
-form.my-form input[name="password"],
-form.my-form input[name="daftar"],
-form.my-form input[name="login"] {
+form.my-form input[name='username'],
+form.my-form input[name='password'],
+form.my-form input[name='daftar'],
+form.my-form input[name='login'] {
     width: 130px;
     height: 28px;
     background: url(~assets/media/images/username.png) center no-repeat;
@@ -411,12 +411,12 @@ form.my-form input[name="login"] {
     padding-left: 10px;
 }
 
-form.my-form input[name="password"] {
+form.my-form input[name='password'] {
     background: url(~assets/media/images/password.png) center no-repeat;
 }
 
-form.my-form input[name="daftar"],
-form.my-form input[name="login"] {
+form.my-form input[name='daftar'],
+form.my-form input[name='login'] {
     background: url(~assets/media/images/daftar-button.png) center no-repeat;
     cursor: pointer;
     font-size: 20px;
@@ -424,7 +424,7 @@ form.my-form input[name="login"] {
     /* -webkit-text-stroke: 2px #202020; */
 }
 
-form.my-form input[name="login"] {
+form.my-form input[name='login'] {
     background: url(~assets/media/images/login.png) center no-repeat;
 }
 
@@ -478,7 +478,7 @@ form.my-form input[name="login"] {
 
 #menu li a:hover {
     color: #f5f34f;
-    background: -webkit-linear-gradient(#646464, #f5f34f, #f5f34f, #f5f34f, #646464);
+    background: -webkit-linear-gradient( #646464, #f5f34f, #f5f34f, #f5f34f, #646464);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
 }
@@ -496,7 +496,7 @@ form.my-form input[name="login"] {
     width: 252px;
 }
 
-form.daftar-button-menu input[id="daftar-button-menu"] {
+form.daftar-button-menu input[id='daftar-button-menu'] {
     width: 252px;
     height: 58px;
     background: url(~assets/media/images/daftar-button-menu.png) center no-repeat;
@@ -511,8 +511,8 @@ form.daftar-button-menu input[id="daftar-button-menu"] {
     -webkit-text-stroke: 2px #c3bd62e3;
 }
 
-form.daftar-button-menu-right input[id="click-here-button-menu"] {
-    width: 252px;
+div.daftar-button-menu-right input[id='click-here-button-menu'] {
+    width: 248px;
     height: 58px;
     background: url(~assets/media/images/daftar-button-menu-right.png) center no-repeat;
     border: none;
@@ -520,10 +520,13 @@ form.daftar-button-menu-right input[id="click-here-button-menu"] {
     font-size: 26px;
     color: #fff;
     outline: none;
-    margin: 16px -20px 10px 22px;
+    /* margin: 16px 5px 0px 22px; */
     text-align: center;
-    padding-left: 10px;
-    -webkit-text-stroke: 2px #c3bd62e3;
+    /* padding-left: 10px; */
+    -webkit-text-stroke: 2px rgba(195, 189, 98, 0.8902);
+    position: relative;
+    top: -68px;
+    left: 25px;
 }
 
 .daftar-right {
@@ -570,17 +573,17 @@ form.daftar-button-menu-right input[id="click-here-button-menu"] {
 }
 
 .win-round-row {
-    margin-left: 20px;
+    /* margin-left: 20px;*/
 }
 
 .win-round {
     background: url(~assets/media/images/win-round.png) center no-repeat;
-    width: 185px;
+    /*width: 185px;*/
     height: 90px;
 }
 
 .cam-img {
-    float: left
+    float: left;
 }
 
 
@@ -650,7 +653,6 @@ form.daftar-button-menu-right input[id="click-here-button-menu"] {
 
 .latest-win {
     background: url(~assets/media/images/latest-win.png) center no-repeat;
-    width: 312px;
     height: 190px;
 }
 
@@ -689,7 +691,7 @@ form.daftar-button-menu-right input[id="click-here-button-menu"] {
 .latest-win-show-link a {
     text-align: center;
     color: white;
-    font-size: 11px
+    font-size: 11px;
 }
 
 .latest-win-show-link a:hover {
@@ -712,7 +714,7 @@ form.daftar-button-menu-right input[id="click-here-button-menu"] {
 
 .latest-win-flush-title {
     position: absolute;
-    font-size: 11px
+    font-size: 11px;
 }
 
 .latest-win-show-flush-number {
@@ -726,7 +728,7 @@ form.daftar-button-menu-right input[id="click-here-button-menu"] {
 
 .latest-win-flush-title {
     position: absolute;
-    font-size: 11px
+    font-size: 11px;
 }
 
 .latest-win-show-flush-number {
@@ -759,7 +761,7 @@ form.daftar-button-menu-right input[id="click-here-button-menu"] {
 
 .latest-win-show-withdraw-number {
     float: left;
-    font-size: 11px
+    font-size: 11px;
 }
 
 .content-wrap {
@@ -782,7 +784,7 @@ form.daftar-button-menu-right input[id="click-here-button-menu"] {
     color: white;
     font-size: 11px;
     font-weight: 700;
-    letter-spacing: 1.50px;
+    letter-spacing: 1.5px;
     line-height: 17px;
 }
 
@@ -793,6 +795,7 @@ form.daftar-button-menu-right input[id="click-here-button-menu"] {
 .copyright {
     padding: 15px 0;
     color: white;
+    text-align: center;
 }
 
 
@@ -829,9 +832,9 @@ ul.contact {
 }
 
 .contact a:hover div {
-    -webkit-mask-image: linear-gradient(-75deg, rgba(0, 0, 0, .6) 30%, #000 50%, rgba(0, 0, 0, .6) 70%);
+    -webkit-mask-image: linear-gradient( -75deg, rgba(0, 0, 0, 0.6) 30%, #000 50%, rgba(0, 0, 0, 0.6) 70%);
     -webkit-mask-size: 200%;
-    animation: shine 1s infinite
+    animation: shine 1s infinite;
 }
 
 .fb,

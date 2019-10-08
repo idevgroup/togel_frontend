@@ -98,7 +98,7 @@ import { Money } from 'v-money'
 import VueRecaptcha from 'vue-recaptcha'
 import Swal from 'sweetalert2'
 export default {
-	layout: 'member',
+	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'member'),
 	components: {
 		Money,
 		VueRecaptcha,

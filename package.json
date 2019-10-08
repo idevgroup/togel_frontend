@@ -51,6 +51,7 @@
         "vue-loader": "^15.7.1",
         "vue-numeric": "^2.3.0",
         "vue-owl-carousel": "^2.0.3",
+        "vue-owl-carousel2": "^2.0.7",
         "vue-recaptcha": "^1.2.0",
         "vue-sweetalert2": "^2.1.1",
         "vue2-filters": "^0.7.2",

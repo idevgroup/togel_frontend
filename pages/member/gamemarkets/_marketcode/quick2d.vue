@@ -164,7 +164,7 @@ import Swal from 'sweetalert2'
 
 import SiteLockInfo from '~/components/gamemarket/SiteLockInfo'
 export default {
-	layout: 'gamemarket',
+	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'gamemarket'),
 	name: 'GameQuickForm',
 	components: {
 		VueNumeric,

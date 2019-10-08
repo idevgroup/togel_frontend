@@ -4,7 +4,7 @@
 
 <script>
 export default {
-    layout: 'gamemarket',
+	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'gamemarket'),
 }
 </script>
 

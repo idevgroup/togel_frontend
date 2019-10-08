@@ -185,7 +185,7 @@ import Swal from 'sweetalert2'
 import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
 import SiteLockInfo from '~/components/gamemarket/SiteLockInfo'
 export default {
-	layout: 'gamemarket',
+	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'gamemarket'),
 	name: 'Game2DForm',
 	components: {
 		VueNumeric,

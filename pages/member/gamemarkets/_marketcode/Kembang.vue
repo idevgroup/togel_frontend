@@ -254,7 +254,7 @@ import SiteLockInfo from '~/components/gamemarket/SiteLockInfo'
 import VueNumeric from 'vue-numeric'
 import Swal from 'sweetalert2'
 export default {
-	layout: 'gamemarket',
+	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'gamemarket'),
 	name: 'GameKembangForm',
 	components: {
 		VueNumeric,

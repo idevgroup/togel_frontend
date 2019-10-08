@@ -1,6 +1,6 @@
 <template>
     <div role="tablist">
-        <b-card no-body class="mb-2">
+        <b-card no-body bg-variant="light" class="mb-2">
             <h4 slot="header" class="m-0"><i class="fa fa-retweet" aria-hidden="true"></i> Transaction</h4>
             <b-list-group flush class="m-menu">
 
@@ -30,7 +30,7 @@
 
             </b-list-group>
         </b-card>
-        <b-card no-body>
+        <b-card no-body bg-variant="light">
             <h4 slot="header" class="m-0"><i class="fa fa-user" aria-hidden="true"></i> Profile</h4>
             <b-list-group flush class="m-menu">
                 <template v-for="item in userprofiles">

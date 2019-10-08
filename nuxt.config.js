@@ -58,7 +58,7 @@ export default {
      ** Plugins to load before mounting the App
      */
     router: {
-        middleware: ['frontendconfig'],
+        middleware: ['frontendconfig', 'mobile'],
         linkActiveClass: 'active',
     },
     plugins: [

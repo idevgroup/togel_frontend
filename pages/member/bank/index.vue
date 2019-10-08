@@ -4,7 +4,7 @@
 
 <script>
 export default {
-    layout: 'member',
+	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'member'),
 }
 </script>
 

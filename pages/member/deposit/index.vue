@@ -77,7 +77,7 @@
                         max-rows="6"
                         data-vv-name="message"
                         data-vv-as="message">
-                        ></b-form-textarea>
+                        </b-form-textarea>
                     <span v-show="veeErrors.has('message')" class="form-text text-danger">{{ veeErrors.first('message') }}</span>
                 </b-form-group>
 
@@ -118,7 +118,7 @@ import { Money } from 'v-money'
 import VueRecaptcha from 'vue-recaptcha'
 import Swal from 'sweetalert2'
 export default {
-	layout: 'member',
+	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'member'),
 	components: {
 		Money,
 		VueRecaptcha,

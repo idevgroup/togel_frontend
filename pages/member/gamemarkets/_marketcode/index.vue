@@ -9,7 +9,7 @@
 
 <script>
 export default {
-	layout: 'gamemarket',
+	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'gamemarket'),
 	components: {},
 }
 </script>

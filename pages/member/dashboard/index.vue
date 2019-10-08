@@ -7,10 +7,10 @@
 <script>
 import TransactionList from '~/components/member/TransactionList.vue'
 export default {
-    layout: 'member',
-    components: {
-        TransactionList,
-    },
+	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'member'),
+	components: {
+		TransactionList,
+	},
 }
 </script>
 

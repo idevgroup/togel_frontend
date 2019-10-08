@@ -20,7 +20,7 @@
 }
 
 .m-menu.list-group a::before {
-    content: "";
+    content: '';
     font-size: 8px;
     padding-right: 10px;
     position: relative;
@@ -30,7 +30,7 @@
 
 .fade-enter-active,
 .fade-leave-active {
-    transition: opacity .5s;
+    transition: opacity 0.5s;
 }
 
 .fade-enter,
@@ -252,12 +252,243 @@ p span {
     .small-center {
         text-align: center;
     }
+    .container {
+        width: 414px;
+    }
 }
 
-@media (min-width: 576px) and (max-width: 767.98px) {}
+@media (min-width: 576px) and (max-width: 767.98px) {
+    .container {
+        width: 736px;
+    }
+}
 
-@media (min-width: 768px) and (max-width: 991.98px) {}
+@media (min-width: 768px) and (max-width: 991.98px) {
+    .container {
+        width: 967px;
+    }
+}
 
-@media (min-width: 992px) and (max-width: 1199.98px) {}
+@media (min-width: 992px) and (max-width: 1199.98px) {
+    .container {
+        width: 990px;
+    }
+}
 
-@media (min-width: 1200px) {}
+@media (min-width: 1200px) {
+    .container {
+        width: 990px;
+    }
+}
+
+.bm-burger-button {
+    position: fixed;
+    width: 36px;
+    height: 30px;
+    left: 36px;
+    top: 36px;
+    cursor: pointer;
+}
+
+.bm-burger-bars {
+    background-color: #373a47;
+}
+
+.line-style {
+    position: absolute;
+    height: 20%;
+    left: 0;
+    right: 0;
+}
+
+.cross-style {
+    position: absolute;
+    top: 12px;
+    right: 2px;
+    cursor: pointer;
+}
+
+.bm-cross {
+    background: #bdc3c7;
+}
+
+.bm-cross-button {
+    height: 24px;
+    width: 24px;
+}
+
+.bm-menu {
+    height: 100%;
+    /* 100% Full-height */
+    width: 0;
+    /* 0 width - change this with JavaScript */
+    position: fixed;
+    /* Stay in place */
+    z-index: 1000;
+    /* Stay on top */
+    top: 0;
+    left: 0;
+    background-color: rgb(63, 63, 65);
+    /* Black*/
+    overflow-x: hidden;
+    /* Disable horizontal scroll */
+    padding-top: 60px;
+    /* Place content 60px from the top */
+    transition: 0.5s;
+    /*0.5 second transition effect to slide in the sidenav*/
+}
+
+.bm-overlay {
+    background: rgba(0, 0, 0, 0.3);
+}
+
+.bm-item-list {
+    color: #b8b7ad;
+    margin-left: 10%;
+    font-size: 20px;
+}
+
+.bm-item-list>* {
+    display: flex;
+    text-decoration: none;
+    padding: 0.7em;
+}
+
+.bm-item-list>*>span {
+    margin-left: 10px;
+    font-weight: 700;
+    color: white;
+}
+
+#mb-top-dropdown .dropdown-toggle::after {
+    padding-top: 8px;
+    position: relative;
+    top: 14px;
+    margin-left: 7px;
+    font-size: 25px;
+    margin-right: 0px;
+}
+
+#top-bar .btn-group {
+    margin-top: 3px;
+}
+
+#mb-top-dropdown {
+    padding: 9px 1px;
+}
+
+#mb-top-dropdown .dropdown-toggle {
+    padding-top: 0px;
+}
+
+h3.title {
+    font-size: 20px;
+    margin: 5px;
+}
+
+#section-game label {
+    margin: 5px;
+}
+
+p.p-span-white {
+    margin-left: 10px;
+}
+
+#section-game label a.nuxt-link-exact-active.active {
+    background: #ae0016;
+    border-color: #fff;
+}
+
+.tbl-bet-list tr td,
+.col-form-label {
+    color: #fff;
+}
+
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px;
+    font-size: 16px;
+    border: none;
+    border-radius: 50%;
+    line-height: 15px;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f1f1f1;
+    min-width: 160px;
+    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+    z-index: 1;
+    right: 0px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 8px 12px;
+    text-decoration: none;
+    display: block;
+    border-bottom: 1px solid #17161617;
+}
+
+.dropdown-content a:last-child {
+    border-bottom: none
+}
+
+.dropdown-content a:hover {
+    background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+
+.icon-user-d::after {
+    content: '\f007';
+    font-family: FontAwesome;
+    font-style: normal;
+    font-weight: normal;
+    text-decoration: inherit;
+    font-size: 30px;
+}
+
+.btn-play {
+    margin-top: -7px;
+}
+
+.bg-light {
+    background-color: #333 !important;
+}
+
+.card-header {
+    padding: 0.75rem 1.25rem;
+    margin-bottom: 0;
+    background-color: rgba(0, 0, 0, 0.03);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.125);
+    color: white;
+    font-size: 22px;
+    text-transform: uppercase;
+}
+
+.tbl-bet-list thead {
+    background: #ae0016;
+}
+
+.card-header h4 {
+    font-size: 18px;
+}
+
+.content-title,
+.content-sen {
+    text-align: center
+}
