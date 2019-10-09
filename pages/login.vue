@@ -1,7 +1,13 @@
 <template>
     <div>
 
-        <b-card title="Login" class="mt-5 mr-5 ml-5">
+        <b-card
+            id="login-frm"
+            title="Login"
+            class="mt-5 mr-5 ml-5">
+            <button type="button" class="close-rg" aria-label="Close" @click="backbtn">
+                <span aria-hidden="true">&times;</span>
+            </button>
             <form
                 ref="form"
                 class="my-form"
@@ -15,7 +21,10 @@
                             id="input-username"
                             v-model="login.username"
                             size="sm"
-                             placeholder="Enter Username" name="name" data-vv-name="username" data-vv-as="user name"></b-form-input>
+                            placeholder="Enter Username"
+                            name="name"
+                            data-vv-name="username"
+                            data-vv-as="user name"></b-form-input>
                     </b-col>
                 </b-row>
 
@@ -25,17 +34,21 @@
                     </b-col>
                     <b-col sm="10">
                         <b-form-input
-                            id="input-password"                          
+                            id="input-password"
                             v-model="login.password"
                             size="sm"
-                            placeholder="Enter Password" name="pwd" type="password" data-vv-name="password" data-vv-as="password"></b-form-input>
+                            placeholder="Enter Password"
+                            name="pwd"
+                            type="password"
+                            data-vv-name="password"
+                            data-vv-as="password"></b-form-input>
                     </b-col>
                 </b-row>
-                 <b-row class="my-1">
-                     <b-col>
-                 <input type="submit" name="login" value="LOGIN" />
-                     </b-col>
-                 </b-row>
+                <b-row class="my-1">
+                    <b-col>
+                        <input type="submit" name="login" value="LOGIN" />
+                    </b-col>
+                </b-row>
             </form>
         </b-card>
 
@@ -72,6 +85,11 @@ export default {
 						console.log(e)
 					}
 				}
+			})
+		},
+		backbtn() {
+			this.$router.push({
+				name: 'index',
 			})
 		},
 	},

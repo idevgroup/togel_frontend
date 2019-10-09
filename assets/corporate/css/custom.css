@@ -492,3 +492,31 @@ p.p-span-white {
 .content-sen {
     text-align: center
 }
+
+#register-frm .card-body .card-title,
+#login-frm .card-body .card-title {
+    font-size: 25px;
+    margin-left: -10px;
+}
+
+.close-rg {
+    float: right;
+    font-size: 1.5rem;
+    font-weight: 700;
+    line-height: 1;
+    color: #000;
+    text-shadow: 0 1px 0 #fff;
+    opacity: .5;
+    position: absolute;
+    right: 13px;
+    top: 20px;
+}
+
+button.close-rg {
+    padding: 0;
+    background-color: transparent;
+    border: 0;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
