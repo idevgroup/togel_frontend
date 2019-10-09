@@ -40,7 +40,7 @@
                            </b-col>     
                             
                         </template>
-                        <b-card no-body class="mb-2">
+                        <b-card no-body bg-variant="light" class="mb-2">
                             <h4 slot="header" class="m-0"><i class="fa fa-bookmark"></i> Market</h4>
                             <b-list-group flush class="m-menu">
                                 <template v-for="item in marketItem">

@@ -39,7 +39,7 @@
                     </b-form>
                 </b-col>
             </b-row>
-            <table class="table table-bordered mt-3">
+            <table class="table table-bordered mt-3 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th width="1">#</th>

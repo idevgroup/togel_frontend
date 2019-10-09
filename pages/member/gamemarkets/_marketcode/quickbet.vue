@@ -31,13 +31,16 @@
                             @keypress="isNumberInt($event)">
                         </b-form-input>
                         <label class="mr-sm-2">x 1000</label>
-                        <b-button :disabled="veeErrors.any()" variant="primary" @click="generateNumber">Submit</b-button>
+                        <b-button
+                            :disabled="veeErrors.any()"
+                            variant="primary"
+                            @click="generateNumber">Submit</b-button>
                         <b-button variant="info" @click="reset">Reset</b-button>
                     </b-form>
                 </b-col>
             </b-row>
 
-            <table class="table table-bordered mt-3">
+            <table class="table table-bordered mt-3 tbl-bet-list">
                 <thead class="thead-light">
                     <tr>
                         <th width="1">#</th>
@@ -99,55 +102,117 @@
                     </tr>
                 </tbody>
             </table>
-			 <b-col class="mb-5">
-                    <b-button variant="success" @click="showConfirm">Save</b-button>
-                </b-col>
-				    <p>
+            <b-col class="mb-5">
+                <b-button variant="success" @click="showConfirm">Save</b-button>
+            </b-col>
+            <p>
                 <span> 4D Min Bet: {{ gameSetting4d.min_bet |currency(setting.general.symbol)}} | 3D Min Bet: {{ gameSetting3d.min_bet |currency(setting.general.symbol)}} | 2D Min Bet: {{ gameSetting2d.min_bet |currency(setting.general.symbol)}} </span>
                 <span> 4D Max Bet: {{ gameSetting4d.max_bet |currency(setting.general.symbol)}} | 3D Max Bet: {{ gameSetting3d.max_bet |currency(setting.general.symbol)}} | 2D Max Bet: {{ gameSetting2d.max_bet |currency(setting.general.symbol)}} </span>
                 <span> 4D Bet Modulus: {{ gameSetting4d.bet_mod |currency(setting.general.symbol)}} | 3D Bet Modulus: {{ gameSetting3d.bet_mod |currency(setting.general.symbol)}} | 2D Bet Modulus: {{ gameSetting2d.bet_mod |currency(setting.general.symbol)}} </span>
                 <span> 4D Bet Discs: {{ gameSetting4d.discount }} % | 3D Bet Discs: {{ gameSetting3d.discount}} % | 2D Bet Discs: {{ gameSetting2d.discount }} % </span>
-                <span> 4D Win: x {{ gameSetting4d.menang }} | 3D Win: x {{ gameSetting3d.menang }} | 2D Win: x  {{ gameSetting2d.menang }}  </span>
+                <span> 4D Win: x {{ gameSetting4d.menang }} | 3D Win: x {{ gameSetting3d.menang }} | 2D Win: x {{ gameSetting2d.menang }} </span>
 
             </p>
 
-			<div style="margin-top: 25px;">
-    <b><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">How to use QUICK BET:</font></font></b>
-<br><br>
-    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        A. Fast purchase, buy at once for 4D, 3D, 2D. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        1. The first column is filled with 4 numbers that will be purchased for example: 4321 </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        2. The second column is filled with betting value.</font></font><br>
-    </p>
+            <div style="margin-top: 25px;">
+                <b>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">How to use QUICK BET:</font>
+                    </font>
+                </b>
+                <br><br>
+                <p>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            A. Fast purchase, buy at once for 4D, 3D, 2D. </font>
+                    </font><br>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            1. The first column is filled with 4 numbers that will be purchased for example: 4321 </font>
+                    </font><br>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            2. The second column is filled with betting value.</font>
+                    </font><br>
+                </p>
 
-    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        For example: 100 (multiples of thousands) </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        Means purchased: </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        4D </font><font style="vertical-align: inherit;">: 100 thousand </font><font style="vertical-align: inherit;">for 4321 </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        3D </font><font style="vertical-align: inherit;">: 100 thousand </font><font style="vertical-align: inherit;">for 321 </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        2D </font><font style="vertical-align: inherit;">: 100 thousand </font><font style="vertical-align: inherit;">for 21</font></font><br>
-    </p>
+                <p>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            For example: 100 (multiples of thousands) </font>
+                    </font><br>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            Means purchased: </font>
+                    </font><br>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            4D </font>
+                        <font style="vertical-align: inherit;">: 100 thousand </font>
+                        <font style="vertical-align: inherit;">for 4321 </font>
+                    </font><br>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            3D </font>
+                        <font style="vertical-align: inherit;">: 100 thousand </font>
+                        <font style="vertical-align: inherit;">for 321 </font>
+                    </font><br>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            2D </font>
+                        <font style="vertical-align: inherit;">: 100 thousand </font>
+                        <font style="vertical-align: inherit;">for 21</font>
+                    </font><br>
+                </p>
 
-    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        B. Buy 3D and 2D </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        For example, you will only buy 654 and 54, writing: </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        1. The first column must still be filled with 4 numbers, for example: 1654 </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        2. The second column is filled according to the type of number, </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        3D: write 3 + 10 (buy 3D = 654 with a value of Rp.10 thousand) </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        2D: write 2 + 100 (buy 2D = 54 with a value of Rp 100,000)</font></font><br>
-    </p>
+                <p>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            B. Buy 3D and 2D </font>
+                    </font><br>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            For example, you will only buy 654 and 54, writing: </font>
+                    </font><br>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            1. The first column must still be filled with 4 numbers, for example: 1654 </font>
+                    </font><br>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            2. The second column is filled according to the type of number, </font>
+                    </font><br>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            3D: write 3 + 10 (buy 3D = 654 with a value of Rp.10 thousand) </font>
+                    </font><br>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            2D: write 2 + 100 (buy 2D = 54 with a value of Rp 100,000)</font>
+                    </font><br>
+                </p>
 
-    <p><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        Purchases will only be approved if you press the CONFIRM button. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        Always check your invoice for every purchase, this is to avoid mistakes. </font></font><br><font style="vertical-align: inherit;"><font style="vertical-align: inherit;">
-        Remove Install if you don't want to buy.
-    </font></font></p>
-</div>
-		  <modal
+                <p>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            Purchases will only be approved if you press the CONFIRM button. </font>
+                    </font><br>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            Always check your invoice for every purchase, this is to avoid mistakes. </font>
+                    </font><br>
+                    <font style="vertical-align: inherit;">
+                        <font style="vertical-align: inherit;">
+                            Remove Install if you don't want to buy.
+                        </font>
+                    </font>
+                </p>
+            </div>
+            <modal
                 :scrollable="true"
                 :classes="['v--modal', 'vue-dialog']"
                 :adaptive="true"
-				 resizable
+                resizable
                 reset
                 name="preview-bet"
                 height="auto"
@@ -167,10 +232,10 @@
                         Payment: <span class="text-info">{{ totalPay | currency(setting.general.symbol)}}</span>
                     </h5>
                     <b-col>
-                      <p class="text-center mt-3 " style="font-weight:bold">
-                          Are you want to process this transaction !!!
-                      </p> 
-                    </b-col>      
+                        <p class="text-center mt-3 " style="font-weight:bold">
+                            Are you want to process this transaction !!!
+                        </p>
+                    </b-col>
                 </div>
 
                 <div class="vue-dialog-buttons">
@@ -183,7 +248,7 @@
                 </div>
 
             </modal>
-	</div>
+        </div>
         <div v-else>
             <site-lock-info />
         </div>
@@ -451,12 +516,15 @@ export default {
 #frm-quick button {
 	margin-right: 3px;
 }
+
 .form-control.is-invalid {
 	padding-right: 5px;
 }
+
 table tr td input {
 	text-align: right;
 }
+
 p span {
 	display: block;
 	font-weight: bold;

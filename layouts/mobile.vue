@@ -78,8 +78,10 @@ export default {
 		getMarketActive: [],
 		periodMarket: '',
 	}),
+	computed() {
+		this.selectedMarket()
+	},
 	mounted() {
-		this.selected = this.$route.params.marketcode
 		this.gameItem = this.setting.gameitem.filter(
 			item => !this.isNotIn.includes(parseInt(item.id))
 		)
@@ -90,6 +92,9 @@ export default {
 			this.$router.push({
 				path: '/member/gamemarkets/' + this.selected,
 			})
+		},
+		selectedMarket() {
+			this.selected = this.$route.params.marketcode
 		},
 	},
 }
