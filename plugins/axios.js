@@ -21,14 +21,15 @@ export default function({ $axios, store, app, redirect, $option }) {
 
     $axios.onError(error => {
         if (!error.response) {
-            // swal.fire('Error', '.Oops... Something went wrong', 'error')
-            // this.$store.commit('todos/add', e.target.value)
+            swal.fire('Error', '.Oops... Something went wrong', 'error')
+                // this.$store.commit('todos/add', e.target.value)
             this.$auth.reset()
             this.$auth.logout()
             return
         }
-        const { status } = parseInt(error.response && error.response.status)
+        const status = parseInt(error.response.status)
             // Error 402
+            //  console.log('working error ', status)
         if (status === 422) {
             const obj = error.response.data.errors
             const arr = []
@@ -38,6 +39,7 @@ export default function({ $axios, store, app, redirect, $option }) {
                     arr.push(element)
                 }
             }
+
             swal.fire({
                 type: 'warning',
                 title: 'Invalid input.',

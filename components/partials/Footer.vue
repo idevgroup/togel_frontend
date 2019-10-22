@@ -1,7 +1,7 @@
 <template>
     <div>        
       <div class="clear"></div>
-                <div class="copyright-wrap">
+                <div class="copyright-wrap mt-5">
                     <div class="wrapper">
                         <div class="copyright">
                             <p>© Copyright 2019 350ToTo. All Rights Reserved.</p>

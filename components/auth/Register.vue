@@ -1,15 +1,6 @@
 <template>
-    
-            <modal
-                :scrollable="true"
-                :classes="['v--modal', 'vue-dialog']"
-                :adaptive="true"
-                :width="modalWidth"
-                height="auto"
-                resizable
-                reset
-                name="register"
-                transition="pop-out">
+    <div>
+          
                 <form ref="form" @submit.stop.prevent="registerSubmit">
                     <div class="modal-header">
                         <h5 class="modal-title">Register</h5>
@@ -156,8 +147,8 @@
                         </button>
                     </div>
                 </form>
-            </modal>
-   
+          
+    </div>
 </template>
 
 <script>
@@ -183,7 +174,6 @@ export default {
 			},
 			recaptchaKey: '',
 			itemBank: [],
-			modalWidth: MODAL_WIDTH,
 		}
 	},
 	computed: {
@@ -220,12 +210,6 @@ export default {
 			this.form.accountname = ''
 			this.form.recaptcha = ''
 		},
-		handleOk(bvModalEvt) {
-			// Prevent modal from closing
-			bvModalEvt.preventDefault()
-			// Trigger submit handler
-			this.registerSubmit()
-		},
 		async registerSubmit() {
 			this.$validator.validateAll().then(result => {
 				let self = this
@@ -255,9 +239,11 @@ export default {
 							})
 							.catch(() => {
 								this.$refs.recaptcha.reset()
+								this.form.recaptcha = ''
 							})
 					} catch (e) {
 						console.log(e)
+						this.$refs.recaptcha.reset()
 					}
 				}
 			})

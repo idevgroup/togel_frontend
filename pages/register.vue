@@ -145,7 +145,7 @@
 <script>
 import VueRecaptcha from 'vue-recaptcha'
 export default {
-	layout: 'mobile',
+	layout: 'mobilehome',
 	components: {
 		VueRecaptcha,
 	},
@@ -234,6 +234,7 @@ export default {
 							})
 							.catch(() => {
 								this.$refs.recaptcha.reset()
+								this.form.recaptcha = ''
 							})
 					} catch (e) {
 						console.log(e)

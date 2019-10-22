@@ -57,7 +57,7 @@
 
 <script>
 export default {
-	layout: 'mobile',
+	layout: 'mobilehome',
 	data: () => ({
 		login: {
 			username: '',

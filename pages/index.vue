@@ -384,7 +384,7 @@
 import Slider from '~/components/partials/Slider'
 import carousel from 'vue-owl-carousel2'
 export default {
-	layout: ({ isMobile }) => (isMobile ? 'mobile' : 'default'),
+	layout: ({ isMobile }) => (isMobile ? 'mobilehome' : 'default'),
 	components: {
 		Slider,
 		carousel,

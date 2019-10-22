@@ -142,7 +142,7 @@
                     </div>
                 </b-col>
             </b-row>
-            <register />
+           
         </div>
     </div>
 </template>
@@ -150,12 +150,10 @@
 <script>
 import moment from 'moment'
 import VueRecaptcha from 'vue-recaptcha'
-import Register from '~/components/auth/Register'
 
 export default {
 	components: {
 		VueRecaptcha,
-		Register,
 	},
 	data: () => ({
 		hover: false,

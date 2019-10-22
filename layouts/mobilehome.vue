@@ -54,7 +54,6 @@ import Footer from '~/components/mobile/Footer'
 import MarketHeadActive from '~/components/gamemarket/MarketHeadActive'
 import QuickGames from '~/components/gamemarket/QuickGames'
 export default {
-	middleware: 'guest',
 	components: {
 		Header,
 		Footer,
