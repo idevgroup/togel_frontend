@@ -90,7 +90,7 @@
                                         <b-dropdown-item :to="{name:'member-'+item.path}" :key="item.path">{{ item.title }}</b-dropdown-item>
                                     </template>
                                     <template v-for="item in userprofiles">
-                                        <b-dropdown-item :key="item.path" to="#">{{ item.title }}</b-dropdown-item>
+                                        <b-dropdown-item :key="item.path" :to="{name:'member-'+item.path}">{{ item.title }}</b-dropdown-item>
                                     </template>
                                     <b-dropdown-divider></b-dropdown-divider>
                                     <b-dropdown-item to="#" @click="logoutSubmit">Logout</b-dropdown-item>
@@ -169,6 +169,10 @@ export default {
 		],
 		itemSelected: null,
 		userprofiles: [
+			{
+				title: 'Profile',
+				path: 'profile',
+			},
 			{
 				title: 'Bank',
 				path: 'bank',

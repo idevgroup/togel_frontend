@@ -33,7 +33,7 @@
                                         <b-link :to="{name:'member-'+item.path}" :key="item.path">{{ item.title }}</b-link>
                                     </template>
                                     <template v-for="item in userprofiles">
-                                        <b-link :key="item.path" to="#">{{ item.title }}</b-link>
+                                        <b-link :key="item.path" :to="{name:'member-'+item.path}">{{ item.title }}</b-link>
                                     </template>
                                   
                                     <b-link to="#" @click="logoutSubmit">Logout</b-link>
@@ -79,6 +79,10 @@ export default {
 		],
 		itemSelected: null,
 		userprofiles: [
+			{
+				title: 'Profile',
+				path: 'profile',
+			},
 			{
 				title: 'Bank',
 				path: 'bank',

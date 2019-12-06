@@ -20,7 +20,7 @@
                                         name="name"
                                         data-vv-name="name"
                                         data-vv-as="name">
-                                        ></b-form-input>
+                                        </b-form-input>
                                     <span v-show="veeErrors.has('name')" class="form-text text-danger">{{ veeErrors.first('name') }}</span>
                                 </b-form-group>
                                 <b-form-group label="User Name" label-for="username-input">
@@ -31,7 +31,7 @@
                                         name="username"
                                         data-vv-name="username"
                                         data-vv-as="username">
-                                        ></b-form-input>
+                                        </b-form-input>
                                     <span v-show="veeErrors.has('username')" class="form-text text-danger">{{ veeErrors.first('username') }}</span>
                                 </b-form-group>
                                 <b-form-group label="Email" label-for="email-input">
@@ -43,7 +43,7 @@
                                         type="email"
                                         data-vv-name="email"
                                         data-vv-as="email">
-                                        ></b-form-input>
+                                        </b-form-input>
                                     <span v-show="veeErrors.has('email')" class="form-text text-danger">{{ veeErrors.first('email') }}</span>
                                 </b-form-group>
                                 <b-form-group label="Password" label-for="password-input">
@@ -56,7 +56,7 @@
                                         type="password"
                                         data-vv-name="password"
                                         data-vv-as="password">
-                                        ></b-form-input>
+                                        </b-form-input>
                                     <span v-show="veeErrors.has('password')" class="form-text text-danger">{{ veeErrors.first('password') }}</span>
                                 </b-form-group>
                                 <b-form-group label="Password Confirm" label-for="confirm-input">
@@ -68,8 +68,17 @@
                                         type="password"
                                         data-vv-name="confirmed"
                                         data-vv-as="password confirm">
-                                        ></b-form-input>
+                                        </b-form-input>
                                     <span v-show="veeErrors.has('confirmed')" class="form-text text-danger">{{ veeErrors.first('confirmed') }}</span>
+                                </b-form-group>
+                                   <b-form-group label="Referral By" label-for="referral-input" >
+                                    <b-form-input                              
+                                        id="referral-input"
+                                        v-model="form.referaltrail[1]"
+                                        disabled
+                                       >
+                                        </b-form-input>
+                                   
                                 </b-form-group>
                             </b-col>
                             <b-col>
@@ -82,7 +91,7 @@
                                         type="tel"
                                         data-vv-name="phone"
                                         data-vv-as="phone">
-                                        ></b-form-input>
+                                        </b-form-input>
                                     <span v-show="veeErrors.has('phone')" class="form-text text-danger">{{ veeErrors.first('phone') }}</span>
                                 </b-form-group>
                                 <b-form-group label="Bank Info" label-for="bank-input">
@@ -106,7 +115,7 @@
                                         name="accountname"
                                         data-vv-name="accountname"
                                         data-vv-as="account name">
-                                        ></b-form-input>
+                                        </b-form-input>
                                     <span v-show="veeErrors.has('accountname')" class="form-text text-danger">{{ veeErrors.first('accountname') }}</span>
                                 </b-form-group>
                                 <b-form-group label="Account Number" label-for="account-input">
@@ -118,7 +127,7 @@
                                         type="number"
                                         data-vv-name="accountid"
                                         data-vv-as="account">
-                                        ></b-form-input>
+                                        </b-form-input>
                                     <span v-show="veeErrors.has('accountid')" class="form-text text-danger">{{ veeErrors.first('accountid') }}</span>
                                 </b-form-group>
                                 <b-form-group>
@@ -147,7 +156,7 @@
                         </button>
                     </div>
                 </form>
-          
+         
     </div>
 </template>
 
@@ -171,6 +180,9 @@ export default {
 				accountid: '',
 				accountname: '',
 				recaptcha: '',
+				referral: null,
+				referaltrail: [],
+				ip: '',
 			},
 			recaptchaKey: '',
 			itemBank: [],
@@ -189,6 +201,12 @@ export default {
 		this.modalWidth =
 			window.innerWidth < MODAL_WIDTH ? MODAL_WIDTH / 2 : MODAL_WIDTH
 		this.getIp()
+		this.form.referral = this.$cookies.get('cookie-referral')
+			? this.$cookies.get('cookie-referral')
+			: null
+		this.form.referaltrail = this.$cookies.get('cookie-referral')
+			? this.$cookies.get('cookie-referral').split('-')
+			: []
 	},
 	methods: {
 		onVerify(response) {
@@ -212,6 +230,7 @@ export default {
 		},
 		async registerSubmit() {
 			this.$validator.validateAll().then(result => {
+				this.form.ip = this.ipPublicClient
 				let self = this
 				if (result) {
 					try {

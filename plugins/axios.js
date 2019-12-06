@@ -25,7 +25,7 @@ export default function({ $axios, store, app, redirect, $option }) {
                 // this.$store.commit('todos/add', e.target.value)
             this.$auth.reset()
             this.$auth.logout()
-            return
+            return false
         }
         const status = parseInt(error.response.status)
             // Error 402
@@ -56,7 +56,7 @@ export default function({ $axios, store, app, redirect, $option }) {
         } else if (status >= 500) {
             this.$auth.reset()
             this.$auth.logout()
-            swal.fire('Error', 'Something went wrong.', 'error')
+                //swal.fire('Error', 'Something went wrong.', 'error')
         } else {
             this.$auth.reset()
             this.$auth.logout()

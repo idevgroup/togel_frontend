@@ -162,6 +162,7 @@ export default {
 				accountid: '',
 				accountname: '',
 				recaptcha: '',
+				referral: null,
 			},
 			recaptchaKey: '',
 			itemBank: [],
@@ -178,6 +179,9 @@ export default {
 		this.recaptchaKey = process.env.RECAPTCHA_KEY
 		this.itemBank = this.setting.bank
 		this.getIp()
+		this.form.referral = this.$cookies.get('cookie-referral')
+			? this.$cookies.get('cookie-referral')
+			: null
 	},
 	methods: {
 		onVerify(response) {

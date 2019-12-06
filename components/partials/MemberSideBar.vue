@@ -75,7 +75,7 @@ export default {
 			},
 			{
 				title: 'Referal',
-				path: 'referal',
+				path: 'referrals',
 			},
 			{
 				title: 'Contact',

@@ -83,6 +83,7 @@ export default {
         '@nuxtjs/auth',
         '@nuxtjs/dotenv',
         '@nuxtjs/moment',
+        'cookie-universal-nuxt',
     ],
 
     /*
