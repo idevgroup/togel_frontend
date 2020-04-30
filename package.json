@@ -33,7 +33,7 @@
         "eslint-plugin-es-beautifier": "^1.0.1",
         "eslint-plugin-standard": "^4.0.1",
         "ip": "^1.1.5",
-        "jquery": "^3.4.1",
+        "jquery": "^3.5.0",
         "js-beautify": "^1.10.2",
         "modernizr": "^3.6.0",
         "moment": "^2.24.0",
