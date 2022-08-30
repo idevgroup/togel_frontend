@@ -37,7 +37,7 @@
         "js-beautify": "^1.10.2",
         "modernizr": "^3.6.0",
         "moment": "^2.24.0",
-        "moment-timezone": "^0.5.27",
+        "moment-timezone": "^0.5.35",
         "nuxt": "^2.10.1",
         "pug-beautify": "^0.1.1",
         "request-ip": "^2.1.3",
